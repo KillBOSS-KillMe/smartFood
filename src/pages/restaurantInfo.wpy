@@ -1,0 +1,94 @@
+<style lang="less">
+  page{
+    background-color: #f0efed;
+  }
+  .list{
+    width: 690rpx;
+    height: auto;
+    padding: 30rpx;
+  }
+  .item{
+    width: 690rpx;
+    height: 300rpx;
+    border-radius: 20rpx;
+    background-color: #fff;
+    margin-bottom: 30rpx;
+  }
+  .list .item:last-child{
+    margin-bottom: 200rpx;
+  }
+  .nav{
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0efed;
+    height: 200rpx;
+  }
+  .nav view{
+    width: 690rpx;
+    height: 90rpx;
+    border-radius: 45rpx;
+    margin: 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #de9732;
+    font-size: 35rpx;
+    color: #fff;
+  }
+</style>
+<template>
+<view>
+  <view class="list">
+    <image class="item" src="/img/daw.jpg" />
+    <image class="item" src="/img/daw.jpg" />
+    <image class="item" src="/img/daw.jpg" />
+    <image class="item" src="/img/daw.jpg" />
+    <image class="item" src="/img/daw.jpg" />
+    <image class="item" src="/img/daw.jpg" />
+    <image class="item" src="/img/daw.jpg" />
+    <image class="item" src="/img/daw.jpg" />
+    <image class="item" src="/img/daw.jpg" />
+    <image class="item" src="/img/daw.jpg" />
+  </view>
+  <view class="nav">
+    <view>预定</view>
+  </view>
+</view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class RestaurantInfo extends wepy.page {
+    config = {
+      navigationBarTitleText: '餐厅详情'
+    }
+    components = {
+
+    }
+
+    mixins = []
+
+    data = {
+
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+
+    }
+  }
+</script>
