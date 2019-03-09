@@ -46,14 +46,14 @@ setStore(store)
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/restaurantInfo',
-      'pages/index'
+      'pages/restaurantInfo', // 餐厅详情
+      'pages/index' // 餐厅列表（首页）
     ],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#fff',
+      navigationBarBackgroundColor: '#de9832',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black'
+      navigationBarTextStyle: 'white'
     }
   }
 
