@@ -1,12 +1,36 @@
 <style lang="less">
-.container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  box-sizing: border-box;
+@font-face {
+  font-family: 'iconfont';  /* project id 1078713 */
+  src: url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.eot');
+  src: url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.svg#iconfont') format('svg');
 }
+.iconfont {
+  font-family:"iconfont" !important;
+  font-size: 50rpx;
+  font-style:normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-gouwuche:before { content: "\e602"; } // 购物车
+.icon-tianjia:before { content: "\e6c4"; } // 添加
+.icon-prune:before { content: "\e61f"; } // 删减
+.icon-chenghao:before { content: "\e62e"; } // 叉号
+.icon-shangpinliebiao:before { content: "\e629"; } // 商品列表
+.icon-gerenzhongxin:before { content: "\e789"; } // 个人中心
+.icon-bianji:before { content: "\e62b"; } // 编辑
+.icon-order_icon:before { content: "\e667"; } // 订单
+.icon-map:before { content: "\e699"; } // 地址
+.icon-ai-list:before { content: "\e610"; } // 预约列表
+.icon-jifenshangcheng:before { content: "\e606"; } // 积分商城
+.icon-tianjiaadd142:before { content: "\e60f"; } // 添加地址
+.icon-arrow-right-copy-copy-copy:before { content: "\e604"; } // 箭头-向右
+.icon-rili:before { content: "\e601"; } // 日历
+.icon-shanchu:before { content: "\e600"; } // 删除
 </style>
 
 <script>

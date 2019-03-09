@@ -33,19 +33,54 @@
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
+    color: #3a3a3a;
   }
   .info .name {
     width: 270rpx;
     padding-right: 20rpx;
     font-size: 30rpx;
     font-weight: 600;
+    
   }
   .info .address {
     width: 360rpx;
     font-size: 25rpx;
   }
+  .info .address .iconfont {
+    font-size: 30rpx;
+  }
+  .list .item:last-child{
+    margin-bottom: 130rpx;
+  }
+  .nav{
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    height: 120rpx;
+  }
+  .nav icon{
+    font-size: 50rpx;
+    color: #959595;
+    margin: 20rpx 0 5rpx 0;
+  }
+  .history,.mall{
+    width: 375rpx;
+    height: 120rpx;
+    border-top: 1rpx solid #dedede;
+    font-size: 25rpx;
+    color: #959595;
+  }
+  .history view,.mall view{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 </style>
 <template>
+<view>
   <view class="list">
     <view class="item">
       <view class="img">
@@ -54,7 +89,7 @@
       <view class="info">
         <view class="name">名字名字名字名字名字名字名字名字</view>
         <view class="address">
-          <icon></icon>
+          <icon class="iconfont icon-map"></icon>
           地址地址地址地址地址地址地址地址地址地址地址地址
         </view>
       </view>
@@ -66,7 +101,7 @@
       <view class="info">
         <view class="name">名字名字名字名字名字名字名字名字</view>
         <view class="address">
-          <icon></icon>
+          <icon class="iconfont icon-map"></icon>
           地址地址地址地址地址地址地址地址地址地址地址地址
         </view>
       </view>
@@ -78,12 +113,39 @@
       <view class="info">
         <view class="name">名字名字名字名字名字名字名字名字</view>
         <view class="address">
-          <icon></icon>
+          <icon class="iconfont icon-map"></icon>
+          地址地址地址地址地址地址地址地址地址地址地址地址
+        </view>
+      </view>
+    </view>
+    <view class="item">
+      <view class="img">
+        <image src="/img/2.jpg" />
+      </view>
+      <view class="info">
+        <view class="name">名字名字名字名字名字名字名字名字</view>
+        <view class="address">
+          <icon class="iconfont icon-map"></icon>
           地址地址地址地址地址地址地址地址地址地址地址地址
         </view>
       </view>
     </view>
   </view>
+  <view class="nav">
+    <view class="history">
+      <view>
+        <icon class="iconfont icon-ai-list"></icon>
+      </view>
+      <view>预约列表</view>
+    </view>
+    <view class="mall">
+      <view>
+        <icon class="iconfont icon-jifenshangcheng"></icon>
+      </view>
+      <view>积分商城</view>
+    </view>
+  </view>
+</view>
 </template>
 
 <script>
