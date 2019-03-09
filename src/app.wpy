@@ -46,6 +46,7 @@ setStore(store)
 export default class extends wepy.app {
   config = {
     pages: [
+    'pages/setPreordain', // 餐厅详情
       'pages/restaurantInfo', // 餐厅详情
       'pages/index' // 餐厅列表（首页）
     ],

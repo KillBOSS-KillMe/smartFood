@@ -1,0 +1,212 @@
+<style lang="less">
+  // page{
+  //   background-color: #f0efed;
+  // }
+  .list{
+    width: 690rpx;
+    height: auto;
+    padding: 30rpx;
+  }
+  .item{
+    width: 690rpx;
+    height: 94rpx;
+    border-bottom: 1rpx solid #ebebeb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .item label{
+    width: 150rpx;
+    height: 94rpx;
+    line-height: 94rpx;
+    font-size: 27rpx;
+  }
+  .item .con{
+    width: 540rpx;
+    height: 94rpx;
+    line-height: 94rpx;
+  }
+  .list .item:last-child{
+    margin-bottom: 200rpx;
+  }
+  .nav{
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    // background-color: #f0efed;
+    height: 200rpx;
+  }
+  .nav view{
+    width: 690rpx;
+    height: 90rpx;
+    border-radius: 45rpx;
+    margin: 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #de9732;
+    font-size: 35rpx;
+    color: #fff;
+  }
+  // 人数
+  .peopleNum,
+  .time,
+  .time view{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #8b8b8b;
+  }
+  .peopleNum input{
+    width: 100rpx;
+    min-width: 100rpx;
+    height: 30rpx;
+    border: 1rpx solid #8b8b8b;
+    border-radius: 30rpx;
+    font-size: 30rpx;
+    margin: 0 10rpx;
+    text-align: center;
+  }
+  .time view{
+    height: 47rpx;
+    border: 1rpx solid #525252;
+    border-radius: 47rpx;
+  }
+  .time .iconfont{
+    font-size: 30rpx;
+    margin-right: 10rpx;
+  }
+  .time input{
+    width: 300rpx;
+    font-size: 30rpx;
+    margin-left: 10rpx;
+  }
+  .setInp input{
+    height: 100%;
+    width: 100%;
+    line-height: 100%;
+    color: #525252;
+    font-size: 30rpx;
+  }
+  .lv, .table{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-size: 30rpx;
+    color: #525252;
+  }
+  .lv input, .table input{
+    width: 500rpx;
+  }
+</style>
+<template>
+<view>
+  <view class="list">
+    <view class="item">
+      <label>人数人数：</label>
+      <view class="con peopleNum">
+        <icon class="iconfont icon-prune"></icon>
+        <input type="text" value="32" />
+        <icon class="iconfont icon-tianjia"></icon>
+      </view>
+    </view>
+    <view class="item">
+      <label>时间：</label>
+      <view class="con time">
+        <view>
+            <picker class="pickerTime" mode="date" value="{{dates}}" bindchange="bindPickerChange">  
+              <input type="number" value="{{'2019-03-06 12:30'}}" disabled="disabled" placeholder="选择时间" />
+            </picker>
+            <icon class="iconfont icon-rili"></icon>
+        </view>
+      </view>
+    </view>
+    <view class="item">
+      <label>餐标：</label>
+      <view class="con lv">
+        <picker class="pickerTime" mode="date" value="{{dates}}" bindchange="bindPickerChange">  
+          <input type="number" value="{{'2019-03-06 12:30'}}" disabled="disabled" placeholder="选择时间" />
+        </picker>
+      </view>
+    </view>
+    <view class="item">
+      <label>旅行社：</label>
+      <view class="con setInp">
+        <input type="text"  placeholder="请输入旅行社名称" value="" />
+      </view>
+    </view>
+    <view class="item">
+      <label>客源地：</label>
+      <view class="con setInp">
+        <input type="text"  placeholder="请输入客源地" value="" />
+      </view>
+    </view>
+    <view class="item">
+      <label>桌数：</label>
+      <view class="con table">
+        <picker class="pickerTime" mode="date" value="{{dates}}" bindchange="bindPickerChange">  
+          <input type="number" value="{{'2019-03-06 12:30'}}" disabled="disabled" placeholder="选择时间" />
+        </picker>
+        <view>卓</view>
+      </view>
+    </view>
+    <view class="item">
+      <label>导游名称：</label>
+      <view class="con setInp">
+        <input type="text"  placeholder="请输入导游名称" value="" />
+      </view>
+    </view>
+    <view class="item">
+      <label>导游电话：</label>
+      <view class="con setInp">
+        <input type="text"  placeholder="请输入导游电话" value="" />
+      </view>
+    </view>
+    <view class="item">
+      <label>特殊要求：</label>
+      <view class="con setInp">
+        <input type="text"  placeholder="录入计划" value="" />
+      </view>
+    </view>
+  </view>
+  <view class="nav">
+    <view>提交</view>
+  </view>
+</view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class SetPreordain extends wepy.page {
+    config = {
+      navigationBarTitleText: '预定表单'
+    }
+    components = {
+
+    }
+
+    mixins = []
+
+    data = {
+
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+
+    }
+  }
+</script>
