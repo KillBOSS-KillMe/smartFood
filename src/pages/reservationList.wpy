@@ -33,6 +33,7 @@
   .time{
     width: 265rpx;
     font-size: 25rpx;
+    text-align: right;
   }
   .addess{
     font-size: 30rpx;
@@ -70,12 +71,12 @@
   </view>
   <view class="item">
     <view class="nameAndTime">
-      <view class="name">餐厅名称餐厅名称餐厅名称餐厅名称</view>
-      <view class="time">时间时间时间时间时间时间时间时间</view>
+      <view class="name">餐厅名称餐厅名称</view>
+      <view class="time">2019.10.11 12.30</view>
     </view>
     <view class="addess">
       <icon class="iconfont icon-map"></icon>
-      地址地址地址地址地址地址地址地址地址地址地址地址
+      地址地址地址地址地
     </view>
   </view>
 </view>

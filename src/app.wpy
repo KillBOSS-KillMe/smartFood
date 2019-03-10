@@ -46,7 +46,8 @@ setStore(store)
 export default class extends wepy.app {
   config = {
     pages: [
-    'pages/reservationList', // 预定列表(历史)
+      'pages/mall', // 商城首页
+      'pages/reservationList', // 预定列表(历史)
       'pages/setPreordain', // 预定表单
       'pages/restaurantInfo', // 餐厅详情
       'pages/index' // 餐厅列表（首页）
@@ -60,7 +61,8 @@ export default class extends wepy.app {
   }
 
   globalData = {
-    userInfo: null
+    userInfo: null,
+    navAction: ['action', 'noAction', 'noAction']
   }
 
   constructor () {
