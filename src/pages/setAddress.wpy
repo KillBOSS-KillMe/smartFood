@@ -1,0 +1,133 @@
+<style lang="less">
+  .list{
+    width: 690rpx;
+    height: auto;
+    padding: 30rpx;
+  }
+  .item{
+    width: 690rpx;
+    min-height: 94rpx;
+    height: auto;
+    border-bottom: 1rpx solid #ebebeb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .item label{
+    width: 150rpx;
+    height: 94rpx;
+    line-height: 94rpx;
+    font-size: 27rpx;
+  }
+  .item .con{
+    width: 540rpx;
+    height: 94rpx;
+    line-height: 94rpx;
+  }
+  .setInp input{
+    height: 100%;
+    width: 100%;
+    line-height: 100%;
+    color: #525252;
+    font-size: 30rpx;
+  }
+  .itemTextarea{
+    // height: 350rpx;
+    border-width: 0rpx;
+  }
+  .setInp textarea{
+    height: 300rpx;
+    width: 100%;
+    line-height: 100%;
+    color: #525252;
+    font-size: 30rpx;
+    margin-top: 30rpx;
+  }
+  
+  .nav{
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0efed;
+    height: 200rpx;
+  }
+  .nav view{
+    width: 690rpx;
+    height: 90rpx;
+    border-radius: 45rpx;
+    margin: 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #de9732;
+    font-size: 35rpx;
+    color: #fff;
+  }
+  
+</style>
+<template>
+<view>
+  <view class="list">
+    <view class="item">
+      <label>收货人：</label>
+      <view class="con setInp">
+        <input type="text"  placeholder="请输入收货人名称" value="" />
+      </view>
+    </view>
+    <view class="item">
+      <label>联系电话：</label>
+      <view class="con setInp">
+        <input type="text"  placeholder="请输入联系电话" value="" />
+      </view>
+    </view>
+    <view class="item itemTextarea">
+      <label>收货地址：</label>
+      <view class="con setInp">
+        <!-- <input type="text"  placeholder="请输入收货地址" value="" /> -->
+        <textarea id='XXX' bindinput='test' maxlength='200' placeholder="请输入200字的个人简介"></textarea>
+      </view>
+    </view>
+  </view>
+  
+  <view class="nav">
+    <view>预定</view>
+  </view>
+</view>
+
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class SetAddress extends wepy.page {
+    config = {
+      navigationBarTitleText: '地址编辑'
+    }
+    components = {
+      
+    }
+
+    mixins = []
+
+    data = {
+      
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+
+    }
+  }
+</script>

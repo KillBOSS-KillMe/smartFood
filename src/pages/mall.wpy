@@ -7,6 +7,7 @@
     height: auto;
     padding: 0 30rpx;
     display: block;
+    margin-bottom: 120rpx;
   }
   .item{
     display: inline-block;
@@ -141,8 +142,8 @@
         '/img/daw.jpg'
       ],
       indicatorDots: false,
-      autoplay: false,
-      interval: 5000,
+      autoplay: true,
+      interval: 3000,
       duration: 1000
     }
 

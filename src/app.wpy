@@ -46,6 +46,7 @@ setStore(store)
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/setAddress', // 编辑地址
       'pages/mall', // 商城首页
       'pages/reservationList', // 预定列表(历史)
       'pages/setPreordain', // 预定表单
