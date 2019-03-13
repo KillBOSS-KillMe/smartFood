@@ -46,6 +46,7 @@ setStore(store)
 export default class extends wepy.app {
   config = {
     pages: [
+      'pages/user', // 个人中心
       'pages/car', // 购物车
       'pages/mall', // 商城首页
       'pages/commodityDetails', // 商品详情
