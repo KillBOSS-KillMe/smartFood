@@ -1,0 +1,157 @@
+<style lang="less">
+  page{
+    background-color: #f9f9f9;
+  }
+  .swiper{
+    width: 750rpx;
+    height: 500rpx;
+  }
+  .swiper image{
+    width: 100%;
+    height: 100%;
+  }
+  .info{
+    width: 750rpx;
+    height: auto;
+    background-color: #fff;
+  }
+  .price{
+    width: 690rpx;
+    height: 105rpx;
+    line-height: 105rpx;
+    padding: 0 30rpx;
+    font-size: 50rpx;
+    color: #de9732;
+  }
+  .name{
+    width: 690rpx;
+    padding: 0 30rpx 30rpx 30rpx;
+    font-size: 30rpx;
+    color: #3a3a3a;
+  }
+  .commodityInfoImg{
+    margin-bottom: 110rpx;
+  }
+  .commodityInfoImg, .commodityInfoImg image{
+    display: block;
+  }
+  .perating, .perating view{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .perating{
+    width: 750rpx;
+    height: 97rpx;
+  }
+  .perating view{
+    width: 375rpx;
+    height: 97rpx;
+    background-color: #fff;
+    color: #333;
+    font-size: 30rpx;
+  }
+  .perating .seCar{
+    background-color: #de9732;
+    color: #fff;
+  }
+</style>
+<template>
+<view>
+  <view>
+    <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" width="355" height="150" />
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+  <view class="info">
+    <view class="price">9200积分</view>
+    <view class="name">商品名称商品名称</view>
+  </view>
+  <view class="commodityInfoImg">
+    <block wx:for="{{commodityImgList}}" key="index" index="index" item="item">
+      <image src="{{item}}" style="width:{{autoW[index]}}px;height:{{autoH[index]}}px" data-index="{{index}}" bindload='autoImage' />
+    </block>
+  </view>
+  <view class="perating">
+    <view class="">立即兑换</view>
+    <view class="seCar">加入购物车</view>
+  </view>
+</view>
+
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class CommodityDetails extends wepy.page {
+    config = {
+      navigationBarTitleText: '商品详情'
+    }
+    components = {
+      
+    }
+
+    mixins = []
+
+    data = {
+      imgUrls: [
+        '/img/daw.jpg',
+        '/img/daw.jpg',
+        '/img/daw.jpg'
+      ],
+      indicatorDots: false,
+      autoplay: true,
+      interval: 3000,
+      duration: 1000,
+      commodityImgList: [
+        '/img/daw.jpg',
+        '/img/daw.jpg',
+        '/img/daw.jpg'
+      ],
+      autoW: [],
+      autoH: []
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+      // 控制背景图大小
+      autoImage(e) {
+        // 获取图片的宽高
+        let index = e.currentTarget.dataset.index
+        var imgW = e.detail.width
+        var imgH = e.detail.height
+        // 计算图片比例
+        var imgScale = imgW / imgH
+        // 声明自适应宽高变量
+        var autoW = ''
+        var autoH = ''
+        // 获取屏幕宽度，并将图片设置为屏幕等宽
+        wx.getSystemInfo({
+          success: res => {
+            autoW = res.windowWidth
+            autoH = autoW / imgScale
+            this.autoW[index] = autoW
+            this.autoH[index] = autoH
+            console.log(this.autoW)
+            console.log(this.autoH)
+            this.$apply()
+          }
+        })
+      }
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+
+    }
+  }
+</script>
