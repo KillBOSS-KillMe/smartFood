@@ -146,12 +146,13 @@
     height: 88rpx;
   }
   .orderList{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
     width: 690rpx;
+    height: auto;
     padding: 0 30rpx;
-    height: 512rpx;
+    min-height: 170rpx;
     margin-bottom: 140rpx;
   }
 </style>
@@ -192,9 +193,9 @@
       <view class="iconfont icon-map"></view>
       <view>暂无订单</view>
     </view>
-    <!-- <view>
+    <view>
       订单列表
-    </view> -->
+    </view>
   </view>
   <!-- <view class="list">
     <view class="item">
