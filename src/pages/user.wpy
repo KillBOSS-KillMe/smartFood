@@ -71,7 +71,6 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color: #fff;
   }
   .userInfo image{
     width: 160rpx;
@@ -103,17 +102,58 @@
   .uInfo .iconfont, .uInfo span{
     color: #de9732;
   }
-  
   .noneCar view{
     font-size: 33rpx;
     text-align: center;
     color: #959595;
   }
   .noneCar .iconfont{
-    font-size: 260rpx;
+    font-size: 140rpx;
     text-align: center;
   }
-  
+  .addressList{
+    width: 750rpx;
+    height: auto;
+    min-height: 340rpx;
+  }
+  .addressListName{
+    width: 690rpx;
+    height: 33prx;
+    padding: 30rpx;
+  }
+  .ordertitle,
+  .addressList,
+  .userInfo,
+  .orderList{
+    background-color: #fff;
+    margin-top: 15rpx;
+  }
+  .ordertitle .sel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1rpx solid #e9e9e9;
+    width: 690rpx;
+    margin: 0 30rpx;
+    height: 88rpx;
+  }
+  .ordertitle .sel view{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #959595;
+    width: 345rpx;
+    height: 88rpx;
+  }
+  .orderList{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 690rpx;
+    padding: 0 30rpx;
+    height: 512rpx;
+    margin-bottom: 140rpx;
+  }
 </style>
 <template>
 <view>
@@ -130,7 +170,33 @@
       </view>
     </view>
   </view>
-  <view class="list">
+  <view class="addressList">
+    <view class="addressListName">收货地址</view>
+    <view class="noneCar">
+      <view class="iconfont icon-map"></view>
+      <view>添加地址</view>
+    </view>
+    <view>
+      地址列表
+    </view>
+  </view>
+  <view class="ordertitle">
+    <view class="addressListName">全部订单</view>
+    <view class="sel">
+      <view>未完成</view>
+      <view>已完成</view>
+    </view>
+  </view>
+  <view class="orderList">
+    <view class="noneCar">
+      <view class="iconfont icon-map"></view>
+      <view>暂无订单</view>
+    </view>
+    <!-- <view>
+      订单列表
+    </view> -->
+  </view>
+  <!-- <view class="list">
     <view class="item">
       <view class="img">
         <image src="/img/daw.jpg" class="slide-image" />
@@ -147,7 +213,7 @@
         </view>
       </view>
     </view>
-  </view>
+  </view> -->
   <nav @childFn.user="goPage" />
 </view>
 
