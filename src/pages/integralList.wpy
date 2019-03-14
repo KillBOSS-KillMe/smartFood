@@ -1,0 +1,114 @@
+<style lang="less">
+  page{
+    background-color: #f0efed;
+  }
+  .list{
+    width: 750rpx;
+    height: auto;
+    padding: 30rpx;
+    background-color: #fff;
+  }
+  .item{
+    width: 690rpx;
+    height: 137rpx;
+    border-bottom: 1rpx solid #989898;
+  }
+  .nameAndTime{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30rpx 0 10rpx 0;
+  }
+  .nameAndTime view{
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+  }
+  .name {
+    width: 425rpx;
+    font-size: 35rpx;
+    font-weight: 600;
+    color: #3a3a3a;
+  }
+  .time{
+    width: 265rpx;
+    font-size: 25rpx;
+    text-align: right;
+    color: #EE6667;
+  }
+  .addess{
+    font-size: 30rpx;
+    color: #989898;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+</style>
+<template>
+<view class="list">
+  <view class="item">
+    <view class="nameAndTime">
+      <view class="name">餐厅名称餐厅名称</view>
+      <view class="time">20积分</view>
+    </view>
+    <view class="addess">
+      <view>2019.10.11 12.30</view>
+      <view>20人</view>
+    </view>
+  </view>
+  <view class="item">
+    <view class="nameAndTime">
+      <view class="name">餐厅名称餐厅名称</view>
+      <view class="time">20积分</view>
+    </view>
+    <view class="addess">
+      <view>2019.10.11 12.30</view>
+      <view>20人</view>
+    </view>
+  </view>
+  <view class="item">
+    <view class="nameAndTime">
+      <view class="name">餐厅名称餐厅名称</view>
+      <view class="time">20积分</view>
+    </view>
+    <view class="addess">
+      <view>2019.10.11 12.30</view>
+      <view>20人</view>
+    </view>
+  </view>
+</view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  export default class IntegralList extends wepy.page {
+    config = {
+      navigationBarTitleText: '积分列表'
+    }
+    components = {
+
+    }
+
+    mixins = []
+
+    data = {
+
+    }
+
+    computed = {
+
+    }
+
+    methods = {
+
+    }
+
+    events = {
+
+    }
+
+    onLoad() {
+
+    }
+  }
+</script>
