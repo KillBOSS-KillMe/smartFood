@@ -8,6 +8,7 @@
   url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.ttf') format('truetype'),
   url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.svg#iconfont') format('svg');
 }
+
 .iconfont {
   font-family:"iconfont" !important;
   font-size: 50rpx;
@@ -46,18 +47,16 @@ setStore(store)
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/reservationList', // 预定列表(历史)
-      'pages/integralList', // 积分列表
       'pages/index', // 餐厅列表（首页）
       'pages/mall', // 商城首页
       'pages/car', // 购物车
       'pages/user', // 个人中心
       'pages/restaurantInfo', // 餐厅详情
       'pages/commodityDetails', // 商品详情
-      'pages/setAddress', // 编辑地址
-      
-      'pages/setPreordain', // 预定表单
-      
+      'pages/setAddress', // 编辑地址--输入
+      'pages/setPreordain', // 预定表单--输入
+      'pages/integralList', // 积分列表--积分
+      'pages/reservationList' // 预定列表(历史)--餐厅的预约详情
     ],
     window: {
       backgroundTextStyle: 'light',

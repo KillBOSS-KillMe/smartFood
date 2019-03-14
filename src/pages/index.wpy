@@ -45,6 +45,7 @@
   .info .address {
     width: 360rpx;
     font-size: 25rpx;
+    text-align: right;
   }
   .info .address .iconfont {
     font-size: 30rpx;
@@ -82,63 +83,29 @@
 <template>
 <view>
   <view class="list">
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" />
-      </view>
-      <view class="info">
-        <view class="name">名字名字名字名字名字名字名字名字</view>
-        <view class="address">
-          <icon class="iconfont icon-map"></icon>
-          地址地址地址地址地址地址地址地址地址地址地址地址
+    <block wx:for="{{diningRoom}}" key="index" index="index" item="item">
+      <view class="item" data-id="{{item.id}}" @tap="goDiningRoomInfo">
+        <view class="img">
+          <image src="{{item.img}}" />
+        </view>
+        <view class="info">
+          <view class="name">{{item.name}}</view>
+          <view class="address">
+            <icon class="iconfont icon-map"></icon>
+            {{item.address}}
+          </view>
         </view>
       </view>
-    </view>
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" />
-      </view>
-      <view class="info">
-        <view class="name">名字名字名字名字名字名字名字名字</view>
-        <view class="address">
-          <icon class="iconfont icon-map"></icon>
-          地址地址地址地址地址地址地址地址地址地址地址地址
-        </view>
-      </view>
-    </view>
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" />
-      </view>
-      <view class="info">
-        <view class="name">名字名字名字名字名字名字名字名字</view>
-        <view class="address">
-          <icon class="iconfont icon-map"></icon>
-          地址地址地址地址地址地址地址地址地址地址地址地址
-        </view>
-      </view>
-    </view>
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" />
-      </view>
-      <view class="info">
-        <view class="name">名字名字名字名字名字名字名字名字</view>
-        <view class="address">
-          <icon class="iconfont icon-map"></icon>
-          地址地址地址地址地址地址地址地址地址地址地址地址
-        </view>
-      </view>
-    </view>
+    </block>
   </view>
   <view class="nav">
-    <view class="history">
+    <view class="history" @tap="goReservationList">
       <view>
         <icon class="iconfont icon-ai-list"></icon>
       </view>
       <view>预约列表</view>
     </view>
-    <view class="mall">
+    <view class="mall" @tap="goMall">
       <view>
         <icon class="iconfont icon-jifenshangcheng"></icon>
       </view>
@@ -161,7 +128,13 @@
     mixins = []
 
     data = {
-
+      diningRoom: [
+        {"name": "奥格瑞玛", "address": "卡利姆多", "img": "/img/daw.jpg", "id": "1"},
+        {"name": "银月城", "address": "卡利姆多", "img": "/img/daw.jpg", "id": "1"},
+        {"name": "幽暗城", "address": "卡利姆多", "img": "/img/daw.jpg", "id": "1"},
+        {"name": "雷霆崖", "address": "卡利姆多", "img": "/img/daw.jpg", "id": "1"},
+        {"name": "十字路口", "address": "卡利姆多", "img": "/img/daw.jpg", "id": "1"}
+      ]
     }
 
     computed = {
@@ -169,7 +142,18 @@
     }
 
     methods = {
-
+      goDiningRoomInfo(e) {
+        // 进入餐厅详情
+        this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}`)
+      },
+      goReservationList() {
+        // 进入预约列表
+        this.$navigate(`/pages/reservationList`)
+      },
+      goMall() {
+        // 进入积分商城
+        this.$navigate(`/pages/mall`)
+      }
     }
 
     events = {
