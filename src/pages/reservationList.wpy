@@ -5,13 +5,13 @@
   .list{
     width: 750rpx;
     height: auto;
-    padding: 30rpx;
-    background-color: #fff;
   }
   .item{
-    width: 690rpx;
-    height: 137rpx;
-    border-bottom: 1rpx solid #989898;
+    width: 750rpx;
+    height: auto;
+    padding: 20rpx 0;
+    background-color: #fff;
+    margin-bottom: 20rpx;
   }
   .nameAndTime{
     display: flex;
@@ -24,6 +24,12 @@
     text-overflow: ellipsis;
     white-space:nowrap;
     color: #3a3a3a;
+  }
+  .nameAndTime,
+  .addess,
+  .infoList{
+    width: 690rpx;
+    padding: 0 30rpx;
   }
   .name {
     width: 425rpx;
@@ -41,32 +47,103 @@
     overflow:hidden;
     text-overflow: ellipsis;
     white-space:nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .addess view:nth-child(1){
+    overflow:hidden;
+    text-overflow: ellipsis;
+    white-space:nowrap;
+  }
+  .addess view:nth-child(2){
+    color: #EE6667;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .addess .bottom{
+    transform: rotate(90deg);
+    margin-left: 10rpx;
+  }
+  .addess .top{
+    transform: rotate(-90deg);
   }
   .addess icon{
     font-size: 30rpx;
-    
+  }
+  .infoList{
+    border-top: 1rpx solid #dedede;
+    margin-top: 20rpx;
+  }
+  .itemInfo{
+    display: flex;
+    justify-content: flex-start;
+    font-size: 27rpx;
+    position: relative;
+    margin: 20rpx 0;
+  }
+  .itemInfo label{
+    width: 130rpx;
+    height: 100%;
+    color: #989898;
+  }
+  .itemInfo view{
+    width: 560rpx;
+    height: 100%;
+    color: #3a3a3a;
   }
 </style>
 <template>
 <view class="list">
   <view class="item">
     <view class="nameAndTime">
-      <view class="name">餐厅名称餐厅名称餐厅名称餐厅名称</view>
-      <view class="time">时间时间时间时间时间时间时间时间</view>
+      <view class="name">餐厅名称餐厅名称</view>
+      <view class="time">2019.10.11 12.30</view>
     </view>
     <view class="addess">
-      <icon class="iconfont icon-map"></icon>
-      地址地址地址地址地址地址地址地址地址地址地址地址
+      <view>
+        <icon class="iconfont icon-map"></icon>
+        地址地址地址地址地
+      </view>
+      <view>
+        <!-- top  bottom  样式替换控制箭头方向 -->
+        展开<icon class="iconfont icon-arrow-right-copy-copy-copy bottom"></icon>
+      </view>
     </view>
-  </view>
-  <view class="item">
-    <view class="nameAndTime">
-      <view class="name">餐厅名称餐厅名称餐厅名称餐厅名称</view>
-      <view class="time">时间时间时间时间时间时间时间时间</view>
-    </view>
-    <view class="addess">
-      <icon class="iconfont icon-map"></icon>
-      地址地址地址地址地址地址地址地址地址地址地址地址
+    <view class="infoList">
+      <view class="itemInfo">
+        <label>人数:</label>
+        <view>10人</view>
+      </view>
+      <view class="itemInfo">
+        <label>餐标:</label>
+        <view>500元/桌</view>
+      </view>
+      <view class="itemInfo">
+        <label>旅行社:</label>
+        <view>中国青年旅行社</view>
+      </view>
+      <view class="itemInfo">
+        <label>客源地:</label>
+        <view>中国上海市</view>
+      </view>
+      <view class="itemInfo">
+        <label>桌数:</label>
+        <view>5桌</view>
+      </view>
+      <view class="itemInfo">
+        <label>导游名字:</label>
+        <view>希尔瓦娜斯</view>
+      </view>
+      <view class="itemInfo">
+        <label>导游电话:</label>
+        <view>18700000000</view>
+      </view>
+      <view class="itemInfo">
+        <label>特殊要求:</label>
+        <view>大部分为老年人，饮食应清淡，不放辣椒，嗯就这样！</view>
+      </view>
     </view>
   </view>
   <view class="item">
@@ -75,8 +152,47 @@
       <view class="time">2019.10.11 12.30</view>
     </view>
     <view class="addess">
-      <icon class="iconfont icon-map"></icon>
-      地址地址地址地址地
+      <view>
+        <icon class="iconfont icon-map"></icon>
+        地址地址地址地址地
+      </view>
+      <view>
+        展开<icon class="iconfont icon-arrow-right-copy-copy-copy bottom"></icon>
+      </view>
+    </view>
+    <view class="infoList">
+      <view class="itemInfo">
+        <label>人数:</label>
+        <view>10人</view>
+      </view>
+      <view class="itemInfo">
+        <label>餐标:</label>
+        <view>500元/桌</view>
+      </view>
+      <view class="itemInfo">
+        <label>旅行社:</label>
+        <view>中国青年旅行社</view>
+      </view>
+      <view class="itemInfo">
+        <label>客源地:</label>
+        <view>中国上海市</view>
+      </view>
+      <view class="itemInfo">
+        <label>桌数:</label>
+        <view>5桌</view>
+      </view>
+      <view class="itemInfo">
+        <label>导游名字:</label>
+        <view>希尔瓦娜斯</view>
+      </view>
+      <view class="itemInfo">
+        <label>导游电话:</label>
+        <view>18700000000</view>
+      </view>
+      <view class="itemInfo">
+        <label>特殊要求:</label>
+        <view>大部分为老年人，饮食应清淡，不放辣椒，嗯就这样！</view>
+      </view>
     </view>
   </view>
 </view>

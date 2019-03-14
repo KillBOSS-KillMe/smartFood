@@ -46,8 +46,8 @@ setStore(store)
 export default class extends wepy.app {
   config = {
     pages: [
-      'pages/integralList', // 积分列表
       'pages/reservationList', // 预定列表(历史)
+      'pages/integralList', // 积分列表
       'pages/index', // 餐厅列表（首页）
       'pages/mall', // 商城首页
       'pages/car', // 购物车
