@@ -71,51 +71,17 @@
     </swiper>
   </view>
   <view class="list">
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" />
+    <block wx:for="{{commodityList}}" key="index" index="index" item="item">
+      <view class="item" data-id="{{item.id}}" @tap="goCommodityInfo">
+        <view class="img">
+          <image src="{{item.img}}" />
+        </view>
+        <view class="info">
+          <view class="name">{{item.name}}</view>
+          <view class="price">{{item.price}}积分</view>
+        </view>
       </view>
-      <view class="info">
-        <view class="name">名字名字名字名字名字名字名字名字名字名字</view>
-        <view class="price">100积分</view>
-      </view>
-    </view>
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" />
-      </view>
-      <view class="info">
-        <view class="name">名字名字名字名字名字名字名字名字名字名字</view>
-        <view class="price">100积分</view>
-      </view>
-    </view>
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" />
-      </view>
-      <view class="info">
-        <view class="name">名字名字名字名字名字名字名字名字名字名字</view>
-        <view class="price">100积分</view>
-      </view>
-    </view>
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" />
-      </view>
-      <view class="info">
-        <view class="name">名字名字名字名字名字名字名字名字名字名字</view>
-        <view class="price">100积分</view>
-      </view>
-    </view>
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" />
-      </view>
-      <view class="info">
-        <view class="name">名字名字名字名字名字名字名字名字名字名字</view>
-        <view class="price">100积分</view>
-      </view>
-    </view>
+    </block>
   </view>
   <nav @childFn.user="goPage" />
 </view>
@@ -144,8 +110,19 @@
       indicatorDots: false,
       autoplay: true,
       interval: 3000,
-      duration: 1000
+      duration: 1000,
+      commodityList: [
+        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
+        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
+        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
+        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
+        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
+        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
+        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
+        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"}
+      ]
     }
+
 
     computed = {
 
@@ -157,6 +134,10 @@
         // 销毁当前页{跳转}
         this.$redirect(url)
       },
+      goCommodityInfo() {
+        // 进入商品详情
+        this.$navigate(`/pages/commodityDetails`)
+      }
     }
 
     events = {
