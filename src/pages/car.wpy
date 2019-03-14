@@ -193,7 +193,11 @@
     }
 
     methods = {
-      
+      // 底部导航跳转
+      goPage (url, evt) {
+        // 销毁当前页{跳转}
+        this.$redirect(url)
+      },
     }
 
     events = {

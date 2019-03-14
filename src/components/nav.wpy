@@ -10,7 +10,7 @@
 }
 
 .footer .ft_item {
-  width: 33.33%;
+  width: 25%;
   height: 100%;
   text-align: center;
   float: left;
@@ -97,21 +97,27 @@
 <template>
   <view class="footer">
     <view class="ft_item {{navAction[0]}}">
-      <view @tap="goBookshelf">
+      <view @tap="goIndex">
         <view class="iconfont icon-shangpinliebiao"></view>
-        <text class="text">书架</text>
+        <text class="text">预约</text>
       </view>
     </view>
     <view class="ft_item {{navAction[1]}}">
-      <view @tap="goIndex">
-        <view class="iconfont icon-gouwuche"></view>
-        <text class="text">书城</text>
+      <view @tap="goMall">
+        <view class="iconfont icon-shangpinliebiao"></view>
+        <text class="text">商城</text>
       </view>
     </view>
     <view class="ft_item {{navAction[2]}}">
-      <view @tap="goSearch">
+      <view @tap="goCar">
+        <view class="iconfont icon-gouwuche"></view>
+        <text class="text">购物车</text>
+      </view>
+    </view>
+    <view class="ft_item {{navAction[3]}}">
+      <view @tap="goUser">
         <view class="iconfont icon-gerenzhongxin"></view>
-        <text class="text">搜索</text>
+        <text class="text">个人中心</text>
       </view>
     </view>
   </view>
@@ -128,22 +134,26 @@ export default class Nav extends wepy.component {
     name: '',
     phone: '',
     id: '',
-    navAction: ['action', 'noAction', 'noAction']
+    navAction: ['action', 'noAction', 'noAction', 'noAction']
   };
   props = {};
   methods = {
-    goBookshelf() {
-      this.$parent.$parent.globalData.navAction = ['action', 'noAction', 'noAction']
-      this.$emit('childFn', '/pages/bookshelf')
-    },
     goIndex() {
-      // 顶部导航状态初始化
-      this.$parent.$parent.globalData.navAction = ['noAction', 'action', 'noAction']
+      this.$parent.$parent.globalData.navAction = ['action', 'noAction', 'noAction', 'noAction']
       this.$emit('childFn', '/pages/index')
     },
-    goSearch() {
-      this.$parent.$parent.globalData.navAction = ['noAction', 'noAction', 'action']
-      this.$emit('childFn', '/pages/search')
+    goMall() {
+      // 顶部导航状态初始化
+      this.$parent.$parent.globalData.navAction = ['noAction', 'action', 'noAction', 'noAction']
+      this.$emit('childFn', '/pages/mall')
+    },
+    goCar() {
+      this.$parent.$parent.globalData.navAction = ['noAction', 'noAction', 'action', 'noAction']
+      this.$emit('childFn', '/pages/car')
+    },
+    goUser() {
+      this.$parent.$parent.globalData.navAction = ['noAction', 'noAction', 'noAction', 'action']
+      this.$emit('childFn', '/pages/user')
     }
   };
   onLoad() {

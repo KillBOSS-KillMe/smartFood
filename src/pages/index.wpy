@@ -152,7 +152,8 @@
       },
       goMall() {
         // 进入积分商城
-        this.$navigate(`/pages/mall`)
+        this.$parent.globalData.navAction = ['noAction', 'action', 'noAction', 'noAction']
+        this.$redirect(`/pages/mall`)
       }
     }
 
