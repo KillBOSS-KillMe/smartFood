@@ -1,4 +1,7 @@
 <style lang="less">
+  page{
+    background-color: #f0f0f0;
+  }
   .list{
     width: 690rpx;
     height: auto;
@@ -65,7 +68,42 @@
   .userInfo{
     width: 750rpx;
     height: 256rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #fff;
   }
+  .userInfo image{
+    width: 160rpx;
+    height: 160rpx;
+    border-radius: 80rpx;
+    margin: 30rpx;
+  }
+  .uInfo{
+    width: 485rpx;
+    // height: 100%;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    color: #3a3a3a;
+  }
+  .uInfo .name,
+  .uInfo .integral {
+    width: 100%;
+    font-size: 35rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  .uInfo .integral {
+    font-size: 25rpx;
+  }
+  .uInfo .iconfont {
+    font-size: 42rpx;
+  }
+  .uInfo .iconfont, .uInfo span{
+    color: #de9732;
+  }
+  
   .noneCar view{
     font-size: 33rpx;
     text-align: center;
@@ -80,7 +118,17 @@
 <template>
 <view>
   <view class="userInfo">
-    
+    <image src="/img/daw.jpg" />
+    <view class="uInfo">
+      <view class="name">中意酱香肉丸</view>
+      <view class="integral">
+        剩余积分:
+        <span>
+          500
+        </span>
+        <icon class="iconfont icon-arrow-right-copy-copy-copy" />
+      </view>
+    </view>
   </view>
   <view class="list">
     <view class="item">
