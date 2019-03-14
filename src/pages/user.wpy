@@ -39,26 +39,6 @@
     justify-content: space-between;
     height: 60rpx;
   }
-  .setPerating{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30rpx;
-  }
-  .setPerating view{
-    width: auto;
-    padding: 0 20rpx;
-    border-radius: 35rpx;
-    height: 35rpx;
-    border: 1rpx solid #3a3a3a;
-    color: #3a3a3a;
-    margin: 0 15rpx;
-    margin-top: 15rpx;
-    
-  }
-  .setPerating .iconfont{
-    font-size: 30rpx;
-  }
   .price{
     font-size: 30rpx;
     color: #de9732;
@@ -115,6 +95,7 @@
     width: 750rpx;
     height: auto;
     min-height: 340rpx;
+    padding-bottom: 30rpx;
   }
   .addressListName{
     width: 690rpx;
@@ -146,14 +127,79 @@
     height: 88rpx;
   }
   .orderList{
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
     width: 690rpx;
     height: auto;
     padding: 0 30rpx;
     min-height: 170rpx;
     margin-bottom: 140rpx;
+  }
+  .orderList .orderInfo{
+    width: 100%;
+    height: 70rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .orderList .name{
+    width: 415rpx;
+    height: 70rpx;
+    color: #3a3a3a;
+    font-size: 28rpx;
+    overflow:hidden;
+    text-overflow: ellipsis;
+  }
+  .orderList .info view{
+    width: 120rpx;
+    font-size: 28rpx;
+    text-align: right;
+  }
+  .orderList .info view:nth-child(1){
+    color: #de9732;
+  }
+  .orderList .info view:nth-child(2){
+    color: #959595;
+  }
+  .price span{
+    color: #959595;
+  }
+  .itemAddress{
+    width: 690rpx;
+    padding: 0 30rpx;
+  }
+  .itemAddress .name{
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
+  .itemAddress .name icon{
+    font-size: 30rpx;
+  }
+  .itemAddress .info{
+    padding-left: 30rpx;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: #959595;
+    font-size: 30rpx;
+  }
+  .itemAddress .info view{
+    margin: 0 30rpx
+  }
+  .itemAddress .open{
+    width: 690rpx;
+    margin-top: 20rpx;
+    border-top: 1rpx solid #e9e9e9;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .itemAddress .open icon,
+  .itemAddress .open view{
+    color: #959595;
+    font-size: 20rpx;
+  }
+  .itemAddress .open view{
+    width: 95rpx;
   }
 </style>
 <template>
@@ -173,12 +219,81 @@
   </view>
   <view class="addressList">
     <view class="addressListName">收货地址</view>
-    <view class="noneCar">
+    <!-- <view class="noneCar">
       <view class="iconfont icon-map"></view>
       <view>添加地址</view>
+    </view> -->
+    <view class="itemAddress">
+      <view class="name">
+        <icon class="iconfont icon-map" />
+        商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称
+      </view>
+      <view class="info">
+        <view>姓名:奖项肉丸</view>
+        <view>联系电话:18888888888</view>
+      </view>
+      <view class="open">
+        <view>
+          <icon class="iconfont icon-tianjia" />
+          添加
+        </view>
+        <view>
+          <icon class="iconfont icon-bianji" />
+          编辑
+        </view>
+        <view>
+          <icon class="iconfont icon-shanchu" />
+          删除
+        </view>
+      </view>
     </view>
-    <view>
-      地址列表
+    <view class="itemAddress">
+      <view class="name">
+        <icon class="iconfont icon-map" />
+        商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称
+      </view>
+      <view class="info">
+        <view>姓名:奖项肉丸</view>
+        <view>联系电话:18888888888</view>
+      </view>
+      <view class="open">
+        <view>
+          <icon class="iconfont icon-tianjia" />
+          添加
+        </view>
+        <view>
+          <icon class="iconfont icon-bianji" />
+          编辑
+        </view>
+        <view>
+          <icon class="iconfont icon-shanchu" />
+          删除
+        </view>
+      </view>
+    </view>
+    <view class="itemAddress">
+      <view class="name">
+        <icon class="iconfont icon-map" />
+        商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称
+      </view>
+      <view class="info">
+        <view>姓名:奖项肉丸</view>
+        <view>联系电话:18888888888</view>
+      </view>
+      <view class="open">
+        <view>
+          <icon class="iconfont icon-tianjia" />
+          添加
+        </view>
+        <view>
+          <icon class="iconfont icon-bianji" />
+          编辑
+        </view>
+        <view>
+          <icon class="iconfont icon-shanchu" />
+          删除
+        </view>
+      </view>
     </view>
   </view>
   <view class="ordertitle">
@@ -189,32 +304,68 @@
     </view>
   </view>
   <view class="orderList">
-    <view class="noneCar">
-      <view class="iconfont icon-map"></view>
+    <!-- <view class="noneCar">
+      <view class="iconfont icon-order_icon"></view>
       <view>暂无订单</view>
-    </view>
-    <view>
-      订单列表
-    </view>
-  </view>
-  <!-- <view class="list">
+    </view> -->
     <view class="item">
       <view class="img">
         <image src="/img/daw.jpg" class="slide-image" />
       </view>
       <view class="con">
-        <view class="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</view>
-        <view class="perating">
-          <view class="setPerating">
-            <icon class="iconfont icon-prune" />
-            <view>12</view>
-            <icon class="iconfont icon-tianjia" />
+        <view class="orderInfo">
+          <view class="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</view>
+          <view class="info">
+            <view>待收货</view>
+            <view>×1</view>
           </view>
-          <view class="price">100积分</view>
+        </view>
+        <!-- <view></view> -->
+        <view class="price">
+          100积分
+          <span>猫抓玻璃杯</span>
         </view>
       </view>
     </view>
-  </view> -->
+    <view class="item">
+      <view class="img">
+        <image src="/img/daw.jpg" class="slide-image" />
+      </view>
+      <view class="con">
+        <view class="orderInfo">
+          <view class="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</view>
+          <view class="info">
+            <view>待收货</view>
+            <view>×1</view>
+          </view>
+        </view>
+        <!-- <view></view> -->
+        <view class="price">
+          100积分
+          <span>猫抓玻璃杯</span>
+        </view>
+      </view>
+    </view>
+    <view class="item">
+      <view class="img">
+        <image src="/img/daw.jpg" class="slide-image" />
+      </view>
+      <view class="con">
+        <view class="orderInfo">
+          <view class="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</view>
+          <view class="info">
+            <view>待收货</view>
+            <view>×1</view>
+          </view>
+        </view>
+        <!-- <view></view> -->
+        <view class="price">
+          100积分
+          <span>猫抓玻璃杯</span>
+        </view>
+      </view>
+    </view>
+  </view>
   <nav @childFn.user="goPage" />
 </view>
 
