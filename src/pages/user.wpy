@@ -219,82 +219,36 @@
   </view>
   <view class="addressList">
     <view class="addressListName">收货地址</view>
-    <!-- <view class="noneCar">
+    <view class="noneCar" wx:if="{{addressList.length === 0}}" @tap="newAddress">
       <view class="iconfont icon-map"></view>
       <view>添加地址</view>
-    </view> -->
-    <view class="itemAddress">
-      <view class="name">
-        <icon class="iconfont icon-map" />
-        商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称
-      </view>
-      <view class="info">
-        <view>姓名:奖项肉丸</view>
-        <view>联系电话:18888888888</view>
-      </view>
-      <view class="open">
-        <view>
-          <icon class="iconfont icon-tianjia" />
-          添加
-        </view>
-        <view>
-          <icon class="iconfont icon-bianji" />
-          编辑
-        </view>
-        <view>
-          <icon class="iconfont icon-shanchu" />
-          删除
-        </view>
-      </view>
     </view>
-    <view class="itemAddress">
-      <view class="name">
-        <icon class="iconfont icon-map" />
-        商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称
-      </view>
-      <view class="info">
-        <view>姓名:奖项肉丸</view>
-        <view>联系电话:18888888888</view>
-      </view>
-      <view class="open">
-        <view>
-          <icon class="iconfont icon-tianjia" />
-          添加
+    <block wx:for="{{addressList}}" key="index" index="index" item="item" wx:if="{{addressList.length > 0}}">
+      <view class="itemAddress">
+        <view class="name">
+          <icon class="iconfont icon-map" />
+          {{item.address}}
         </view>
-        <view>
-          <icon class="iconfont icon-bianji" />
-          编辑
+        <view class="info">
+          <view>姓名:{{item.name}}</view>
+          <view>联系电话:{{item.phone}}</view>
         </view>
-        <view>
-          <icon class="iconfont icon-shanchu" />
-          删除
-        </view>
-      </view>
-    </view>
-    <view class="itemAddress">
-      <view class="name">
-        <icon class="iconfont icon-map" />
-        商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称
-      </view>
-      <view class="info">
-        <view>姓名:奖项肉丸</view>
-        <view>联系电话:18888888888</view>
-      </view>
-      <view class="open">
-        <view>
-          <icon class="iconfont icon-tianjia" />
-          添加
-        </view>
-        <view>
-          <icon class="iconfont icon-bianji" />
-          编辑
-        </view>
-        <view>
-          <icon class="iconfont icon-shanchu" />
-          删除
+        <view class="open">
+          <view>
+            <icon class="iconfont icon-tianjia" />
+            添加
+          </view>
+          <view data-index="{{index}}" @tap="setAddress">
+            <icon class="iconfont icon-bianji" />
+            编辑
+          </view>
+          <view data-id="{{item.id}}" @tap="delAddress">
+            <icon class="iconfont icon-shanchu" />
+            删除
+          </view>
         </view>
       </view>
-    </view>
+    </block>
   </view>
   <view class="ordertitle">
     <view class="addressListName">全部订单</view>
@@ -304,67 +258,31 @@
     </view>
   </view>
   <view class="orderList">
-    <!-- <view class="noneCar">
+    <view class="noneCar" wx:if="{{orderList.length === 0}}">
       <view class="iconfont icon-order_icon"></view>
       <view>暂无订单</view>
-    </view> -->
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" class="slide-image" />
-      </view>
-      <view class="con">
-        <view class="orderInfo">
-          <view class="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</view>
-          <view class="info">
-            <view>待收货</view>
-            <view>×1</view>
+    </view>
+    <block wx:for="{{orderList}}" key="index" index="index" item="item" wx:if="{{orderList.length > 0}}">
+      <view class="item" data-id="{{item.id}}" @tap="goOrderInfo">
+        <view class="img">
+          <image src="{{item.img}}" class="slide-image" />
+        </view>
+        <view class="con">
+          <view class="orderInfo">
+            <view class="name">{{item.name}}</view>
+            <view class="info">
+              <view wx:if="{{item.status === '1'}}">待收货</view>
+              <view wx:if="{{item.status === '2'}}">已收货</view>
+              <view>×{{item.num}}</view>
+            </view>
+          </view>
+          <view class="price">
+            {{item.price}}积分
+            <span>{{item.info}}</span>
           </view>
         </view>
-        <!-- <view></view> -->
-        <view class="price">
-          100积分
-          <span>猫抓玻璃杯</span>
-        </view>
       </view>
-    </view>
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" class="slide-image" />
-      </view>
-      <view class="con">
-        <view class="orderInfo">
-          <view class="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</view>
-          <view class="info">
-            <view>待收货</view>
-            <view>×1</view>
-          </view>
-        </view>
-        <!-- <view></view> -->
-        <view class="price">
-          100积分
-          <span>猫抓玻璃杯</span>
-        </view>
-      </view>
-    </view>
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" class="slide-image" />
-      </view>
-      <view class="con">
-        <view class="orderInfo">
-          <view class="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</view>
-          <view class="info">
-            <view>待收货</view>
-            <view>×1</view>
-          </view>
-        </view>
-        <!-- <view></view> -->
-        <view class="price">
-          100积分
-          <span>猫抓玻璃杯</span>
-        </view>
-      </view>
-    </view>
+    </block>
   </view>
   <nav @childFn.user="goPage" />
 </view>
@@ -385,9 +303,20 @@
     mixins = []
 
     data = {
-      
+      addressList: [
+        {'id': '1', 'address': '收货地址,收货地址,收货地址,收货地址,收货地址,收货地址', 'name':'希尔瓦娜斯', 'phone': '18888888888'},
+        {'id': '1', 'address': '收货地址,收货地址,收货地址,收货地址,收货地址,收货地址', 'name':'希尔瓦娜斯', 'phone': '18888888888'},
+        {'id': '1', 'address': '收货地址,收货地址,收货地址,收货地址,收货地址,收货地址', 'name':'希尔瓦娜斯', 'phone': '18888888888'},
+        {'id': '1', 'address': '收货地址,收货地址,收货地址,收货地址,收货地址,收货地址', 'name':'希尔瓦娜斯', 'phone': '18888888888'},
+        {'id': '1', 'address': '收货地址,收货地址,收货地址,收货地址,收货地址,收货地址', 'name':'希尔瓦娜斯', 'phone': '18888888888'}
+      ],
+      orderList: [
+        {'id': '1', 'name': '商品名称商品名称商品名称', 'num': '2', 'price': '100', 'status': '1', 'img': '/img/daw.jpg', 'info': '猫抓玻璃杯'},
+        {'id': '1', 'name': '商品名称商品名称商品名称', 'num': '2', 'price': '100', 'status': '1', 'img': '/img/daw.jpg', 'info': '猫抓玻璃杯'},
+        {'id': '1', 'name': '商品名称商品名称商品名称', 'num': '2', 'price': '100', 'status': '1', 'img': '/img/daw.jpg', 'info': '猫抓玻璃杯'},
+        {'id': '1', 'name': '商品名称商品名称商品名称', 'num': '2', 'price': '100', 'status': '1', 'img': '/img/daw.jpg', 'info': '猫抓玻璃杯'}
+      ]
     }
-
     computed = {
 
     }
@@ -398,6 +327,22 @@
         // 销毁当前页{跳转}
         this.$redirect(url)
       },
+      newAddress() {
+        // 新增地址
+        this.$navigate(`/pages/setAddress`)
+      },
+      setAddress(e) {
+        // 修改地址
+        this.$navigate(`/pages/setAddress?info=${JSON.stringify(this.addressList[e.currentTarget.dataset.index])}`)
+      },
+      delAddress(e) {
+        // 删除地址
+        let id = e.currentTarget.dataset.id
+      },
+      goOrderInfo(e) {
+        // 产看订单商品
+        this.$navigate(`/pages/commodityDetails?id=${e.currentTarget.dataset.id}`)
+      }
     }
 
     events = {

@@ -126,8 +126,8 @@
 
     }
 
-    onLoad() {
-
+    onLoad(options) {
+      this.address = options.info
     }
   }
 </script>
