@@ -71,6 +71,8 @@ setStore(store)
 export default class extends wepy.app {
   config = {
     pages: [
+      
+      'pages/settlement', // 结算页
       'pages/index', // 餐厅列表（首页）
       'pages/mall', // 商城首页
       'pages/car', // 购物车
