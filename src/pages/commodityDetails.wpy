@@ -35,15 +35,18 @@
   .commodityInfoImg, .commodityInfoImg image{
     display: block;
   }
+  .perating{
+    position: fixed;
+    bottom: 0rpx;
+    width: 750rpx;
+    height: 97rpx;
+  }
   .perating, .perating view{
     display: flex;
     align-items: center;
     justify-content: center;
   }
-  .perating{
-    width: 750rpx;
-    height: 97rpx;
-  }
+
   .perating view{
     width: 375rpx;
     height: 97rpx;
