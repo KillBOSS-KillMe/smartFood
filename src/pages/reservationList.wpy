@@ -93,108 +93,79 @@
     height: 100%;
     color: #3a3a3a;
   }
+  .noneCar{
+    width: 690rpx;
+  }
+  .noneCar view{
+    font-size: 33rpx;
+    text-align: center;
+    color: #959595;
+  }
+  .noneCar .iconfont{
+    font-size: 140rpx;
+    text-align: center;
+  }
 </style>
 <template>
 <view class="list">
-  <view class="item">
-    <view class="nameAndTime">
-      <view class="name">餐厅名称餐厅名称</view>
-      <view class="time">2019.10.11 12.30</view>
-    </view>
-    <view class="addess">
-      <view>
-        <icon class="iconfont icon-map"></icon>
-        地址地址地址地址地
-      </view>
-      <view>
-        <!-- top  bottom  样式替换控制箭头方向 -->
-        展开<icon class="iconfont icon-arrow-right-copy-copy-copy bottom"></icon>
-      </view>
-    </view>
-    <view class="infoList">
-      <view class="itemInfo">
-        <label>人数:</label>
-        <view>10人</view>
-      </view>
-      <view class="itemInfo">
-        <label>餐标:</label>
-        <view>500元/桌</view>
-      </view>
-      <view class="itemInfo">
-        <label>旅行社:</label>
-        <view>中国青年旅行社</view>
-      </view>
-      <view class="itemInfo">
-        <label>客源地:</label>
-        <view>中国上海市</view>
-      </view>
-      <view class="itemInfo">
-        <label>桌数:</label>
-        <view>5桌</view>
-      </view>
-      <view class="itemInfo">
-        <label>导游名字:</label>
-        <view>希尔瓦娜斯</view>
-      </view>
-      <view class="itemInfo">
-        <label>导游电话:</label>
-        <view>18700000000</view>
-      </view>
-      <view class="itemInfo">
-        <label>特殊要求:</label>
-        <view>大部分为老年人，饮食应清淡，不放辣椒，嗯就这样！</view>
-      </view>
-    </view>
+  <view class="noneCar" wx:if="{{listData.length === 0}}" @tap="newAddress">
+    <view class="iconfont icon-order_icon"></view>
+    <view>暂无纪录</view>
   </view>
-  <view class="item">
-    <view class="nameAndTime">
-      <view class="name">餐厅名称餐厅名称</view>
-      <view class="time">2019.10.11 12.30</view>
+  <block wx:for="{{listData}}" key="index" index="index" item="item" wx:if="{{listData.length > 0}}">
+    <view class="item">
+      <view class="nameAndTime">
+        <view class="name">{{item.foodName}}</view>
+        <view class="time">{{item.time}}</view>
+      </view>
+      <view class="addess">
+        <view>
+          <icon class="iconfont icon-map"></icon>
+          {{item.address}}
+        </view>
+        <view data-index="{{index}}" @tap="showInfoList">
+          <!-- top  bottom  样式替换控制箭头方向 -->
+          <span wx:if="{{item.closed === '0'}}">展开</span>
+          <span wx:if="{{item.closed === '1'}}">收起</span>
+          <icon class="iconfont icon-arrow-right-copy-copy-copy {{item.closed === '0' ? 'bottom':'top'}}"></icon>
+        </view>
+      </view>
+      <view class="infoList" wx:if="{{item.closed === '1'}}">
+        <view class="itemInfo">
+          <label>人数:</label>
+          <view>{{item.peopleNum}}人</view>
+        </view>
+        <view class="itemInfo">
+          <label>餐标:</label>
+          <view>{{item.standard}}元/桌</view>
+        </view>
+        <view class="itemInfo">
+          <label>旅行社:</label>
+          <view>{{item.travelAgency}}</view>
+        </view>
+        <view class="itemInfo">
+          <label>客源地:</label>
+          <view>{{item.sourceArea}}</view>
+        </view>
+        <view class="itemInfo">
+          <label>桌数:</label>
+          <view>{{item.tableNum}}桌</view>
+        </view>
+        <view class="itemInfo">
+          <label>导游名字:</label>
+          <view>{{item.guideName}}</view>
+        </view>
+        <view class="itemInfo">
+          <label>导游电话:</label>
+          <view>{{item.phone}}</view>
+        </view>
+        <view class="itemInfo">
+          <label>特殊要求:</label>
+          <view>{{item.remarks}}</view>
+        </view>
+      </view>
     </view>
-    <view class="addess">
-      <view>
-        <icon class="iconfont icon-map"></icon>
-        地址地址地址地址地
-      </view>
-      <view>
-        展开<icon class="iconfont icon-arrow-right-copy-copy-copy bottom"></icon>
-      </view>
-    </view>
-    <view class="infoList">
-      <view class="itemInfo">
-        <label>人数:</label>
-        <view>10人</view>
-      </view>
-      <view class="itemInfo">
-        <label>餐标:</label>
-        <view>500元/桌</view>
-      </view>
-      <view class="itemInfo">
-        <label>旅行社:</label>
-        <view>中国青年旅行社</view>
-      </view>
-      <view class="itemInfo">
-        <label>客源地:</label>
-        <view>中国上海市</view>
-      </view>
-      <view class="itemInfo">
-        <label>桌数:</label>
-        <view>5桌</view>
-      </view>
-      <view class="itemInfo">
-        <label>导游名字:</label>
-        <view>希尔瓦娜斯</view>
-      </view>
-      <view class="itemInfo">
-        <label>导游电话:</label>
-        <view>18700000000</view>
-      </view>
-      <view class="itemInfo">
-        <label>特殊要求:</label>
-        <view>大部分为老年人，饮食应清淡，不放辣椒，嗯就这样！</view>
-      </view>
-    </view>
-  </view>
+  </block>
 </view>
 </template>
 
@@ -211,7 +182,36 @@
     mixins = []
 
     data = {
-
+      listData: [
+        {
+          'foodName': '餐厅名称餐厅名称',
+          'time': '2019.10.11 12.30',
+          'address': '地址地址地址地址地',
+          'peopleNum': '10',
+          'standard': '500',
+          'travelAgency': '中国青年旅行社',
+          'sourceArea': '中国上海市',
+          'tableNum': '5',
+          'guideName': '希尔瓦娜斯',
+          'phone': '18700000000',
+          'remarks': '大部分为老年人，饮食应清淡，不放辣椒，嗯就这样',
+          'closed': '0'
+        },
+        {
+          'foodName': '餐厅名称餐厅名称',
+          'time': '2019.10.11 12.30',
+          'address': '地址地址地址地址地',
+          'peopleNum': '10',
+          'standard': '500',
+          'travelAgency': '中国青年旅行社',
+          'sourceArea': '中国上海市',
+          'tableNum': '5',
+          'guideName': '希尔瓦娜斯',
+          'phone': '18700000000',
+          'remarks': '大部分为老年人，饮食应清淡，不放辣椒，嗯就这样',
+          'closed': '0'
+        }
+      ]
     }
 
     computed = {
@@ -219,7 +219,15 @@
     }
 
     methods = {
-
+      showInfoList(e) {
+        let index = e.currentTarget.dataset.index
+        if (this.listData[index].closed === '0') {
+          this.listData[index]['closed'] = '1'
+        } else {
+          this.listData[index]['closed'] = '0'
+        }
+        this.$apply()
+      }
     }
 
     events = {
