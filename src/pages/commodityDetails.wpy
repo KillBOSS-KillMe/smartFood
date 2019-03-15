@@ -80,7 +80,7 @@
     </block>
   </view>
   <view class="perating">
-    <view class="">立即兑换</view>
+    <view class="" @tap="goSettlement">立即兑换</view>
     <view class="seCar">加入购物车</view>
   </view>
 </view>
@@ -146,6 +146,10 @@
             this.$apply()
           }
         })
+      },
+      goSettlement() {
+        // 进入结算页
+        this.$navigate(`/pages/settlement`)
       }
     }
 

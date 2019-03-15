@@ -72,11 +72,12 @@ export default class extends wepy.app {
   config = {
     pages: [
       
-      'pages/settlement', // 结算页
+      
       'pages/index', // 餐厅列表（首页）
       'pages/mall', // 商城首页
       'pages/car', // 购物车
       'pages/user', // 个人中心
+      'pages/settlement', // 结算页
       'pages/restaurantInfo', // 餐厅详情
       'pages/commodityDetails', // 商品详情
       'pages/setAddress', // 编辑地址--输入

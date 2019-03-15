@@ -172,14 +172,6 @@
       <view>商品金额</view>
       <view>59积分</view>
     </view>
-    <view>
-      <view>运费</view>
-      <view>0.00元</view>
-    </view>
-    <view>
-      <view>积分抵扣</view>
-      <view>59积分</view>
-    </view>
     <view class="balance">
       <view>可用积分</view>
       <view>59积分</view>

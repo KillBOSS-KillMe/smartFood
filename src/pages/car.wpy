@@ -153,7 +153,7 @@
     <view class="price">
       合计<span>￥0</span>
     </view>
-    <view class="sett">结算</view>
+    <view class="sett" @tap="goSettlement">结算</view>
   </view>
   <nav @childFn.user="goPage" />
 </view>
@@ -219,6 +219,10 @@ export default class SetAddress extends wepy.page {
       this.$navigate(
         `/pages/commodityDetails?id=${e.currentTarget.dataset.id}`
       )
+    },
+    goSettlement() {
+      // 进入结算页
+      this.$navigate(`/pages/settlement`)
     }
   }
 
