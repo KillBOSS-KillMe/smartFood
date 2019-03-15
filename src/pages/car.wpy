@@ -1,82 +1,120 @@
 <style lang="less">
-  .list{
-    width: 690rpx;
-    height: auto;
-    padding: 30rpx;
-    margin-bottom: 120rpx;
-  }
-  .item{
-    width: 690rpx;
-    height: 237rpx;
-    border-bottom: 1rpx solid #ebebeb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .item .img,.item image{
-    width: 128rpx;
-    height: 128rpx;
-  }
-  .item .con{
-    width: 542rpx;
-    height: 128rpx;
-    padding-left: 20rpx;
-  }
-  .name{
-    width: 100%;
-    height: 70rpx;
-    color: #3a3a3a;
-    font-size: 28rpx;
-    overflow:hidden;
-    text-overflow: ellipsis;
-  }
-  .perating{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60rpx;
-  }
-  .setPerating{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 30rpx;
-  }
-  .setPerating view{
-    width: auto;
-    padding: 0 20rpx;
-    border-radius: 35rpx;
-    height: 35rpx;
-    border: 1rpx solid #3a3a3a;
-    color: #3a3a3a;
-    margin: 0 15rpx;
-    margin-top: 15rpx;
-    
-  }
-  .setPerating .iconfont{
-    font-size: 30rpx;
-  }
-  .price{
-    font-size: 30rpx;
-    color: #de9732;
-    height: 60rpx;
-    line-height: 80rpx;
-  }
-  .noneCar{
-    width: 750rpx;
-    height: 350rpx;
-    padding-top: 150rpx;
-  }
-  .noneCar view{
-    font-size: 33rpx;
-    text-align: center;
-    color: #959595;
-  }
-  .noneCar .iconfont{
-    font-size: 260rpx;
-    text-align: center;
-  }
-  
+.list {
+  width: 690rpx;
+  height: auto;
+  padding: 30rpx;
+  margin-bottom: 220rpx;
+}
+.item {
+  width: 690rpx;
+  height: 237rpx;
+  border-bottom: 1rpx solid #ebebeb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.item .img,
+.item image {
+  width: 128rpx;
+  height: 128rpx;
+}
+.item .sel {
+  width: 60rpx;
+}
+.item .con {
+  width: 482rpx;
+  height: 128rpx;
+  padding-left: 20rpx;
+}
+.name {
+  width: 100%;
+  height: 70rpx;
+  color: #3a3a3a;
+  font-size: 28rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.perating {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60rpx;
+}
+.setPerating {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30rpx;
+}
+.setPerating view {
+  width: auto;
+  padding: 0 20rpx;
+  border-radius: 35rpx;
+  height: 35rpx;
+  border: 1rpx solid #3a3a3a;
+  color: #3a3a3a;
+  margin: 0 15rpx;
+  margin-top: 15rpx;
+}
+.setPerating .iconfont {
+  font-size: 30rpx;
+}
+.price {
+  font-size: 30rpx;
+  color: #de9732;
+  height: 60rpx;
+  line-height: 80rpx;
+}
+.noneCar {
+  width: 750rpx;
+  height: 350rpx;
+  padding-top: 150rpx;
+}
+.noneCar view {
+  font-size: 33rpx;
+  text-align: center;
+  color: #959595;
+}
+.noneCar .iconfont {
+  font-size: 260rpx;
+  text-align: center;
+}
+.settlement {
+  width: 690rpx;
+  height: 100rpx;
+  padding: 0 30rpx;
+  position: fixed;
+  bottom: 130rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.settlement .sel{
+  width: 130rpx;
+  font-size: 25rpx;
+  color: #3a3a3a;
+}
+.settlement .price{
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #3a3a3a;
+}
+.settlement .price span{
+  color: #F74D4E;
+}
+.settlement .sett{
+  width: 174rpx;
+  height: 64rpx;
+  border-radius: 64rpx;
+  background-color: #F74D4E;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 </style>
 <template>
 <view>
@@ -87,6 +125,9 @@
   <view class="list" wx:if="{{listData.length > 0}}">
     <block wx:for="{{listData}}" key="index" index="index" item="item">
       <view class="item">
+        <view class="sel">
+          <checkbox data-index="{{index}}" id="2" value="{{index}}" checked="{{item.checks}}"/>
+        </view>
         <view class="img">
           <image src="{{item.img}}" class="slide-image" data-id="{{item.id}}" @tap="goCommodity" />
         </view>
@@ -104,55 +145,85 @@
       </view>
     </block>
   </view>
+  <view class="settlement">
+    <view class="sel">
+      <checkbox data-index="{{index}}" id="2" value="{{index}}" checked="{{item.checks}}"/>
+      全选
+    </view>
+    <view class="price">
+      合计<span>￥0</span>
+    </view>
+    <view class="sett">结算</view>
+  </view>
   <nav @childFn.user="goPage" />
 </view>
 
 </template>
 
 <script>
-  import wepy from 'wepy'
-  import nav from '../components/nav' // 底部导航
-  export default class SetAddress extends wepy.page {
-    config = {
-      navigationBarTitleText: '购物车'
-    }
-    components = {
-      nav: nav
-    }
+import wepy from 'wepy';
+import nav from '../components/nav'; // 底部导航
+export default class SetAddress extends wepy.page {
+  config = {
+    navigationBarTitleText: '购物车'
+  };
+  components = {
+    nav: nav
+  };
 
-    mixins = []
+  mixins = [];
 
-    data = {
-      listData: [
-        {'id': '1', 'name': '商品名称商品名称商品名称商品名称商', 'num': '12', 'price': '100', 'img': '/img/daw.jpg'},
-        {'id': '1', 'name': '商品名称商品名称商品名称商品名称商', 'num': '12', 'price': '100', 'img': '/img/daw.jpg'},
-        {'id': '1', 'name': '商品名称商品名称商品名称商品名称商', 'num': '12', 'price': '100', 'img': '/img/daw.jpg'},
-        {'id': '1', 'name': '商品名称商品名称商品名称商品名称商', 'num': '12', 'price': '100', 'img': '/img/daw.jpg'}
-      ]
-    }
-
-    computed = {
-
-    }
-
-    methods = {
-      // 底部导航跳转
-      goPage (url, evt) {
-        // 销毁当前页{跳转}
-        this.$redirect(url)
+  data = {
+    listData: [
+      {
+        id: '1',
+        name: '商品名称商品名称商品名称商品名称商',
+        num: '12',
+        price: '100',
+        img: '/img/daw.jpg'
       },
-      goCommodity(e) {
-        // 进入餐厅详情
-        this.$navigate(`/pages/commodityDetails?id=${e.currentTarget.dataset.id}`)
+      {
+        id: '1',
+        name: '商品名称商品名称商品名称商品名称商',
+        num: '12',
+        price: '100',
+        img: '/img/daw.jpg'
+      },
+      {
+        id: '1',
+        name: '商品名称商品名称商品名称商品名称商',
+        num: '12',
+        price: '100',
+        img: '/img/daw.jpg'
+      },
+      {
+        id: '1',
+        name: '商品名称商品名称商品名称商品名称商',
+        num: '12',
+        price: '100',
+        img: '/img/daw.jpg'
       }
-    }
+    ]
+  };
 
-    events = {
+  computed = {}
 
-    }
-
-    onLoad() {
-
+  methods = {
+    // 底部导航跳转
+    goPage(url, evt) {
+      // 销毁当前页{跳转}
+      this.$redirect(url);
+    },
+    goCommodity(e) {
+      // 进入餐厅详情
+      this.$navigate(
+        `/pages/commodityDetails?id=${e.currentTarget.dataset.id}`
+      )
     }
   }
+
+  events = {}
+
+  onLoad() {}
+}
 </script>
