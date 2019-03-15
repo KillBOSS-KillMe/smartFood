@@ -43,39 +43,44 @@
     align-items: center;
     justify-content: space-between;
   }
+  .noneCar{
+    width: 690rpx;
+  }
+  .noneCar view{
+    font-size: 33rpx;
+    text-align: center;
+    color: #959595;
+  }
+  .noneCar .iconfont{
+    font-size: 140rpx;
+    text-align: center;
+  }
 </style>
 <template>
 <view class="list">
-  <view class="item">
-    <view class="nameAndTime">
-      <view class="name">餐厅名称餐厅名称</view>
-      <view class="time">20积分</view>
-    </view>
-    <view class="addess">
-      <view>2019.10.11 12.30</view>
-      <view>20人</view>
-    </view>
+  <view class="noneCar" wx:if="{{listData.length === 0}}" @tap="newAddress">
+    <view class="iconfont icon-order_icon"></view>
+    <view>暂无纪录</view>
   </view>
-  <view class="item">
-    <view class="nameAndTime">
-      <view class="name">餐厅名称餐厅名称</view>
-      <view class="time">20积分</view>
-    </view>
-    <view class="addess">
-      <view>2019.10.11 12.30</view>
-      <view>20人</view>
-    </view>
+  <block wx:for="{{listData}}" key="index" index="index" item="item" wx:if="{{listData.length > 0}}">
+    <view class="item">
+      <view class="nameAndTime">
+        <view class="name">{{item.name}}</view>
+        <view class="time">
+          <span wx:if="{{item.type === '1'}}">-</span>
+          <span wx:if="{{item.type === '2'}}">+</span>
+          {{item.price}}积分
+        </view>
+      </view>
+      <view class="addess">
+        <view>
+          <span wx:if="{{item.type === '1'}}">商品数量</span>
+          <span wx:if="{{item.type === '2'}}">人数</span>
+          {{item.num}}</view>
+        <view>{{item.time}}</view>
+      </view>
   </view>
-  <view class="item">
-    <view class="nameAndTime">
-      <view class="name">餐厅名称餐厅名称</view>
-      <view class="time">20积分</view>
-    </view>
-    <view class="addess">
-      <view>2019.10.11 12.30</view>
-      <view>20人</view>
-    </view>
-  </view>
+  </block>
 </view>
 </template>
 
@@ -92,7 +97,11 @@
     mixins = []
 
     data = {
-
+      listData: [
+        {'name': '商品商品商品', 'price': '20', 'time': '2019.10.11', 'num': '3','type': '1'},
+        {'name': '餐厅餐厅餐厅', 'price': '20', 'time': '2019.10.11', 'num': '3','type': '2'},
+        {'name': '餐厅餐厅餐厅', 'price': '20', 'time': '2019.10.11', 'num': '3','type': '2'}
+      ]
     }
 
     computed = {

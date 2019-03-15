@@ -208,7 +208,7 @@
     <image src="/img/daw.jpg" />
     <view class="uInfo">
       <view class="name">中意酱香肉丸</view>
-      <view class="integral">
+      <view class="integral" @tap="goIntegralInfo">
         剩余积分:
         <span>
           500
@@ -342,6 +342,10 @@
       goOrderInfo(e) {
         // 产看订单商品
         this.$navigate(`/pages/commodityDetails?id=${e.currentTarget.dataset.id}`)
+      },
+      goIntegralInfo() {
+        // 查看积分消费纪录
+        this.$navigate(`/pages/integralList`)
       }
     }
 
