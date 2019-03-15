@@ -112,14 +112,14 @@
       interval: 3000,
       duration: 1000,
       commodityList: [
-        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
-        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
-        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
-        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
-        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
-        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
-        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"},
-        {"id":"1", "name":"希尔瓦娜斯", "price":"100", "img":"/img/daw.jpg"}
+        {'id': '1', 'name': '希尔瓦娜斯', 'price': '100', 'img': '/img/daw.jpg'},
+        {'id': '1', 'name': '希尔瓦娜斯', 'price': '100', 'img': '/img/daw.jpg'},
+        {'id': '1', 'name': '希尔瓦娜斯', 'price': '100', 'img': '/img/daw.jpg'},
+        {'id': '1', 'name': '希尔瓦娜斯', 'price': '100', 'img': '/img/daw.jpg'},
+        {'id': '1', 'name': '希尔瓦娜斯', 'price': '100', 'img': '/img/daw.jpg'},
+        {'id': '1', 'name': '希尔瓦娜斯', 'price': '100', 'img': '/img/daw.jpg'},
+        {'id': '1', 'name': '希尔瓦娜斯', 'price': '100', 'img': '/img/daw.jpg'},
+        {'id': '1', 'name': '希尔瓦娜斯', 'price': '100', 'img': '/img/daw.jpg'}
       ]
     }
 

@@ -54,7 +54,7 @@
     <image class="item" src="/img/daw.jpg" />
   </view>
   <view class="nav">
-    <view>预定</view>
+    <view @tap="goPreordain">预定</view>
   </view>
 </view>
 </template>
@@ -80,7 +80,11 @@
     }
 
     methods = {
-
+      goPreordain() {
+        // 进入预约表单
+        this.$navigate(`/pages/setPreordain`)
+      }
+      
     }
 
     events = {

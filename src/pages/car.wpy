@@ -80,91 +80,29 @@
 </style>
 <template>
 <view>
-  <view class="noneCar">
+  <view class="noneCar" wx:if="{{listData.length === 0}}">
     <view class="iconfont icon-gouwuche"></view>
     <view>购物车是空的！</view>
   </view>
-  <view class="list">
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" class="slide-image" />
-      </view>
-      <view class="con">
-        <view class="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</view>
-        <view class="perating">
-          <view class="setPerating">
-            <icon class="iconfont icon-prune" />
-            <view>12</view>
-            <icon class="iconfont icon-tianjia" />
+  <view class="list" wx:if="{{listData.length > 0}}">
+    <block wx:for="{{listData}}" key="index" index="index" item="item">
+      <view class="item">
+        <view class="img">
+          <image src="{{item.img}}" class="slide-image" data-id="{{item.id}}" @tap="goCommodity" />
+        </view>
+        <view class="con">
+          <view class="name">{{item.name}}</view>
+          <view class="perating">
+            <view class="setPerating">
+              <icon class="iconfont icon-prune" />
+              <view>{{item.num}}</view>
+              <icon class="iconfont icon-tianjia" />
+            </view>
+            <view class="price">{{item.price}}积分</view>
           </view>
-          <view class="price">100积分</view>
         </view>
       </view>
-    </view>
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" class="slide-image" />
-      </view>
-      <view class="con">
-        <view class="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</view>
-        <view class="perating">
-          <view class="setPerating">
-            <icon class="iconfont icon-prune" />
-            <view>12</view>
-            <icon class="iconfont icon-tianjia" />
-          </view>
-          <view class="price">100积分</view>
-        </view>
-      </view>
-    </view>
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" class="slide-image" />
-      </view>
-      <view class="con">
-        <view class="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</view>
-        <view class="perating">
-          <view class="setPerating">
-            <icon class="iconfont icon-prune" />
-            <view>12</view>
-            <icon class="iconfont icon-tianjia" />
-          </view>
-          <view class="price">100积分</view>
-        </view>
-      </view>
-    </view>
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" class="slide-image" />
-      </view>
-      <view class="con">
-        <view class="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</view>
-        <view class="perating">
-          <view class="setPerating">
-            <icon class="iconfont icon-prune" />
-            <view>12</view>
-            <icon class="iconfont icon-tianjia" />
-          </view>
-          <view class="price">100积分</view>
-        </view>
-      </view>
-    </view>
-    <view class="item">
-      <view class="img">
-        <image src="/img/daw.jpg" class="slide-image" />
-      </view>
-      <view class="con">
-        <view class="name">商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称商品名称</view>
-        <view class="perating">
-          <view class="setPerating">
-            <icon class="iconfont icon-prune" />
-            <view>12</view>
-            <icon class="iconfont icon-tianjia" />
-          </view>
-          <view class="price">100积分</view>
-        </view>
-      </view>
-    </view>
+    </block>
   </view>
   <nav @childFn.user="goPage" />
 </view>
@@ -185,7 +123,12 @@
     mixins = []
 
     data = {
-      
+      listData: [
+        {'id': '1', 'name': '商品名称商品名称商品名称商品名称商', 'num': '12', 'price': '100', 'img': '/img/daw.jpg'},
+        {'id': '1', 'name': '商品名称商品名称商品名称商品名称商', 'num': '12', 'price': '100', 'img': '/img/daw.jpg'},
+        {'id': '1', 'name': '商品名称商品名称商品名称商品名称商', 'num': '12', 'price': '100', 'img': '/img/daw.jpg'},
+        {'id': '1', 'name': '商品名称商品名称商品名称商品名称商', 'num': '12', 'price': '100', 'img': '/img/daw.jpg'}
+      ]
     }
 
     computed = {
@@ -198,6 +141,10 @@
         // 销毁当前页{跳转}
         this.$redirect(url)
       },
+      goCommodity(e) {
+        // 进入餐厅详情
+        this.$navigate(`/pages/commodityDetails?id=${e.currentTarget.dataset.id}`)
+      }
     }
 
     events = {
