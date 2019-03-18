@@ -1,12 +1,12 @@
 <style lang="less">
 @font-face {
   font-family: 'iconfont';  /* project id 1078713 */
-  src: url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.eot');
-  src: url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1078713_eq59qa5kgqa.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1078713_zoz8vw1pk6.eot');
+  src: url('//at.alicdn.com/t/font_1078713_zoz8vw1pk6.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1078713_zoz8vw1pk6.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1078713_zoz8vw1pk6.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1078713_zoz8vw1pk6.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1078713_zoz8vw1pk6.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -32,6 +32,133 @@
 .icon-arrow-right-copy-copy-copy:before { content: "\e604"; } // 箭头-向右
 .icon-rili:before { content: "\e601"; } // 日历
 .icon-shanchu:before { content: "\e600"; } // 删除
+.icon-guanbi:before { content: "\e62a"; } // 清空，关闭，叉号
+.icon-biyan:before { content: "\e7ca"; } // 闭眼
+.icon-in_zhengyan:before { content: "\e607"; } // 睁眼
+.icon-yonghu-tianchong:before { content: "\e670"; } // 用户
+.icon-mimaffffffpx:before { content: "\e603"; } // 密码
+.icon-yanzhengma:before { content: "\e605"; } // 验证
+
+
+
+
+/** 登陆，注册，忘记密码页面的样式--开始 */
+.login .logo{
+  width: 750rpx;
+  height: 300rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom:100rpx;
+}
+.login .logo .img{
+  width: 300rpx;
+  height: 300rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .set{
+  margin: auto;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .set view{
+  width: 70rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1rpx solid #78ac47;
+  border-right: 0;
+  color: #78ac47;
+}
+.login .set .rightIcon{
+  color: #cbcbcb;
+}
+.login .set input{
+  width: 330rpx;
+  height: 80rpx;
+  font-size: 30rpx;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1rpx solid #78ac47;
+}
+.login .sub{
+  margin-top: 50rpx;
+}
+.login .sub view{
+  width: 470rpx;
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1rpx solid #78ac47;
+  border-radius: 40rpx;
+  color: #fff;
+  background-color: #78ac47;
+}
+.login .verification{
+  margin: auto;
+  height: 100rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .verification .iconfont,
+.login .verification .getCode{
+  height: 80rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1rpx solid #78ac47;
+}
+.login .verification .getCode{
+  width: 170rpx;
+}
+.login .verification .getCode view{
+  width: 170rpx;
+  height: 60rpx;
+  color: #2c4e0a;
+  background-color: #e5f1dc;
+  font-size: 20rpx;
+  margin-bottom: 10rpx;
+  border-radius: 10rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .verification .iconfont{
+  width: 70rpx;
+  color: #78ac47;
+}
+.login .verification input{
+  width: 230rpx;
+  height: 80rpx;
+  font-size:30rpx;
+  color:#333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1rpx solid #78ac47;
+}
+.registered{
+  margin: auto;
+  width: 470rpx;
+  height: 50rpx;
+  font-size: 20rpx;
+  color: #78ac47;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.registered .alter {
+  color: #9f9f9f;
+}
 
 
 // 多选框样式
@@ -72,7 +199,7 @@ export default class extends wepy.app {
   config = {
     pages: [
       
-      
+      'pages/login', // 餐厅列表（首页）
       'pages/index', // 餐厅列表（首页）
       'pages/mall', // 商城首页
       'pages/car', // 购物车

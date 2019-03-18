@@ -1,0 +1,150 @@
+<style lang="less">
+
+</style>
+<template>
+<view class="login">
+  <view class="logo">
+    <image class="img" src="/img/daw.jpg" />
+  </view>
+  <view class="form">
+    <view class="set">
+      <view class="iconfont icon-yonghu-tianchong"></view>
+      <input type="number" placeholder="请输入用户名" name="tel" value="{{userName}}" bindinput="getUserName" />
+      <view class="iconfont icon-guanbi rightIcon" bindtap="delUserName"></view>
+    </view>
+    <view class="set">
+      <view class="iconfont icon-mimaffffffpx"></view>
+      <input type="{{passwordInputType}}" placeholder="请输入密码" name="name" value="{{userPaw}}" bindinput="getUserPaw" />
+      <view class="iconfont icon-{{passwordIcon}} rightIcon" bindtap="showPassword"></view>
+    </view>
+    <view class="set sub">
+      <view bindtap="submit">登录</view>
+    </view>
+    <view class="registered">
+      <text class="alter" bindtap="alterPassword">忘记密码</text>
+      <text bindtap="registerd">注册</text>
+    </view>
+  </view>
+</view>
+</template>
+
+<script>
+import wepy from 'wepy';
+import nav from '../components/nav'; // 底部导航
+export default class Login extends wepy.page {
+  config = {
+    navigationBarTitleText: '登陆'
+  };
+  components = {
+    nav: nav
+  };
+
+  mixins = [];
+
+  data = {
+    userName: '18700458359',
+    userPaw: '123456',
+    passwordInputType: 'password',
+    passwordIcon: 'in_zhengyan'
+  };
+
+  computed = {}
+
+  methods = {
+    // 登陆
+    login(url, evt) {
+      // 销毁当前页{跳转}
+      this.$redirect(url);
+    },
+    goCommodity(e) {
+      // 进入餐厅详情
+      this.$navigate(
+        `/pages/commodityDetails?id=${e.currentTarget.dataset.id}`
+      )
+    },
+    // 忘记密码
+    alterPassword() {
+      wx.navigateTo({
+        url: `/pages/alterPassword/alterPassword?`
+      })
+    },
+    // 注册
+    registerd() {
+      wx.navigateTo({
+        url: `/pages/registered/registered?`
+      })
+    },
+    showPassword() {
+      if (this.data.passwordInputType == 'password') {
+        this.passwordInputType = 'text',
+        this.passwordIcon = 'biyan'
+      } else {
+        this.passwordInputType = 'password',
+        this.passwordIcon = 'zhengyan'
+      }
+    },
+    getUserName(e) {
+        this.userName = e.detail.value
+    },
+    getUserPaw(e) {
+        this.userPaw = e.detail.value
+    },
+    delUserName() {
+        this.userName = ''
+    },
+    submit() {
+      if (this.check.isPhone(this.data.userName)) {
+        wx.showModal({
+          title: '',
+          content: '请输入正确的账号'
+        })
+        return ''
+      }
+      if (this.check.isNull(this.data.userPaw)) {
+        wx.showModal({
+          title: '',
+          content: '请输入密码'
+        })
+        return ''
+      }
+      if (this.data.userPaw.length < 6 || this.data.userPaw.length > 15) {
+        wx.showModal({
+          title: '',
+          content: '密码长度为6-15位'
+        })
+        return ''
+      }
+      let gourl = ''
+      wx.redirectTo({
+        url: gourl
+      })
+      return
+      // wx.request({
+      //   url: `${app.globalData.requestUrl}/api/login`,
+      //   method: 'POST',
+      //   data: {
+      //     mobile: this.data.userName,
+      //     password: this.data.userPaw
+      //   },
+      //   success: data => {
+      //     console.log(data)
+      //     if (data.data.code == 1) {
+
+      //     } else {
+      //       wx.showModal({
+      //         title: '',
+      //         content: data.msg
+      //       })
+      //     }
+      //   }
+      // })
+    },
+  }
+
+  events = {}
+
+  onLoad() {
+    this.getUserLoginInfo()
+  }
+}
+</script>
