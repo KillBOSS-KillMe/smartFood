@@ -120,8 +120,8 @@ export default class Login extends wepy.page {
       //   url: `${this.$parent.globalData.requestUrl}/api/login`,
       //   method: 'POST',
       //   data: {
-      //     mobile: this.data.userName,
-      //     password: this.data.userPaw
+      //     mobile: this.userName,
+      //     password: this.userPaw
       //   },
       //   success: data => {
       //     console.log(data)
