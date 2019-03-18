@@ -166,12 +166,15 @@ export default class Registered extends wepy.page {
       }
       return ''
       wx.request({
-        url: `${this.$parent.globalData.requestUrl}/api/login`,
+        url: `${this.$parent.globalData.requestUrl}/api/register`,
         method: 'POST',
         data: {
           mobile: this.userName,
           password: this.userPaw,
-          code: this.verificationCode
+          code: this.verificationCode,
+          username: this.userInfo.nickName,
+          img: this.userInfo.avatarUrl,
+          openid: this.userInfo.openid
         },
         success: data => {
           if (data.code !== '0') {
@@ -199,7 +202,7 @@ export default class Registered extends wepy.page {
     wx.getUserInfo({
       success (res) {
         console.log(res.userInfo)
-        that.globalData.userInfo = res.userInfo
+        that.userInfo = res.userInfo
         that.authorizationButton = false
         // // 数据生效
         // that.$apply()
@@ -207,6 +210,23 @@ export default class Registered extends wepy.page {
           success: ress => {
             that.code = ress.code
             console.log(that.code)
+            wx.request({
+              url: `${that.$parent.globalData.requestUrl}/api/openid`,
+              method: 'POST',
+              data: {
+                code: that.code
+              },
+              success: data => {
+                if (data.code !== '0') {
+                  that.userInfo['openid'] = data.openid
+                } else {
+                  wx.showModal({
+                    title: '',
+                    content: data.msg
+                  })
+                }
+              }
+            })
           }
         })
       }
