@@ -174,6 +174,7 @@ export default class SetAddress extends wepy.page {
   mixins = [];
 
   data = {
+    userInfo: null,
     listData: [
       {
         id: '1',
@@ -228,6 +229,40 @@ export default class SetAddress extends wepy.page {
 
   events = {}
 
-  onLoad() {}
+  onLoad() {
+    this.userInfo = this.$parent.globalData.userInfo
+    console.log(this.userInfo)
+    this.getCarList()
+  }
+  getCarList() {
+    wx.request({
+      url: `${this.$parent.globalData.requestUrl}/shop_cart`,
+      method: 'POST',
+      data: {
+        uid: this.userInfo.id
+      },
+      success: data => {
+        console.log(data)
+        if (data.data.code == 1) {
+          this.listData = data.data.data
+          let i = 0
+          for (i in this.listData) {
+            // 替换反斜杠正则
+            // replace(reg,"/")
+            var reg=/\\|\//g;
+            this.listData[i]['img'] = this.listData[i]['img'].replace(reg,"/")
+            this.listData[i]['detail'] = this.listData[i]['detail'].replace(reg,"/")
+          }
+          console.log(this.listData)
+          this.$apply()
+        } else {
+          wx.showModal({
+            title: '',
+            content: data.msg
+          })
+        }
+      }
+    })
+  }
 }
 </script>

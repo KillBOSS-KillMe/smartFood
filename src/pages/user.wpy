@@ -303,6 +303,7 @@
     mixins = []
 
     data = {
+      userInfo: null,
       addressList: [
         {'id': '1', 'address': '收货地址,收货地址,收货地址,收货地址,收货地址,收货地址', 'name':'希尔瓦娜斯', 'phone': '18888888888'},
         {'id': '1', 'address': '收货地址,收货地址,收货地址,收货地址,收货地址,收货地址', 'name':'希尔瓦娜斯', 'phone': '18888888888'},
@@ -354,7 +355,70 @@
     }
 
     onLoad() {
-
+      this.userInfo = this.$parent.globalData.userInfo
+      console.log(this.userInfo)
+      this.getAddressList()
+      this.getOrderList()
+    }
+    getAddressList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/users_address`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id
+        },
+        success: data => {
+          console.log(data)
+          if (data.data.code == 1) {
+            this.listData = data.data.data
+            let i = 0
+            for (i in this.listData) {
+              // 替换反斜杠正则
+              // replace(reg,"/")
+              var reg=/\\|\//g;
+              this.listData[i]['img'] = this.listData[i]['img'].replace(reg,"/")
+              this.listData[i]['detail'] = this.listData[i]['detail'].replace(reg,"/")
+            }
+            console.log(this.listData)
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.msg
+            })
+          }
+        }
+      })
+    }
+    getOrderList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/users_order`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id
+        },
+        success: data => {
+          console.log(data)
+          if (data.data.code == 1) {
+            this.listData = data.data.data
+            let i = 0
+            for (i in this.listData) {
+              // 替换反斜杠正则
+              // replace(reg,"/")
+              var reg=/\\|\//g;
+              this.listData[i]['img'] = this.listData[i]['img'].replace(reg,"/")
+              this.listData[i]['detail'] = this.listData[i]['detail'].replace(reg,"/")
+            }
+            console.log(this.listData)
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.msg
+            })
+          }
+        }
+      })
     }
   }
 </script>

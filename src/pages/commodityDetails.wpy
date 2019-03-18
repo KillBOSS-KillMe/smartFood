@@ -98,6 +98,7 @@
     mixins = []
 
     data = {
+      userInfo: null,
       imgUrls: [
         '/img/daw.jpg',
         '/img/daw.jpg',
@@ -156,7 +157,8 @@
     }
 
     onLoad(options) {
-      this.id = options.id
+      this.userInfo = this.$parent.globalData.userInfo
+      console.log(this.userInfo)
     }
   }
 </script>

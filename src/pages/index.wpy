@@ -146,12 +146,11 @@
     methods = {
       goDiningRoomInfo(e) {
         // 进入餐厅详情
-        // console.log(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}`)
         this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}`)
       },
-      goReservationList() {
+      goReservationList(e) {
         // 进入预约列表
-        this.$navigate(`/pages/reservationList`)
+        this.$navigate(`/pages/reservationList?id=${e.currentTarget.dataset.id}`)
       },
       goMall() {
         // 进入积分商城
