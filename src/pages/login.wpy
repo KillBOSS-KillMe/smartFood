@@ -65,13 +65,13 @@ export default class Login extends wepy.page {
     // 忘记密码
     alterPassword() {
       wx.navigateTo({
-        url: `/pages/alterPassword/alterPassword?`
+        url: `/pages/login_alterPassword?`
       })
     },
     // 注册
     registerd() {
       wx.navigateTo({
-        url: `/pages/registered/registered?`
+        url: `/pages/login_registered?`
       })
     },
     showPassword() {

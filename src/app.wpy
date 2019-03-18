@@ -195,11 +195,19 @@ import configStore from './store'
 const store = configStore()
 setStore(store)
 
+// url: `/pages/login_alterPassword?`
+//       })
+//     },
+//     // 注册
+//     registerd() {
+//       wx.navigateTo({
+//         url: `/pages/login_registered?`
 export default class extends wepy.app {
   config = {
     pages: [
-      
-      'pages/login', // 餐厅列表（首页）
+      'pages/login', // 登陆
+      'pages/login_alterPassword', // 修改密码
+      'pages/login_registered', // 注册
       'pages/index', // 餐厅列表（首页）
       'pages/mall', // 商城首页
       'pages/car', // 购物车
