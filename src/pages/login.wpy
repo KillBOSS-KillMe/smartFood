@@ -30,16 +30,15 @@
 
 <script>
 import wepy from 'wepy';
-import nav from '../components/nav'; // 底部导航
+import check from '../mixins/check'
 export default class Login extends wepy.page {
   config = {
     navigationBarTitleText: '登陆'
   };
   components = {
-    nav: nav
   };
 
-  mixins = [];
+  mixins = [check];
 
   data = {
     userName: '18700458359',
@@ -93,31 +92,29 @@ export default class Login extends wepy.page {
         this.userName = ''
     },
     submit() {
-      if (this.check.isPhone(this.data.userName)) {
+      console.log(this.userName, this.userPaw)
+      if (this.check.isPhone(this.userName)) {
         wx.showModal({
           title: '',
           content: '请输入正确的账号'
         })
         return ''
       }
-      if (this.check.isNull(this.data.userPaw)) {
+      if (this.check.isNull(this.userPaw)) {
         wx.showModal({
           title: '',
           content: '请输入密码'
         })
         return ''
       }
-      if (this.data.userPaw.length < 6 || this.data.userPaw.length > 15) {
+      if (this.userPaw.length < 6 || this.userPaw.length > 15) {
         wx.showModal({
           title: '',
           content: '密码长度为6-15位'
         })
         return ''
       }
-      let gourl = ''
-      wx.redirectTo({
-        url: gourl
-      })
+      this.$redirect(`/pages/index`)
       return
       // wx.request({
       //   url: `${app.globalData.requestUrl}/api/login`,
@@ -145,6 +142,29 @@ export default class Login extends wepy.page {
 
   onLoad() {
     this.getUserLoginInfo()
+  }
+  getUserLoginInfo() {
+    wx.getStorage({
+      key: 'userLoginInfo',
+      success: res => {
+        console.log(res)
+        if (res.data) {
+          let loginInfo = res.data
+          loginInfo = loginInfo.split(',------,')
+
+          this.setData({
+            userName: loginInfo[0],
+            userPaw: loginInfo[1]
+          })
+          this.submit()
+        } else {
+          
+        }
+      }
+    })
+  }
+  setUserLoginInfo(name, password) {
+    wx.setStorageSync('userLoginInfo', `${name},------,${password}`)
   }
 }
 </script>
