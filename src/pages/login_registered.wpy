@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import wepy from 'wepy';
+import wepy from 'wepy'
 import check from '../mixins/check'
 export default class Registered extends wepy.page {
   config = {
@@ -88,36 +88,36 @@ export default class Registered extends wepy.page {
       console.log('获取验证码')
     },
     getUserName(e) {
-        this.userName = e.detail.value
+      this.userName = e.detail.value
     },
     getUserPaw(e) {
-        this.userPaw = e.detail.value
+      this.userPaw = e.detail.value
     },
     getUserPaw2(e) {
-        this.userPaw2 = e.detail.value
+      this.userPaw2 = e.detail.value
     },
     setVerificationCode(e) {
-        this.verificationCode = e.detail.value
+      this.verificationCode = e.detail.value
     },
     delUserName() {
-        this.userName = ''
+      this.userName = ''
     },
     showPassword() {
       if (this.passwordInputType === 'password') {
-          this.passwordInputType = 'text',
-          this.passwordIcon = 'biyan'
+        this.passwordInputType = 'text'
+        this.passwordIcon = 'biyan'
       } else {
-          passwordInputType = 'password',
-          passwordIcon = 'in_zhengyan'
+        passwordInputType = 'password'
+        passwordIcon = 'in_zhengyan'
       }
     },
     showPassword2() {
       if (this.passwordInputType2 === 'password') {
-          this.passwordInputType2 = 'text',
-          this.passwordIcon2 = 'biyan'
+        this.passwordInputType2 = 'text'
+        this.passwordIcon2 = 'biyan'
       } else {
-          this.passwordInputType2 = 'password',
-          this.passwordIcon2 =  'in_zhengyan'
+        this.passwordInputType2 = 'password'
+        this.passwordIcon2 =  'in_zhengyan'
       }
     },
     submit() {
@@ -164,8 +164,7 @@ export default class Registered extends wepy.page {
         })
         return ''
       }
-      
-      return
+      return ''
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/api/login`,
         method: 'POST',
@@ -213,6 +212,5 @@ export default class Registered extends wepy.page {
       }
     })
   };
-  
 }
 </script>
