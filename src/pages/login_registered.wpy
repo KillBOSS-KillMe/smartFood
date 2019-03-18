@@ -1,5 +1,14 @@
 <style lang="less">
-
+#getUserInfo{
+  position: fixed;
+  top: 0;
+  width: 750rpx !important;
+  height: 100% !important;
+  padding: 0rpx !important;
+  z-index: 999;
+  background-color:rgba(255, 255, 255, 0);
+  color: #fff;
+}
 </style>
 <template>
 <view class="login">
@@ -34,6 +43,8 @@
       <view bindtap="submit">注册</view>
     </view>
   </view>
+  <!-- 授权按钮部分 -->
+  <button open-type="getUserInfo" wx:if="{{authorizationButton}}" id='getUserInfo' lang="zh_CN" @getuserinfo="onGetUserInfo"></button>
 </view>
 </template>
 
@@ -50,6 +61,7 @@ export default class Registered extends wepy.page {
   mixins = [check];
 
   data = {
+    userInfo: null,
     userName: '',
     userPaw: '',
     userPaw2: '',
@@ -57,7 +69,8 @@ export default class Registered extends wepy.page {
     passwordInputType: 'password',
     passwordIcon: 'in_zhengyan',
     passwordInputType2: 'password',
-    passwordIcon2: 'in_zhengyan'
+    passwordIcon2: 'in_zhengyan',
+    authorizationButton: true
   };
 
   computed = {}
@@ -109,6 +122,13 @@ export default class Registered extends wepy.page {
     },
     submit() {
       // console.log('提交')
+      if (this.check.isNull(this.code)) {
+        wx.showModal({
+          title: '',
+          content: '请授权小程序'
+        })
+        return ''
+      }
       if (this.check.isPhone(this.userName)) {
         wx.showModal({
           title: '',
@@ -166,14 +186,33 @@ export default class Registered extends wepy.page {
           }
         }
       })
-      // 
     }
   }
 
   events = {}
 
   onLoad() {
-    
-  }
+    // 获取用户信息及code
+    this.onGetUserInfo()
+  };
+  onGetUserInfo(cb) {
+    var that = this
+    wx.getUserInfo({
+      success (res) {
+        console.log(res.userInfo)
+        that.globalData.userInfo = res.userInfo
+        that.authorizationButton = false
+        // // 数据生效
+        // that.$apply()
+        wx.login({
+          success: ress => {
+            that.code = ress.code
+            console.log(that.code)
+          }
+        })
+      }
+    })
+  };
+  
 }
 </script>
