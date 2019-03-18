@@ -39,16 +39,15 @@
 
 <script>
 import wepy from 'wepy';
-import nav from '../components/nav'; // 底部导航
+import check from '../mixins/check'
 export default class Registered extends wepy.page {
   config = {
     navigationBarTitleText: '注册'
   };
   components = {
-    nav: nav
   };
 
-  mixins = [];
+  mixins = [check];
 
   data = {
     userName: '',
@@ -109,7 +108,7 @@ export default class Registered extends wepy.page {
       } else {
         this.setData({
           passwordInputType: 'password',
-          passwordIcon: 'zhengyan'
+          passwordIcon: 'in_zhengyan'
         })
       }
     },
@@ -122,7 +121,7 @@ export default class Registered extends wepy.page {
       } else {
         this.setData({
           passwordInputType2: 'password',
-          passwordIcon2: 'zhengyan'
+          passwordIcon2: 'in_zhengyan'
         })
       }
     },
@@ -192,7 +191,7 @@ export default class Registered extends wepy.page {
   events = {}
 
   onLoad() {
-    this.getUserLoginInfo()
+    
   }
 }
 </script>

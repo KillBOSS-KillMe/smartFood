@@ -74,7 +74,7 @@ export default class Login extends wepy.page {
       })
     },
     showPassword() {
-      if (this.data.passwordInputType == 'password') {
+      if (this.passwordInputType == 'password') {
         this.passwordInputType = 'text',
         this.passwordIcon = 'biyan'
       } else {
@@ -117,7 +117,7 @@ export default class Login extends wepy.page {
       this.$redirect(`/pages/index`)
       return
       // wx.request({
-      //   url: `${app.globalData.requestUrl}/api/login`,
+      //   url: `${this.$parent.globalData.requestUrl}/api/login`,
       //   method: 'POST',
       //   data: {
       //     mobile: this.data.userName,
