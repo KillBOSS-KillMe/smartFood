@@ -2,19 +2,8 @@
   page{
     background-color: #f0efed;
   }
-  .list{
-    width: 690rpx;
-    height: auto;
-    padding: 30rpx;
-  }
-  .item{
-    width: 690rpx;
-    height: 300rpx;
-    border-radius: 20rpx;
-    background-color: #fff;
-    margin-bottom: 30rpx;
-  }
-  .list .item:last-child{
+  image{
+    margin: 20rpx;
     margin-bottom: 200rpx;
   }
   .nav{
@@ -41,18 +30,7 @@
 </style>
 <template>
 <view>
-  <view class="list">
-    <image class="item" src="/img/daw.jpg" />
-    <image class="item" src="/img/daw.jpg" />
-    <image class="item" src="/img/daw.jpg" />
-    <image class="item" src="/img/daw.jpg" />
-    <image class="item" src="/img/daw.jpg" />
-    <image class="item" src="/img/daw.jpg" />
-    <image class="item" src="/img/daw.jpg" />
-    <image class="item" src="/img/daw.jpg" />
-    <image class="item" src="/img/daw.jpg" />
-    <image class="item" src="/img/daw.jpg" />
-  </view>
+  <image class="item" src="{{requestImgUrl + detailImg}}" style="width:{{autoW}}px;height:{{autoH}}px" bindload='autoImage' />
   <view class="nav">
     <view @tap="goPreordain">预定</view>
   </view>
@@ -72,7 +50,11 @@
     mixins = []
 
     data = {
-
+      id: '',
+      detailImg: '',
+      requestImgUrl: '',
+      autoW: 0,
+      autoH: 0
     }
 
     computed = {
@@ -82,8 +64,30 @@
     methods = {
       goPreordain() {
         // 进入预约表单
-        this.$navigate(`/pages/setPreordain`)
-      }
+        this.$navigate(`/pages/setPreordain?id=${this.id}`)
+      },
+      // 控制背景图大小
+      autoImage(e) {
+        // 获取图片的宽高
+        var imgW = e.detail.width
+        var imgH = e.detail.height
+        // 计算图片比例
+        var imgScale = imgW / imgH
+        // 声明自适应宽高变量
+        var autoW = ''
+        var autoH = ''
+        // 获取屏幕宽度，并将图片设置为屏幕等宽
+        wx.getSystemInfo({
+          success: res => {
+            autoW = res.windowWidth - 20
+            // console.log(autoW)
+            autoH = autoW / imgScale
+            this.autoW = autoW
+            this.autoH = autoH
+            this.$apply()
+          }
+        })
+      },
       
     }
 
@@ -91,8 +95,10 @@
 
     }
 
-    onLoad() {
-
+    onLoad(options) {
+      this.id = options.id
+      this.detailImg = options.detail
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
     }
   }
 </script>

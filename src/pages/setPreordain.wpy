@@ -190,7 +190,7 @@
     mixins = []
 
     data = {
-
+      id: ''
     }
 
     computed = {
@@ -205,8 +205,9 @@
 
     }
 
-    onLoad() {
-
+    onLoad(options) {
+      this.id = options.id
+      console.log(this.id)
     }
   }
 </script>

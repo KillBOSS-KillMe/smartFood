@@ -232,9 +232,10 @@ export default class extends wepy.app {
     code: null,
     userInfo: null,
     // 线下
-    // requestUrl: 'http://47.97.161.139:8081/api',
+    requestUrl: 'http://192.168.1.125/api',
     // 线上
-    requestUrl: 'https://bkwhb.beaconway.cn/api',
+    // requestUrl: 'https://bkwhb.beaconway.cn/api',
+    requestImgUrl: 'http://192.168.1.125',
     navAction: ['action', 'noAction', 'noAction']
   }
 

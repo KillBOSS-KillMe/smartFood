@@ -42,7 +42,7 @@ export default class Login extends wepy.page {
 
   data = {
     userName: '18700458359',
-    userPaw: '123456',
+    userPaw: '123456789',
     passwordInputType: 'password',
     passwordIcon: 'in_zhengyan'
   };
@@ -114,27 +114,28 @@ export default class Login extends wepy.page {
         })
         return ''
       }
-      this.$redirect(`/pages/index`)
-      return
-      // wx.request({
-      //   url: `${this.$parent.globalData.requestUrl}/api/login`,
-      //   method: 'POST',
-      //   data: {
-      //     mobile: this.userName,
-      //     password: this.userPaw
-      //   },
-      //   success: data => {
-      //     console.log(data)
-      //     if (data.data.code == 1) {
-
-      //     } else {
-      //       wx.showModal({
-      //         title: '',
-      //         content: data.msg
-      //       })
-      //     }
-      //   }
-      // })
+      // this.$redirect(`/pages/index`)
+      // return
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/login`,
+        method: 'POST',
+        data: {
+          mobile: this.userName,
+          password: this.userPaw
+        },
+        success: data => {
+          console.log(data)
+          if (data.data.code == 1) {
+            this.$parent.globalData.userInfo = data.data.data
+            this.$redirect(`/pages/index`)
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.msg
+            })
+          }
+        }
+      })
     },
   }
 
