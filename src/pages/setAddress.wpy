@@ -160,7 +160,7 @@
       if (this.check.isPhone(this.addressInfo.mobile)) {
         wx.showModal({
           title: '',
-          content: '请输入正确的账号'
+          content: '请输入正确的手机号'
         })
         return ''
       }
@@ -200,7 +200,7 @@
           } else {
             wx.showModal({
               title: '',
-              content: data.msg
+              content: data.data.msg
             })
           }
         }

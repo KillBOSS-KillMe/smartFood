@@ -305,7 +305,7 @@
     data = {
       requestImgUrl: '',
       userInfo: null,
-      addressList: null,
+      addressList: [],
       orderList: null
     }
     computed = {
@@ -389,9 +389,10 @@
             this.addressList = data.data.data
             this.$apply()
           } else {
+            this.orderList = []
             wx.showModal({
               title: '',
-              content: data.msg
+              content: data.data.msg
             })
           }
         }
@@ -420,7 +421,7 @@
           } else {
             wx.showModal({
               title: '',
-              content: data.msg
+              content: data.data.msg
             })
           }
         }

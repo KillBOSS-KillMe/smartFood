@@ -78,7 +78,7 @@
   </view>
   <view class="perating">
     <view class="" @tap="goSettlement">立即兑换</view>
-    <view class="seCar">加入购物车</view>
+    <view class="seCar" @tap="setCar">加入购物车</view>
   </view>
 </view>
 
@@ -102,6 +102,7 @@
       img: '',
       detail:'',
       money: '',
+      address_id: '',
       indicatorDots: false,
       autoplay: true,
       interval: 3000,
@@ -140,8 +141,49 @@
         })
       },
       goSettlement() {
+        // // 商品ID
+        // let id = e.currentTarget.dataset.id
+        // // 描述
+        // let depict = e.currentTarget.dataset.depict
+        // // 商品名
+        // let name = e.currentTarget.dataset.name
+        // // 商品图
+        // let img = e.currentTarget.dataset.img
+        // // 详情图
+        // let detail = e.currentTarget.dataset.detail
+        // // 价格
+        // let money = e.currentTarget.dataset.money
         // 进入结算页
         this.$navigate(`/pages/settlement`)
+      },
+      setCar() {
+        // 加入购物车
+        wx.request({
+          url: `${this.$parent.globalData.requestUrl}/order`,
+          method: 'POST',
+          data: {
+            uid: this.userInfo.id,
+            title: this.name,
+            img: this.img,
+            num: 1,
+            integral: this.money,
+            address_id: this.address_id,
+            type: 0
+          },
+          success: data => {
+            if (data.data.code == 1) {
+              wx.showModal({
+                title: '',
+                content: '添加购物车成功，是否前往？'
+              })
+            } else {
+              wx.showModal({
+                title: '',
+                content: data.data.msg
+              })
+            }
+          }
+        })
       }
     }
 
@@ -164,6 +206,39 @@
       this.detail = options.detail
       // 价格
       this.money = options.money
+      // 获取收货地址ID
+      this.getAddressList()
+    }
+    // 获取地址列表
+    getAddressList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/users_address`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id
+        },
+        success: data => {
+          console.log(data)
+          if (data.data.code == 1) {
+            let addressList = data.data.data
+            if (addressList.length <= 0) {
+              wx.showModal({
+                title: '',
+                content: '暂无收货地址，请前往添加'
+              })
+              return ''
+            }
+            this.address_id = addressList[0].id
+            this.$apply()
+          } else {
+
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
     }
   }
 </script>

@@ -131,7 +131,7 @@ export default class Login extends wepy.page {
           } else {
             wx.showModal({
               title: '',
-              content: data.msg
+              content: data.data.msg
             })
           }
         }

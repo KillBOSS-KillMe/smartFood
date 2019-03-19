@@ -194,7 +194,7 @@
           } else {
             wx.showModal({
               title: '',
-              content: data.msg
+              content: data.data.msg
             })
           }
         }

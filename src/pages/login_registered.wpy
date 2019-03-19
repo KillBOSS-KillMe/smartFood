@@ -183,7 +183,7 @@ export default class Registered extends wepy.page {
           } else {
             wx.showModal({
               title: '',
-              content: data.msg
+              content: data.data.msg
             })
           }
         }
@@ -223,7 +223,7 @@ export default class Registered extends wepy.page {
                 } else {
                   wx.showModal({
                     title: '',
-                    content: data.msg
+                    content: data.data.msg
                   })
                 }
               }
