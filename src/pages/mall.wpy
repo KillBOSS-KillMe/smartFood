@@ -63,11 +63,9 @@
 <view>
   <view>
     <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <!-- <block wx:for="{{bannerImg}}" key="index" index="index" item="item"> -->
-        <swiper-item>
-          <image src="{{requestImgUrl + bannerImg.img}}" class="slide-image" width="355" height="150" />
-        </swiper-item>
-      <!-- </block> -->
+      <swiper-item>
+        <image src="{{requestImgUrl + bannerImg.img}}" class="slide-image" width="355" height="150" />
+      </swiper-item>
     </swiper>
   </view>
   <view class="list">

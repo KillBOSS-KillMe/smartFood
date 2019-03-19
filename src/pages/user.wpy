@@ -231,7 +231,7 @@
         </view>
         <view class="info">
           <view>姓名:{{item.name}}</view>
-          <view>联系电话:{{item.phone}}</view>
+          <view>联系电话:{{item.mobile}}</view>
         </view>
         <view class="open">
           <view>
@@ -242,7 +242,7 @@
             <icon class="iconfont icon-bianji" />
             编辑
           </view>
-          <view data-id="{{item.id}}" @tap="delAddress">
+          <view data-id="{{item.id}}" data-uid="{{item.uid}}" @tap="delAddress">
             <icon class="iconfont icon-shanchu" />
             删除
           </view>
@@ -263,21 +263,21 @@
       <view>暂无订单</view>
     </view>
     <block wx:for="{{orderList}}" key="index" index="index" item="item" wx:if="{{orderList.length > 0}}">
-      <view class="item" data-id="{{item.id}}" @tap="goOrderInfo">
+      <view class="item" data-id="{{item.id}}" data-address_id="{{item.address_id}}" @tap="goOrderInfo">
         <view class="img">
-          <image src="{{item.img}}" class="slide-image" />
+          <image src="{{requestImgUrl + item.img}}" class="slide-image" />
         </view>
         <view class="con">
           <view class="orderInfo">
-            <view class="name">{{item.name}}</view>
+            <view class="name">{{item.title}}</view>
             <view class="info">
-              <view wx:if="{{item.status === '1'}}">待收货</view>
-              <view wx:if="{{item.status === '2'}}">已收货</view>
+              <view wx:if="{{item.type === '1'}}">待收货</view>
+              <view wx:if="{{item.type === '2'}}">已收货</view>
               <view>×{{item.num}}</view>
             </view>
           </view>
           <view class="price">
-            {{item.price}}积分
+            {{item.integral}}积分
             <span>{{item.info}}</span>
           </view>
         </view>
@@ -303,20 +303,10 @@
     mixins = []
 
     data = {
+      requestImgUrl: '',
       userInfo: null,
-      addressList: [
-        {'id': '1', 'address': '收货地址,收货地址,收货地址,收货地址,收货地址,收货地址', 'name':'希尔瓦娜斯', 'phone': '18888888888'},
-        {'id': '1', 'address': '收货地址,收货地址,收货地址,收货地址,收货地址,收货地址', 'name':'希尔瓦娜斯', 'phone': '18888888888'},
-        {'id': '1', 'address': '收货地址,收货地址,收货地址,收货地址,收货地址,收货地址', 'name':'希尔瓦娜斯', 'phone': '18888888888'},
-        {'id': '1', 'address': '收货地址,收货地址,收货地址,收货地址,收货地址,收货地址', 'name':'希尔瓦娜斯', 'phone': '18888888888'},
-        {'id': '1', 'address': '收货地址,收货地址,收货地址,收货地址,收货地址,收货地址', 'name':'希尔瓦娜斯', 'phone': '18888888888'}
-      ],
-      orderList: [
-        {'id': '1', 'name': '商品名称商品名称商品名称', 'num': '2', 'price': '100', 'status': '1', 'img': '/img/daw.jpg', 'info': '猫抓玻璃杯'},
-        {'id': '1', 'name': '商品名称商品名称商品名称', 'num': '2', 'price': '100', 'status': '1', 'img': '/img/daw.jpg', 'info': '猫抓玻璃杯'},
-        {'id': '1', 'name': '商品名称商品名称商品名称', 'num': '2', 'price': '100', 'status': '1', 'img': '/img/daw.jpg', 'info': '猫抓玻璃杯'},
-        {'id': '1', 'name': '商品名称商品名称商品名称', 'num': '2', 'price': '100', 'status': '1', 'img': '/img/daw.jpg', 'info': '猫抓玻璃杯'}
-      ]
+      addressList: null,
+      orderList: null
     }
     computed = {
 
@@ -356,6 +346,7 @@
 
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
+      this.requestImgUrl = this.$parent.globalData.requestImgUrl
       console.log(this.userInfo)
       this.getAddressList()
       this.getOrderList()
@@ -370,16 +361,7 @@
         success: data => {
           console.log(data)
           if (data.data.code == 1) {
-            this.listData = data.data.data
-            let i = 0
-            for (i in this.listData) {
-              // 替换反斜杠正则
-              // replace(reg,"/")
-              var reg=/\\|\//g;
-              this.listData[i]['img'] = this.listData[i]['img'].replace(reg,"/")
-              this.listData[i]['detail'] = this.listData[i]['detail'].replace(reg,"/")
-            }
-            console.log(this.listData)
+            this.addressList = data.data.data
             this.$apply()
           } else {
             wx.showModal({
@@ -400,16 +382,15 @@
         success: data => {
           console.log(data)
           if (data.data.code == 1) {
-            this.listData = data.data.data
+            this.orderList = data.data.data
             let i = 0
-            for (i in this.listData) {
+            let reg = /\\|\//g
+            for (i in this.orderList) {
               // 替换反斜杠正则
               // replace(reg,"/")
-              var reg=/\\|\//g;
-              this.listData[i]['img'] = this.listData[i]['img'].replace(reg,"/")
-              this.listData[i]['detail'] = this.listData[i]['detail'].replace(reg,"/")
+              this.orderList[i]['img'] = this.orderList[i]['img'].replace(reg, '/')
             }
-            console.log(this.listData)
+            console.log(this.orderList)
             this.$apply()
           } else {
             wx.showModal({
