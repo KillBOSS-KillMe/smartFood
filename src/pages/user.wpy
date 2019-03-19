@@ -205,13 +205,13 @@
 <template>
 <view>
   <view class="userInfo">
-    <image src="/img/daw.jpg" />
+    <image src="{{requestImgUrl + userInfo.img}}" />
     <view class="uInfo">
-      <view class="name">中意酱香肉丸</view>
+      <view class="name">{{userInfo.username}}</view>
       <view class="integral" @tap="goIntegralInfo">
         剩余积分:
         <span>
-          500
+          {{userInfo.integral}}
         </span>
         <icon class="iconfont icon-arrow-right-copy-copy-copy" />
       </view>
@@ -370,7 +370,6 @@
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       console.log(this.userInfo)
-      
       this.getOrderList()
     }
     onShow() {

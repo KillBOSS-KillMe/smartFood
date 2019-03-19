@@ -127,6 +127,8 @@ export default class Login extends wepy.page {
           console.log(data)
           if (data.data.code == 1) {
             this.$parent.globalData.userInfo = data.data.data
+            let reg = /\\|\//g
+            this.$parent.globalData.userInfo['img'] = this.$parent.globalData.userInfo['img'].replace(reg, '/')
             this.$redirect(`/pages/index`)
           } else {
             wx.showModal({
