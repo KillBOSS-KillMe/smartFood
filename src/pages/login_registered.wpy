@@ -210,6 +210,7 @@ export default class Registered extends wepy.page {
           success: ress => {
             that.code = ress.code
             console.log(that.code)
+            return ''
             wx.request({
               url: `${that.$parent.globalData.requestUrl}/api/openid`,
               method: 'POST',
