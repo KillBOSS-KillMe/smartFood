@@ -73,26 +73,28 @@
     <view class="item">
       <label>收货人：</label>
       <view class="con setInp">
-        <input type="text"  placeholder="请输入收货人名称" value="" />
+        <input type="text"  placeholder="请输入收货人名称" value="{{addressInfo.name}}" bindinput="getName" />
       </view>
     </view>
     <view class="item">
       <label>联系电话：</label>
       <view class="con setInp">
-        <input type="text"  placeholder="请输入联系电话" value="" />
+        <input type="text"  placeholder="请输入联系电话" value="{{addressInfo.mobile}}" bindinput="getMobile" />
       </view>
     </view>
     <view class="item itemTextarea">
       <label>收货地址：</label>
       <view class="con setInp">
-        <!-- <input type="text"  placeholder="请输入收货地址" value="" /> -->
-        <textarea id='XXX' bindinput='test' maxlength='200' placeholder="请输入200字的个人简介"></textarea>
+        <textarea id='XXX' bindinput='test' maxlength='200' placeholder="请输入详细收货地址" vlaue="{{addressInfo.address}}" bindinput="getAddress"></textarea>
       </view>
     </view>
   </view>
   
-  <view class="nav">
-    <view>预定</view>
+  <view class="nav" wx:if="{{type == 'new'}}" @tap="newAddress">
+    <view>新建地址</view>
+  </view>
+  <view class="nav" wx:if="{{type != 'new'}}" @tap="modifyAddress">
+    <view>修改地址</view>
   </view>
 </view>
 
@@ -111,7 +113,9 @@
     mixins = []
 
     data = {
-      
+      userInfo: null,
+      addressInfo: {},
+      type: ''
     }
 
     computed = {
@@ -119,7 +123,44 @@
     }
 
     methods = {
-      
+      newAddress() {
+        console.log(this.addressInfo)
+        // console.log()
+        wx.request({
+          url: `${this.$parent.globalData.requestUrl}/address`,
+          method: 'POST',
+          data: {
+            name: this.addressInfo.name,
+            address: this.addressInfo.address,
+            uid: this.userInfo.id,
+            mobile: this.addressInfo.mobile
+          },
+          success: data => {
+            console.log(data)
+            if (data.data.code == 1) {
+              wx.navigateBack()
+            } else {
+              wx.showModal({
+                title: '',
+                content: data.msg
+              })
+            }
+          }
+        })
+      },
+      modifyAddress() {
+        console.log(this.addressInfo)
+      },
+      getName(e) {
+        // addressInfo = new Objet()
+        this.addressInfo['name'] = e.detail.value
+      },
+      getMobile(e) {
+        this.addressInfo['mobile'] = e.detail.value
+      },
+      getAddress(e) {
+        this.addressInfo['address'] = e.detail.value
+      },
     }
 
     events = {
@@ -127,7 +168,16 @@
     }
 
     onLoad(options) {
-      this.address = options.info
+      
+      if (!options.info) {
+        this.userInfo = this.$parent.globalData.userInfo
+        console.log(this.userInfo)
+        this.type = 'new'
+      } else {
+        this.addressInfo = JSON.parse(options.info)
+        console.log(this.addressInfo)
+        
+      }
     }
   }
 </script>

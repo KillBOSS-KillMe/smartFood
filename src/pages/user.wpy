@@ -234,11 +234,11 @@
           <view>联系电话:{{item.mobile}}</view>
         </view>
         <view class="open">
-          <view>
+          <view @tap="newAddress">
             <icon class="iconfont icon-tianjia" />
             添加
           </view>
-          <view data-index="{{index}}" @tap="setAddress">
+          <view data-index="{{index}}" @tap="modifyAddress">
             <icon class="iconfont icon-bianji" />
             编辑
           </view>
@@ -320,9 +320,9 @@
       },
       newAddress() {
         // 新增地址
-        this.$navigate(`/pages/setAddress`)
+        this.$navigate(`/pages/setAddress?info=`)
       },
-      setAddress(e) {
+      modifyAddress(e) {
         // 修改地址
         this.$navigate(`/pages/setAddress?info=${JSON.stringify(this.addressList[e.currentTarget.dataset.index])}`)
       },
@@ -348,8 +348,11 @@
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       console.log(this.userInfo)
-      this.getAddressList()
+      
       this.getOrderList()
+    }
+    onShow() {
+      this.getAddressList()
     }
     getAddressList() {
       wx.request({
