@@ -70,7 +70,7 @@
   </view>
   <view class="list">
     <block wx:for="{{commodityList}}" key="index" index="index" item="item">
-      <view class="item" data-id="{{item.id}}" @tap="goCommodityInfo">
+      <view class="item" @tap="goCommodityInfo" data-id="{{item.id}}" data-depict="{{item.depict}}" data-money="{{item.money}}" data-name="{{item.name}}" data-img="{{requestImgUrl + item.img}}" data-detail="{{requestImgUrl + item.detail}}">
         <view class="img">
           <image src="{{requestImgUrl + item.img}}" />
         </view>
@@ -120,9 +120,21 @@
         // 销毁当前页{跳转}
         this.$redirect(url)
       },
-      goCommodityInfo() {
+      goCommodityInfo(e) {
         // 进入商品详情
-        this.$navigate(`/pages/commodityDetails`)
+        // 商品ID
+        let id = e.currentTarget.dataset.id
+        // 描述
+        let depict = e.currentTarget.dataset.depict
+        // 商品名
+        let name = e.currentTarget.dataset.name
+        // 商品图
+        let img = e.currentTarget.dataset.img
+        // 详情图
+        let detail = e.currentTarget.dataset.detail
+        // 价格
+        let money = e.currentTarget.dataset.money
+        this.$navigate(`/pages/commodityDetails?id=${id}&depict=${depict}&money=${money}&name=${name}&img=${img}&detail=${detail}`)
       }
     }
 

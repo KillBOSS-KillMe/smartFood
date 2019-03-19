@@ -63,21 +63,18 @@
 <view>
   <view>
     <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{imgUrls}}">
-        <swiper-item>
-          <image src="{{item}}" class="slide-image" width="355" height="150" />
-        </swiper-item>
-      </block>
+      <swiper-item>
+        <image src="{{img}}" class="slide-image" width="355" height="150" />
+      </swiper-item>
     </swiper>
   </view>
   <view class="info">
-    <view class="price">9200积分</view>
-    <view class="name">商品名称商品名称</view>
+    <view class="price">{{money}}积分</view>
+    <view class="name">{{name}}</view>
+    <view class="name">{{depict}}</view>
   </view>
   <view class="commodityInfoImg">
-    <block wx:for="{{commodityImgList}}" key="index" index="index" item="item">
-      <image src="{{item}}" style="width:{{autoW[index]}}px;height:{{autoH[index]}}px" data-index="{{index}}" bindload='autoImage' />
-    </block>
+    <image src="{{detail}}" style="width:{{autoW}}px;height:{{autoH}}px" bindload='autoImage' />
   </view>
   <view class="perating">
     <view class="" @tap="goSettlement">立即兑换</view>
@@ -99,22 +96,18 @@
 
     data = {
       userInfo: null,
-      imgUrls: [
-        '/img/daw.jpg',
-        '/img/daw.jpg',
-        '/img/daw.jpg'
-      ],
+      id: '',
+      name: '',
+      depict: '',
+      img: '',
+      detail:'',
+      money: '',
       indicatorDots: false,
       autoplay: true,
       interval: 3000,
       duration: 1000,
-      commodityImgList: [
-        '/img/daw.jpg',
-        '/img/daw.jpg',
-        '/img/daw.jpg'
-      ],
-      autoW: [],
-      autoH: []
+      autoW: 0,
+      autoH: 0
     }
 
     computed = {
@@ -138,8 +131,8 @@
           success: res => {
             autoW = res.windowWidth
             autoH = autoW / imgScale
-            this.autoW[index] = autoW
-            this.autoH[index] = autoH
+            this.autoW = autoW
+            this.autoH = autoH
             console.log(this.autoW)
             console.log(this.autoH)
             this.$apply()
@@ -159,6 +152,18 @@
     onLoad(options) {
       this.userInfo = this.$parent.globalData.userInfo
       console.log(this.userInfo)
+      // 商品ID
+      this.id = options.id
+      // 描述
+      this.depict = options.depict
+      // 商品名
+      this.name = options.name
+      // 商品图
+      this.img = options.img
+      // 详情图
+      this.detail = options.detail
+      // 价格
+      this.money = options.money
     }
   }
 </script>
