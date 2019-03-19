@@ -126,20 +126,20 @@
     <block wx:for="{{listData}}" key="index" index="index" item="item">
       <view class="item">
         <view class="sel">
-          <checkbox data-index="{{index}}" id="2" value="{{index}}" checked="{{item.checks}}"/>
+          <checkbox data-index="{{index}}" id="{{item.id}}" value="{{index}}" checked="{{item.checks}}"/>
         </view>
         <view class="img">
           <image src="{{item.img}}" class="slide-image" data-id="{{item.id}}" @tap="goCommodity" />
         </view>
         <view class="con">
-          <view class="name">{{item.name}}</view>
+          <view class="name">{{item.title}}</view>
           <view class="perating">
             <view class="setPerating">
               <icon class="iconfont icon-prune" />
               <view>{{item.num}}</view>
               <icon class="iconfont icon-tianjia" />
             </view>
-            <view class="price">{{item.price}}积分</view>
+            <view class="price">{{item.integral}}积分</view>
           </view>
         </view>
       </view>
@@ -175,36 +175,7 @@ export default class SetAddress extends wepy.page {
 
   data = {
     userInfo: null,
-    listData: [
-      {
-        id: '1',
-        name: '商品名称商品名称商品名称商品名称商',
-        num: '12',
-        price: '100',
-        img: '/img/daw.jpg'
-      },
-      {
-        id: '1',
-        name: '商品名称商品名称商品名称商品名称商',
-        num: '12',
-        price: '100',
-        img: '/img/daw.jpg'
-      },
-      {
-        id: '1',
-        name: '商品名称商品名称商品名称商品名称商',
-        num: '12',
-        price: '100',
-        img: '/img/daw.jpg'
-      },
-      {
-        id: '1',
-        name: '商品名称商品名称商品名称商品名称商',
-        num: '12',
-        price: '100',
-        img: '/img/daw.jpg'
-      }
-    ]
+    listData: []
   };
 
   computed = {}
@@ -245,15 +216,6 @@ export default class SetAddress extends wepy.page {
         console.log(data)
         if (data.data.code === 1) {
           this.listData = data.data.data
-          let i = 0
-          let reg = /\\|\//g
-          for (i in this.listData) {
-            // 替换反斜杠正则
-            // replace(reg,"/")
-            this.listData[i]['img'] = this.listData[i]['img'].replace(reg, '/')
-            this.listData[i]['detail'] = this.listData[i]['detail'].replace(reg, '/')
-          }
-          console.log(this.listData)
           this.$apply()
         } else {
           wx.showModal({
