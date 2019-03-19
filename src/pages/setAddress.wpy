@@ -102,6 +102,7 @@
 
 <script>
   import wepy from 'wepy'
+  import check from '../mixins/check'
   export default class SetAddress extends wepy.page {
     config = {
       navigationBarTitleText: '地址编辑'
@@ -110,7 +111,7 @@
       
     }
 
-    mixins = []
+    mixins = [check]
 
     data = {
       userInfo: null,
@@ -156,6 +157,27 @@
       }
     }
     updataAddress() {
+      if (this.check.isPhone(this.addressInfo.mobile)) {
+        wx.showModal({
+          title: '',
+          content: '请输入正确的账号'
+        })
+        return ''
+      }
+      if (this.check.isNull(this.addressInfo.name)) {
+        wx.showModal({
+          title: '',
+          content: '请输入收货人'
+        })
+        return ''
+      }
+      if (this.check.isNull(this.addressInfo.address)) {
+        wx.showModal({
+          title: '',
+          content: '请输入收货地址'
+        })
+        return ''
+      }
       var id = ''
       var data = {
           "name": this.addressInfo.name,
