@@ -123,27 +123,30 @@
     <view>购物车是空的！</view>
   </view>
   <view class="list" wx:if="{{listData.length > 0}}">
-    <block wx:for="{{listData}}" key="index" index="index" item="item">
-      <view class="item">
-        <view class="sel">
-          <checkbox data-index="{{index}}" id="{{item.id}}" value="{{index}}" checked="{{item.checks}}"/>
-        </view>
-        <view class="img">
-          <image src="{{item.img}}" class="slide-image" data-id="{{item.id}}" @tap="goCommodity" />
-        </view>
-        <view class="con">
-          <view class="name">{{item.title}}</view>
-          <view class="perating">
-            <view class="setPerating">
-              <icon class="iconfont icon-prune" />
-              <view>{{item.num}}</view>
-              <icon class="iconfont icon-tianjia" />
+    <checkbox-group bindchange="selCommodity" data-index="{{index}}" data-checks="{{item.checks}}">
+      <block wx:for="{{listData}}" key="index" index="index" item="item">
+        <view class="item">
+          <view class="sel">
+            <checkbox data-index="{{index}}" id="{{item.id}}" value="{{index}}" checked="{{item.checks}}"/>
+          </view>
+          <view class="img">
+            <image src="{{item.img}}" class="slide-image" data-id="{{item.id}}" @tap="goCommodity" />
+          </view>
+          <view class="con">
+            <view class="name">{{item.title}}</view>
+            <view class="perating">
+              <view class="setPerating">
+                <icon class="iconfont icon-prune" data-index="{{index}}" data-num="{{item.num}}" @tap="quantityDown" />
+                <view>{{item.num}}</view>
+                <icon class="iconfont icon-tianjia" data-index="{{index}}" data-num="{{item.num}}" @tap="quantityUp" />
+              </view>
+              <view class="price">{{item.integral}}积分</view>
             </view>
-            <view class="price">{{item.integral}}积分</view>
           </view>
         </view>
-      </view>
-    </block>
+      </block>
+    </checkbox-group>
+    
   </view>
   <view class="settlement">
     <view class="sel">
@@ -151,7 +154,7 @@
       全选
     </view>
     <view class="price">
-      合计<span>￥0</span>
+      合计<span>{{allPrice}}积分</span>
     </view>
     <view class="sett" @tap="goSettlement">结算</view>
   </view>
@@ -175,7 +178,9 @@ export default class SetAddress extends wepy.page {
 
   data = {
     userInfo: null,
-    listData: []
+    listData: [],
+    cartIndex: [],
+    allPrice: 0
   };
 
   computed = {}
@@ -193,9 +198,44 @@ export default class SetAddress extends wepy.page {
       )
     },
     goSettlement() {
+      this.$parent.globalData.carData = this.listData
+      console.log(this.listData)
       // 进入结算页
       this.$navigate(`/pages/settlement`)
-    }
+    },
+    selCommodity(e) {
+      console.log(e.detail.value)
+      this.cartIndex = e.detail.value
+      this.allPrice = this.getAllPrice()
+    },
+    quantityUp(e) {
+      // 商品数量
+      let num = e.currentTarget.dataset.num
+      // 下标
+      let index = e.currentTarget.dataset.index
+      for (var i in this.cartIndex) {
+        this.listData[this.cartIndex[i]].checks = true
+      }
+      this.listData[index].num += 1
+      this.allPrice = this.getAllPrice()
+      this.$apply()
+    },
+    quantityDown(e) {
+      // 商品数量
+      let num = e.currentTarget.dataset.num
+      // 下标
+      let index = e.currentTarget.dataset.index
+      if (num === 1) {
+        return
+      }
+      for (var i in this.cartIndex) {
+        this.listData[this.cartIndex[i]].checks = true
+      }
+      this.listData[index].num -= 1
+      this.allPrice = this.getAllPrice()
+      this.$apply()
+    },
+    
   }
 
   events = {}
@@ -225,6 +265,15 @@ export default class SetAddress extends wepy.page {
         }
       }
     })
+  }
+  getAllPrice() {
+    let allPrice = 0
+    let index = this.cartIndex
+    let allListData = this.listData
+    for (var i in index) {
+      allPrice += allListData[index[i]].num * allListData[index[i]].integral
+    }
+    return allPrice
   }
 }
 </script>

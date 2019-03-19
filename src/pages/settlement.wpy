@@ -170,78 +170,30 @@
   <view class="list">
     <view>
       <view>商品金额</view>
-      <view>59积分</view>
+      <view>{{allPrice}}积分</view>
     </view>
     <view class="balance">
       <view>可用积分</view>
-      <view>59积分</view>
+      <view>{{userInfo.integral}}积分</view>
     </view>
   </view>
   <view class="listCommodity">
     <view class="title">商品</view>
-    <view class="item">
-      <view>
-        <image src="/img/daw.jpg" />
+    <block wx:for="{{listData}}" key="index" index="index" item="item">
+      <view class="item">
+        <view>
+          <image src="{{item.img}}" />
+        </view>
+        <view class="name">{{item.title}}</view>
+        <view class="info">
+          <view>*{{item.num}}</view>
+          <view>{{item.integral * item.num}}积分</view>
+        </view>
       </view>
-      <view class="name">名称名称名称名称名称名称名称名称名称</view>
-      <view class="info">
-        <view>*1</view>
-        <view>50积分</view>
-      </view>
-    </view>
-    <view class="item">
-      <view>
-        <image src="/img/daw.jpg" />
-      </view>
-      <view class="name">名称名称名称名称名称名称名称名称名称</view>
-      <view class="info">
-        <view>*1</view>
-        <view>50积分</view>
-      </view>
-    </view>
-    <view class="item">
-      <view>
-        <image src="/img/daw.jpg" />
-      </view>
-      <view class="name">名称名称名称名称名称名称名称名称名称</view>
-      <view class="info">
-        <view>*1</view>
-        <view>50积分</view>
-      </view>
-    </view>
-    <view class="item">
-      <view>
-        <image src="/img/daw.jpg" />
-      </view>
-      <view class="name">名称名称名称名称名称名称名称名称名称</view>
-      <view class="info">
-        <view>*1</view>
-        <view>50积分</view>
-      </view>
-    </view>
-    <view class="item">
-      <view>
-        <image src="/img/daw.jpg" />
-      </view>
-      <view class="name">名称名称名称名称名称名称名称名称名称</view>
-      <view class="info">
-        <view>*1</view>
-        <view>50积分</view>
-      </view>
-    </view>
-    <view class="item">
-      <view>
-        <image src="/img/daw.jpg" />
-      </view>
-      <view class="name">名称名称名称名称名称名称名称名称名称</view>
-      <view class="info">
-        <view>*1</view>
-        <view>50积分</view>
-      </view>
-    </view>
+    </block>
   </view>
   <view class="sett">
-    <view>应付50积分</view>
+    <view>应付{{allPrice}}积分</view>
     <view>去兑换</view>
   </view>
 </view>
@@ -260,7 +212,9 @@
     mixins = []
 
     data = {
-      
+      userInfo: null,
+      listData: [],
+      allPrice: 0
     }
 
 
@@ -277,7 +231,14 @@
     }
 
     onLoad() {
-
+      this.userInfo = this.$parent.globalData.userInfo
+      console.log(this.userInfo)
+      this.listData = this.$parent.globalData.carData
+      this.allPrice = 0
+      let i = 0
+      for (i in this.listData) {
+        this.allPrice += this.listData[i].integral * this.listData[i].num
+      }
     }
   }
 </script>
