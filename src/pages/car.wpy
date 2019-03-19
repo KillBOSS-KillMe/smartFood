@@ -198,8 +198,14 @@ export default class SetAddress extends wepy.page {
       )
     },
     goSettlement() {
+      if (this.listData.length === 0) {
+        wx.showModal({
+          title: '',
+          content: '请选择商品'
+        })
+        return ''
+      }
       this.$parent.globalData.carData = this.listData
-      console.log(this.listData)
       // 进入结算页
       this.$navigate(`/pages/settlement`)
     },

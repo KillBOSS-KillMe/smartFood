@@ -186,7 +186,7 @@
         </view>
         <view class="name">{{item.title}}</view>
         <view class="info">
-          <view>*{{item.num}}</view>
+          <view>×{{item.num}}</view>
           <view>{{item.integral * item.num}}积分</view>
         </view>
       </view>
