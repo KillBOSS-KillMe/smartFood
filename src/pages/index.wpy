@@ -182,12 +182,12 @@
           if (data.data.code == 1) {
             this.diningRoom = data.data.data
             let i = 0
+            var reg = /\\|\//g
             for (i in this.diningRoom) {
               // 替换反斜杠正则
               // replace(reg,"/")
-              var reg=/\\|\//g;
-              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg,"/")
-              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg,"/")
+              this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
+              this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
             }
             console.log(this.diningRoom)
             this.$apply()

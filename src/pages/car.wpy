@@ -161,8 +161,8 @@
 </template>
 
 <script>
-import wepy from 'wepy';
-import nav from '../components/nav'; // 底部导航
+import wepy from 'wepy'
+import nav from '../components/nav' // 底部导航
 export default class SetAddress extends wepy.page {
   config = {
     navigationBarTitleText: '购物车'
@@ -213,7 +213,7 @@ export default class SetAddress extends wepy.page {
     // 底部导航跳转
     goPage(url, evt) {
       // 销毁当前页{跳转}
-      this.$redirect(url);
+      this.$redirect(url)
     },
     goCommodity(e) {
       // 进入餐厅详情
@@ -243,15 +243,15 @@ export default class SetAddress extends wepy.page {
       },
       success: data => {
         console.log(data)
-        if (data.data.code == 1) {
+        if (data.data.code === 1) {
           this.listData = data.data.data
           let i = 0
+          let reg = /\\|\//g
           for (i in this.listData) {
             // 替换反斜杠正则
             // replace(reg,"/")
-            var reg=/\\|\//g;
-            this.listData[i]['img'] = this.listData[i]['img'].replace(reg,"/")
-            this.listData[i]['detail'] = this.listData[i]['detail'].replace(reg,"/")
+            this.listData[i]['img'] = this.listData[i]['img'].replace(reg, '/')
+            this.listData[i]['detail'] = this.listData[i]['detail'].replace(reg, '/')
           }
           console.log(this.listData)
           this.$apply()

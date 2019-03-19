@@ -63,11 +63,11 @@
 <view>
   <view>
     <swiper class="swiper" indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-      <block wx:for="{{imgUrls}}">
+      <!-- <block wx:for="{{bannerImg}}" key="index" index="index" item="item"> -->
         <swiper-item>
-          <image src="{{item}}" class="slide-image" width="355" height="150" />
+          <image src="{{requestImgUrl + bannerImg.img}}" class="slide-image" width="355" height="150" />
         </swiper-item>
-      </block>
+      <!-- </block> -->
     </swiper>
   </view>
   <view class="list">
@@ -103,11 +103,7 @@
 
     data = {
       requestImgUrl: '',
-      imgUrls: [
-        '/img/daw.jpg',
-        '/img/daw.jpg',
-        '/img/daw.jpg'
-      ],
+      bannerImg: null,
       indicatorDots: false,
       autoplay: true,
       interval: 3000,
@@ -139,28 +135,45 @@
     onLoad() {
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
       this.getCommodityList()
+      this.getBanner()
+    }
+    getBanner() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/banner`,
+        method: 'GET',
+        success: data => {
+          console.log(data)
+          if (data.data.code == 1) {
+            this.bannerImg = data.data.data
+            let reg = /\\|\//g
+            this.bannerImg['img'] = this.bannerImg['img'].replace(reg, '/')
+            this.$apply()
+            console.log(this.bannerImg)
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.msg
+            })
+          }
+        }
+      })
     }
     getCommodityList() {
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/shop`,
         method: 'GET',
-        data: {
-          mobile: this.userName,
-          password: this.userPaw
-        },
         success: data => {
           console.log(data)
           if (data.data.code == 1) {
             this.commodityList = data.data.data
             let i = 0
+            let reg = /\\|\//g
             for (i in this.commodityList) {
               // 替换反斜杠正则
               // replace(reg,"/")
-              var reg=/\\|\//g;
-              this.commodityList[i]['img'] = this.commodityList[i]['img'].replace(reg,"/")
-              this.commodityList[i]['detail'] = this.commodityList[i]['detail'].replace(reg,"/")
+              this.commodityList[i]['img'] = this.commodityList[i]['img'].replace(reg, '/')
+              this.commodityList[i]['detail'] = this.commodityList[i]['detail'].replace(reg, '/')
             }
-            console.log(this.commodityList)
             this.$apply()
           } else {
             wx.showModal({
