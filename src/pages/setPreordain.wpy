@@ -103,6 +103,7 @@
 </style>
 <template>
 <view>
+  
   <view class="list">
     <view class="item">
       <label>人数人数：</label>
@@ -116,8 +117,8 @@
       <label>时间：</label>
       <view class="con time">
         <view>
-            <picker class="pickerTime" mode="date" value="{{dates}}" bindchange="bindPickerChange">  
-              <input type="number" value="{{'2019-03-06 12:30'}}" disabled="disabled" placeholder="选择时间" />
+            <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
+              <input value='{{time}}' placeholder='选择时间'/>
             </picker>
             <icon class="iconfont icon-rili"></icon>
         </view>
@@ -126,8 +127,10 @@
     <view class="item">
       <label>餐标：</label>
       <view class="con lv">
-        <picker class="pickerTime" mode="date" value="{{dates}}" bindchange="bindPickerChange">  
-          <input type="number" value="{{'2019-03-06 12:30'}}" disabled="disabled" placeholder="选择时间" />
+        <picker data-model="component" range="{{regionss}}" @change="selStandard" value="{{standard}}" custom-item="{{customItem}}">
+          <view class="picker">
+            {{standard}}
+          </view>
         </picker>
       </view>
     </view>
@@ -146,9 +149,7 @@
     <view class="item">
       <label>桌数：</label>
       <view class="con table">
-        <picker class="pickerTime" mode="date" value="{{dates}}" bindchange="bindPickerChange">  
-          <input type="number" value="{{'2019-03-06 12:30'}}" disabled="disabled" placeholder="选择时间" />
-        </picker>
+        <input type="text"  placeholder="请输入导游名称" value="" />
         <view>卓</view>
       </view>
     </view>
@@ -178,6 +179,44 @@
 </template>
 
 <script>
+const date = new Date();
+const years = [];
+const months = [];
+const days = [];
+const hours = [];
+const minutes = [];
+//获取年
+for (let i = 2018; i <= date.getFullYear() + 5; i++) {
+  years.push("" + i);
+}
+//获取月份
+for (let i = 1; i <= 12; i++) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  months.push("" + i);
+}
+//获取日期
+for (let i = 1; i <= 31; i++) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  days.push("" + i);
+}
+//获取小时
+for (let i = 0; i < 24; i++) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  hours.push("" + i);
+}
+//获取分钟
+for (let i = 0; i < 60; i++) {
+  if (i < 10) {
+    i = "0" + i;
+  }
+  minutes.push("" + i);
+}
   import wepy from 'wepy'
   export default class SetPreordain extends wepy.page {
     config = {
@@ -190,7 +229,14 @@
     mixins = []
 
     data = {
-      id: ''
+      id: '',
+      standard: '标准1',
+      regionss: ['标准1', '标准1', '标准1', '标准1'],
+
+      time: '',
+      multiArray: [years, months, days, hours, minutes],
+      multiIndex: [0, 9, 16, 10, 17],
+      choose_year: '',
     }
 
     computed = {
@@ -198,6 +244,16 @@
     }
 
     methods = {
+      selStandard(e) {
+        this.standard = e.detail.value
+        let area = ''
+        for (let i in this.standard) {
+          if (this.standard[i] !== '全部' && this.standard[i] !== '请选择详细地址') {
+            area += this.standard[i]
+          }
+        }
+        this.standard = area
+      }
 
     }
 
@@ -208,6 +264,78 @@
     onLoad(options) {
       this.id = options.id
       console.log(this.id)
+      this.choose_year = this.multiArray[0][0]
+    }
+    / /获取时间日期
+    bindMultiPickerChange(e) {
+      // console.log('picker发送选择改变，携带值为', e.detail.value)
+      this.multiIndex = e.detail.value
+      const index = this.multiIndex
+      const year = this.multiArray[0][index[0]]
+      const month = this.multiArray[1][index[1]]
+      const day = this.multiArray[2][index[2]]
+      const hour = this.multiArray[3][index[3]]
+      const minute = this.multiArray[4][index[4]]
+      // console.log(`${year}-${month}-${day}-${hour}-${minute}`)
+      this.time = year + '-' + month + '-' + day + ' ' + hour + ':' + minute
+      console.log(this.time)
+    }
+    // 监听picker的滚动事件
+    bindMultiPickerColumnChange(e) {
+      // 获取年份
+      if (e.detail.column == 0) {
+        let choose_year = this.multiArray[e.detail.column][e.detail.value]
+      }
+      if (e.detail.column == 1) {
+        let num = parseInt(this.multiArray[e.detail.column][e.detail.value])
+        let temp = []
+        if (num == 1 || num == 3 || num == 5 || num == 7 || num == 8 || num == 10 || num == 12) {
+          //判断31天的月份
+          for (let i = 1; i <= 31; i++) {
+            if (i < 10) {
+              i = "0" + i
+            }
+            temp.push("" + i)
+          }
+          this.multiArray[2] = temp
+        } else if (num == 4 || num == 6 || num == 9 || num == 11) {
+          // 判断30天的月份
+          for (let i = 1; i <= 30; i++) {
+            if (i < 10) {
+              i = "0" + i
+            }
+            temp.push("" + i)
+          }
+          this.multiArray[2] = temp
+        } else if (num == 2) {
+          // 判断2月份天数
+          let year = parseInt(this.choose_year)
+          if (((year % 400 == 0) || (year % 100 != 0)) && (year % 4 == 0)) {
+            for (let i = 1; i <= 29; i++) {
+              if (i < 10) {
+                i = "0" + i
+              }
+              temp.push("" + i)
+            }
+            this.multiArray[2] = temp
+          } else {
+            for (let i = 1; i <= 28; i++) {
+              if (i < 10) {
+                i = "0" + i
+              }
+              temp.push("" + i)
+            }
+            this.multiArray[2] = temp
+          }
+        }
+        console.log(this.multiArray[2])
+      }
+      var data = {
+        multiArray: this.multiArray,
+        multiIndex: this.multiIndex
+      }
+      data.multiIndex[e.detail.column] = e.detail.value;
+      this.setData(data)
     }
   }
 </script>
