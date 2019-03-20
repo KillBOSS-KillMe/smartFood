@@ -141,20 +141,34 @@
         })
       },
       goSettlement() {
-        // // 商品ID
-        // let id = e.currentTarget.dataset.id
-        // // 描述
-        // let depict = e.currentTarget.dataset.depict
-        // // 商品名
-        // let name = e.currentTarget.dataset.name
-        // // 商品图
-        // let img = e.currentTarget.dataset.img
-        // // 详情图
-        // let detail = e.currentTarget.dataset.detail
-        // // 价格
-        // let money = e.currentTarget.dataset.money
-        // 进入结算页
-        this.$navigate(`/pages/settlement`)
+        wx.request({
+          url: `${this.$parent.globalData.requestUrl}/order`,
+          method: 'POST',
+          data: {
+            uid: this.userInfo.id,
+            title: this.name,
+            shop_id: this.id,
+            img: this.img,
+            num: 1,
+            integral: this.money,
+            address_id: this.address_id,
+            type: 2
+          },
+          success: data => {
+            if (data.data.code == 1) {
+              wx.showModal({
+                title: '',
+                content: `${this.name}下单成功`
+              })
+              wx.navigateBack()
+            } else {
+              wx.showModal({
+                title: '',
+                content: data.data.msg
+              })
+            }
+          }
+        })
       },
       setCar() {
         // 加入购物车
@@ -165,6 +179,7 @@
             uid: this.userInfo.id,
             title: this.name,
             img: this.img,
+            shop_id: this.id,
             num: 1,
             integral: this.money,
             address_id: this.address_id,

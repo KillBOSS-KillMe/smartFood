@@ -254,6 +254,8 @@ export default class SetAddress extends wepy.page {
   onLoad() {
     this.userInfo = this.$parent.globalData.userInfo
     console.log(this.userInfo)
+  }
+  onShow() {
     this.getCarList()
   }
   getCarList() {

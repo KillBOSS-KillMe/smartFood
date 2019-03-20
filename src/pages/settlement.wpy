@@ -151,22 +151,39 @@
 </style>
 <template>
 <view>
-  <view class="address">
+  <view class="address" wx:if="{{!addressListShow}}">
     <view class="name">
-      <view>收货人收货人</view>
+      <view>{{addressShow.name}}</view>
       <view>默认</view>
     </view>
     <view class="info">
-      <view class="phone">18888888888</view>
+      <view class="phone">{{addressShow.mobile}}</view>
       <view class="add">
         <icon class="iconfont icon-arrow-right-copy-copy-copy" />
-        地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址地址
+        {{addressShow.address}}
       </view>
     </view>
-    <view class="goAddressList">
+    <view class="goAddressList" @tap="addressListShow">
       <icon class="iconfont icon-arrow-right-copy-copy-copy" />
     </view>
   </view>
+  <block wx:for="{{addressList}}" key="index" index="index" item="item" wx:if="{{addressListShow}}">
+    <view class="address" data-index="{{index}}" data-id="{{item.id}}" @tap="addressSel">
+      <view class="name">
+        <view>{{item.name}}</view>
+      </view>
+      <view class="info">
+        <view class="phone">{{item.mobile}}</view>
+        <view class="add">
+          <icon class="iconfont icon-arrow-right-copy-copy-copy" />
+          {{item.address}}
+        </view>
+      </view>
+      <view class="goAddressList">
+        <icon class="iconfont icon-arrow-right-copy-copy-copy" />
+      </view>
+    </view>
+  </block>
   <view class="list">
     <view>
       <view>商品金额</view>
@@ -194,7 +211,7 @@
   </view>
   <view class="sett">
     <view>应付{{allPrice}}积分</view>
-    <view>去兑换</view>
+    <view @tap="order">去兑换</view>
   </view>
 </view>
 </template>
@@ -214,7 +231,10 @@
     data = {
       userInfo: null,
       listData: [],
-      allPrice: 0
+      allPrice: 0,
+      addressList: [],
+      addressShow: null,
+      addressListShow: false
     }
 
 
@@ -223,7 +243,26 @@
     }
 
     methods = {
-
+      addressListShow() {
+        if (this.addressListShow) {
+          this.addressListShow = false
+        } else {
+          this.addressListShow = true
+        }
+        this.$apply()
+      },
+      addressSel(e) {
+        let index = e.currentTarget.dataset.index
+        this.addressShow = this.addressList[index]
+        this.addressListShow = false
+        this.$apply()
+      },
+      order(e) {
+        let i = 0
+        for (i in this.listData) {
+          this.runOrder(i)
+        }
+      }
     }
 
     events = {
@@ -239,6 +278,67 @@
       for (i in this.listData) {
         this.allPrice += this.listData[i].integral * this.listData[i].num
       }
+      this.getAddressList()
+    }
+    getAddressList() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/users_address`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id
+        },
+        success: data => {
+          console.log(data)
+          if (data.data.code == 1) {
+            this.addressList = data.data.data
+            if (this.addressList.length > 0) {
+              this.addressShow = this.addressList[0]
+            } else {
+              wx.showModal({
+                title: '',
+                content: '暂无收货地址，请添加地址'
+              })
+            }
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
+    runOrder(i) {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/order`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id,
+          // title: this.listData[i].title,
+          // shop_id: ,
+          // img: this.listData[i].img,
+          // num: this.listData[i].num,
+          // integral: this.listData[i].integral,
+          address_id: this.addressShow.id,
+          type: 2,
+          order_id:this.listData[i].id
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            wx.showModal({
+              title: '',
+              content: `${this.listData[i].title}下单成功`
+            })
+            wx.navigateBack()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
     }
   }
 </script>
