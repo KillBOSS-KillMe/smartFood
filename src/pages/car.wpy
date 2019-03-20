@@ -198,14 +198,19 @@ export default class SetAddress extends wepy.page {
       )
     },
     goSettlement() {
-      if (this.listData.length === 0) {
+      let cartIndex = []
+      let i = 0
+      for (i in this.cartIndex) {
+        cartIndex.push(this.listData[this.cartIndex[i]])
+      }
+      if (cartIndex.length === 0) {
         wx.showModal({
           title: '',
           content: '请选择商品'
         })
         return ''
       }
-      this.$parent.globalData.carData = this.listData
+      this.$parent.globalData.carData = cartIndex
       // 进入结算页
       this.$navigate(`/pages/settlement`)
     },
