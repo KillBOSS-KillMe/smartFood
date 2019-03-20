@@ -315,14 +315,14 @@
         method: 'POST',
         data: {
           uid: this.userInfo.id,
-          // title: this.listData[i].title,
-          // shop_id: ,
-          // img: this.listData[i].img,
-          // num: this.listData[i].num,
-          // integral: this.listData[i].integral,
+          title: this.listData[i].title,
+          shop_id: this.listData[i].shop_id,
+          img: this.listData[i].img,
+          num: this.listData[i].num,
+          integral: this.listData[i].integral,
           address_id: this.addressShow.id,
           type: 2,
-          order_id:this.listData[i].id
+          order_id: this.listData[i].id
         },
         success: data => {
           if (data.data.code == 1) {
