@@ -103,14 +103,13 @@
 </style>
 <template>
 <view>
-  
   <view class="list">
     <view class="item">
       <label>人数人数：</label>
       <view class="con peopleNum">
-        <icon class="iconfont icon-prune"></icon>
-        <input type="text" value="32" />
-        <icon class="iconfont icon-tianjia"></icon>
+        <icon class="iconfont icon-prune" @tap="getNumDown"></icon>
+        <input type="text" value="{{num}}" bindinput="getNum" />
+        <icon class="iconfont icon-tianjia" @tap="getNumUp"></icon>
       </view>
     </view>
     <view class="item">
@@ -137,38 +136,38 @@
     <view class="item">
       <label>旅行社：</label>
       <view class="con setInp">
-        <input type="text"  placeholder="请输入旅行社名称" value="" />
+        <input type="text"  placeholder="请输入旅行社名称" value="" bindinput="getTeam" />
       </view>
     </view>
     <view class="item">
       <label>客源地：</label>
       <view class="con setInp">
-        <input type="text"  placeholder="请输入客源地" value="" />
+        <input type="text"  placeholder="请输入客源地" value="" bindinput="getOrigin" />
       </view>
     </view>
     <view class="item">
       <label>桌数：</label>
       <view class="con table">
-        <input type="text"  placeholder="请输入导游名称" value="" />
+        <input type="text"  placeholder="请输入导游名称" value="" bindinput="getTable" />
         <view>卓</view>
       </view>
     </view>
     <view class="item">
       <label>导游名称：</label>
       <view class="con setInp">
-        <input type="text"  placeholder="请输入导游名称" value="" />
+        <input type="text"  placeholder="请输入导游名称" value="" bindinput="getName" />
       </view>
     </view>
     <view class="item">
       <label>导游电话：</label>
       <view class="con setInp">
-        <input type="text"  placeholder="请输入导游电话" value="" />
+        <input type="text"  placeholder="请输入导游电话" value="" bindinput="getMobile" />
       </view>
     </view>
     <view class="item">
       <label>特殊要求：</label>
       <view class="con setInp">
-        <input type="text"  placeholder="录入计划" value="" />
+        <input type="text"  placeholder="录入计划" value="" bindinput="getRemark" />
       </view>
     </view>
   </view>
@@ -179,43 +178,43 @@
 </template>
 
 <script>
-const date = new Date();
-const years = [];
-const months = [];
-const days = [];
-const hours = [];
-const minutes = [];
+const date = new Date()
+const years = []
+const months = []
+const days = []
+const hours = []
+const minutes = []
 //获取年
 for (let i = 2018; i <= date.getFullYear() + 5; i++) {
-  years.push("" + i);
+  years.push("" + i)
 }
 //获取月份
 for (let i = 1; i <= 12; i++) {
   if (i < 10) {
-    i = "0" + i;
+    i = "0" + i
   }
-  months.push("" + i);
+  months.push("" + i)
 }
 //获取日期
 for (let i = 1; i <= 31; i++) {
   if (i < 10) {
-    i = "0" + i;
+    i = "0" + i
   }
-  days.push("" + i);
+  days.push("" + i)
 }
 //获取小时
 for (let i = 0; i < 24; i++) {
   if (i < 10) {
-    i = "0" + i;
+    i = "0" + i
   }
-  hours.push("" + i);
+  hours.push("" + i)
 }
 //获取分钟
 for (let i = 0; i < 60; i++) {
   if (i < 10) {
-    i = "0" + i;
+    i = "0" + i
   }
-  minutes.push("" + i);
+  minutes.push("" + i)
 }
   import wepy from 'wepy'
   export default class SetPreordain extends wepy.page {
@@ -237,6 +236,7 @@ for (let i = 0; i < 60; i++) {
       multiArray: [years, months, days, hours, minutes],
       multiIndex: [0, 9, 16, 10, 17],
       choose_year: '',
+      num: 0
     }
 
     computed = {
@@ -253,7 +253,47 @@ for (let i = 0; i < 60; i++) {
           }
         }
         this.standard = area
-      }
+      },
+      getNumDown() {
+        if (this.num <= 1) {
+          return ''
+        }
+        this.num -= 1
+        this.$apply()
+      },
+      getNumUp() {
+        this.num += 1
+        this.$apply()
+      },
+      getNum(e) {
+        // 获取人数
+        this.num = e.detail.value
+        console.log(this.num)
+      },
+      getTeam(e) {
+        // 获取旅行社
+        this.team = e.detail.value
+      },
+      getOrigin(e) {
+        // 获取客源地
+        this.origin = e.detail.value
+      },
+      getTable(e) {
+        // 获取桌数
+        this.table = e.detail.value
+      },
+      getName(e) {
+        // 获取导游姓名
+        this.name = e.detail.value
+      },
+      getMobile(e) {
+        // 获取手机号
+        this.mobile = e.detail.value
+      },
+      getRemark(e) {
+        // 获取备注
+        this.remark = e.detail.value
+      },
 
     }
 
@@ -266,7 +306,8 @@ for (let i = 0; i < 60; i++) {
       console.log(this.id)
       this.choose_year = this.multiArray[0][0]
     }
-    / /获取时间日期
+
+    // 获取时间日期
     bindMultiPickerChange(e) {
       // console.log('picker发送选择改变，携带值为', e.detail.value)
       this.multiIndex = e.detail.value
