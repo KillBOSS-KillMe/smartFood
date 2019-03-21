@@ -130,13 +130,7 @@
     data = {
       userInfo: null,
       requestImgUrl: '',
-      diningRoom: [
-        {"name": "奥格瑞玛", "address": "卡利姆多", "img": "/img/daw.jpg", "detail": "/img/daw.jpg", "id": "1"},
-        {"name": "银月城", "address": "卡利姆多", "img": "/img/daw.jpg", "detail": "/img/daw.jpg", "id": "1"},
-        {"name": "幽暗城", "address": "卡利姆多", "img": "/img/daw.jpg", "detail": "/img/daw.jpg", "id": "1"},
-        {"name": "雷霆崖", "address": "卡利姆多", "img": "/img/daw.jpg", "detail": "/img/daw.jpg", "id": "1"},
-        {"name": "十字路口", "address": "卡利姆多", "img": "/img/daw.jpg", "detail": "/img/daw.jpg", "id": "1"}
-      ]
+      diningRoom: []
     }
 
     computed = {

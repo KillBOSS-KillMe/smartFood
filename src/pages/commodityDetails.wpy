@@ -21,7 +21,7 @@
     line-height: 105rpx;
     padding: 0 30rpx;
     font-size: 50rpx;
-    color: #de9732;
+    color: #EE6667;
   }
   .name{
     width: 690rpx;
@@ -55,7 +55,7 @@
     font-size: 30rpx;
   }
   .perating .seCar{
-    background-color: #de9732;
+    background-color: #EE6667;
     color: #fff;
   }
 </style>

@@ -4,7 +4,7 @@
 <template>
 <view class="login">
   <view class="logo">
-    <image class="img" src="/img/daw.jpg" />
+    <image class="img" src="/img/logo.jpg" />
   </view>
   <view class="form">
     <view class="set">
@@ -42,7 +42,7 @@ export default class Login extends wepy.page {
 
   data = {
     userName: '18700458359',
-    userPaw: '123123',
+    userPaw: '123456',
     passwordInputType: 'password',
     passwordIcon: 'in_zhengyan'
   };

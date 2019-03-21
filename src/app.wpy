@@ -49,7 +49,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom:100rpx;
+  margin:50rpx 0;
 }
 .login .logo .img{
   width: 300rpx;
@@ -71,9 +71,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1rpx solid #78ac47;
+  border-bottom: 1rpx solid #363636;
   border-right: 0;
-  color: #78ac47;
+  color: #363636;
 }
 .login .set .rightIcon{
   color: #cbcbcb;
@@ -86,7 +86,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1rpx solid #78ac47;
+  border-bottom: 1rpx solid #363636;
 }
 .login .sub{
   margin-top: 50rpx;
@@ -97,10 +97,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1rpx solid #78ac47;
+  border: 1rpx solid #363636;
   border-radius: 40rpx;
   color: #fff;
-  background-color: #78ac47;
+  background-color: #363636;
 }
 .login .verification{
   margin: auto;
@@ -115,7 +115,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1rpx solid #78ac47;
+  border-bottom: 1rpx solid #363636;
 }
 .login .verification .getCode{
   width: 170rpx;
@@ -134,7 +134,7 @@
 }
 .login .verification .iconfont{
   width: 70rpx;
-  color: #78ac47;
+  color: #363636;
 }
 .login .verification input{
   width: 230rpx;
@@ -144,14 +144,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-bottom: 1rpx solid #78ac47;
+  border-bottom: 1rpx solid #363636;
 }
 .registered{
   margin: auto;
   width: 470rpx;
   height: 50rpx;
   font-size: 20rpx;
-  color: #78ac47;
+  color: #363636;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -222,7 +222,7 @@ export default class extends wepy.app {
     ],
     window: {
       backgroundTextStyle: 'light',
-      navigationBarBackgroundColor: '#de9832',
+      navigationBarBackgroundColor: '#363636',
       navigationBarTitleText: 'WeChat',
       navigationBarTextStyle: 'white'
     }

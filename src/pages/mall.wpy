@@ -43,7 +43,7 @@
     padding: 10rpx;
     height: 30rpx;
     font-size: 25rpx;
-    color: #de9732;
+    color: #EE6667;
     overflow:hidden;
     text-overflow: ellipsis;
     white-space:nowrap;

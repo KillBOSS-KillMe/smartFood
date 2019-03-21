@@ -205,7 +205,7 @@
 <template>
 <view>
   <view class="userInfo">
-    <image src="{{requestImgUrl + userInfo.img}}" />
+    <image src="{{userInfo.img}}" />
     <view class="uInfo">
       <view class="name">{{userInfo.username}}</view>
       <view class="integral" @tap="goIntegralInfo">
@@ -252,10 +252,10 @@
   </view>
   <view class="ordertitle">
     <view class="addressListName">全部订单</view>
-    <view class="sel">
+    <!-- <view class="sel">
       <view>未完成</view>
       <view>已完成</view>
-    </view>
+    </view> -->
   </view>
   <view class="orderList">
     <view class="noneCar" wx:if="{{orderList.length === 0}}">
@@ -271,8 +271,9 @@
           <view class="orderInfo">
             <view class="name">{{item.title}}</view>
             <view class="info">
-              <view wx:if="{{item.type === '1'}}">待收货</view>
-              <view wx:if="{{item.type === '2'}}">已收货</view>
+              <view wx:if="{{item.type === '3'}}">待收货</view>
+              <view wx:if="{{item.type === '2'}}">待发货</view>
+              <view wx:if="{{item.type === '4'}}">已收货</view>
               <view>×{{item.num}}</view>
             </view>
           </view>
@@ -306,7 +307,7 @@
       requestImgUrl: '',
       userInfo: null,
       addressList: [],
-      orderList: null
+      orderList: []
     }
     computed = {
 

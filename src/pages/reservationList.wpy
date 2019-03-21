@@ -56,7 +56,9 @@
     text-overflow: ellipsis;
     white-space:nowrap;
   }
-  .addess view:nth-child(2){
+  .addess view:nth-child(2),
+  .addess view:nth-child(3){
+    padding-left: 20rpx;
     color: #EE6667;
     display: flex;
     align-items: center;
@@ -95,6 +97,8 @@
   }
   .noneCar{
     width: 690rpx;
+    padding:20rpx;
+    margin-top: 30rpx;
   }
   .noneCar view{
     font-size: 33rpx;
@@ -115,13 +119,18 @@
   <block wx:for="{{listData}}" key="index" index="index" item="item" wx:if="{{listData.length > 0}}">
     <view class="item">
       <view class="nameAndTime">
-        <view class="name">{{item.foodName}}</view>
+        <view class="name">{{item.title}}</view>
         <view class="time">{{item.createTime}}</view>
       </view>
       <view class="addess">
         <view>
           <icon class="iconfont icon-map"></icon>
-          {{item.address}}
+          {{item.mess_address}}{{item.mess_address}}{{item.mess_address}}{{item.mess_address}}{{item.mess_address}}{{item.mess_address}}
+        </view>
+        <view>
+          <span wx:if="{{item.type == '1'}}">预约中</span>
+          <span wx:if="{{item.type == '2'}}">预约成功</span>
+          <span wx:if="{{item.type == '3'}}">预约失败</span>
         </view>
         <view data-index="{{index}}" @tap="showInfoList">
           <!-- top  bottom  样式替换控制箭头方向 -->
@@ -183,36 +192,7 @@
 
     data = {
       userInfo: null,
-      listData: [
-        {
-          'foodName': '餐厅名称餐厅名称',
-          'time': '2019.10.11 12.30',
-          'address': '地址地址地址地址地',
-          'package': '10',
-          'standard': '500',
-          'team': '中国青年旅行社',
-          'origin': '中国上海市',
-          'table': '5',
-          'name': '希尔瓦娜斯',
-          'mobile': '18700000000',
-          'remark': '大部分为老年人，饮食应清淡，不放辣椒，嗯就这样',
-          'closed': '0'
-        },
-        {
-          'foodName': '餐厅名称餐厅名称',
-          'time': '2019.10.11 12.30',
-          'address': '地址地址地址地址地',
-          'peopleNum': '10',
-          'standard': '500',
-          'travelAgency': '中国青年旅行社',
-          'sourceArea': '中国上海市',
-          'tableNum': '5',
-          'guideName': '希尔瓦娜斯',
-          'phone': '18700000000',
-          'remarks': '大部分为老年人，饮食应清淡，不放辣椒，嗯就这样',
-          'closed': '0'
-        }
-      ]
+      listData: []
     }
 
     computed = {
@@ -251,15 +231,15 @@
           console.log(data)
           if (data.data.code == 1) {
             this.listData = data.data.data
+            let i = 0
+            for (i in this.listData) {
+              this.listData[i]['closed'] = '0'
+            }
             this.$apply()
-          } else {
-            wx.showModal({
-              title: '',
-              content: data.data.msg
-            })
           }
         }
       })
     }
   }
+
 </script>
