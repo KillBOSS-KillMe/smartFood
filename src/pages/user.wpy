@@ -9,6 +9,7 @@
     margin-bottom: 120rpx;
   }
   .item{
+    position: relative;
     width: 690rpx;
     height: 237rpx;
     border-bottom: 1rpx solid #ebebeb;
@@ -41,7 +42,7 @@
   }
   .price{
     font-size: 30rpx;
-    color: #de9732;
+    color: #EE6667;
     height: 60rpx;
     line-height: 80rpx;
   }
@@ -80,7 +81,7 @@
     font-size: 42rpx;
   }
   .uInfo .iconfont, .uInfo span{
-    color: #de9732;
+    color: #EE6667;
   }
   .noneCar view{
     font-size: 33rpx;
@@ -94,20 +95,20 @@
   .addressList{
     width: 750rpx;
     height: auto;
-    min-height: 340rpx;
+    min-height: 270rpx;
     padding-bottom: 30rpx;
   }
   .addressListName{
     width: 690rpx;
     height: 33prx;
-    padding: 30rpx;
+    padding: 20rpx;
   }
   .ordertitle,
   .addressList,
   .userInfo,
   .orderList{
     background-color: #fff;
-    margin-top: 15rpx;
+    margin-top: 10rpx;
   }
   .ordertitle .sel{
     display: flex;
@@ -154,7 +155,7 @@
     text-align: right;
   }
   .orderList .info view:nth-child(1){
-    color: #de9732;
+    color: #EE6667;
   }
   .orderList .info view:nth-child(2){
     color: #959595;
@@ -196,10 +197,24 @@
   .itemAddress .open icon,
   .itemAddress .open view{
     color: #959595;
-    font-size: 20rpx;
+    font-size: 25rpx;
   }
   .itemAddress .open view{
     width: 95rpx;
+  }
+  .confirmReceipt{
+    position: absolute;
+    height: 50rpx;
+    width: 130rpx;
+    font-size: 25rpx;
+    border: 1rpx solid #EE6667;
+    border-radius: 50rpx;
+    color: #EE6667;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 130rpx;
+    right: 10rpx;
   }
 </style>
 <template>
@@ -281,6 +296,8 @@
             {{item.integral}}积分
             <span>{{item.info}}</span>
           </view>
+          <view wx:if="{{item.type === '3'}}" data-id="{{item.id}}" class="confirmReceipt" @tap="confirmReceipt">确认收货</view>
+          <view wx:if="{{item.type === '4'}}" data-id="{{item.id}}" class="confirmReceipt" @tap="delOrder">删除订单</view>
         </view>
       </view>
     </block>
@@ -327,6 +344,54 @@
         // 修改地址
         this.$navigate(`/pages/setAddress?info=${JSON.stringify(this.addressList[e.currentTarget.dataset.index])}`)
       },
+      confirmReceipt(e) {
+        var id = e.currentTarget.dataset.id
+        wx.request({
+          url: `${this.$parent.globalData.requestUrl}/order_confirm`,
+          method: 'POST',
+          data: {
+            order_id: id
+          },
+          success: data => {
+            if (data.data.code === '1') {
+              wx.showModal({
+                title: '',
+                content: '收货成功'
+              })
+              this.getOrderList()
+            } else {
+              wx.showModal({
+                title: '',
+                content: data.data.msg
+              })
+            }
+          }
+        })
+      },
+      delOrder(e) {
+        var id = e.currentTarget.dataset.id
+        wx.request({
+          url: `${this.$parent.globalData.requestUrl}/order_del`,
+          method: 'POST',
+          data: {
+            order_id: id
+          },
+          success: data => {
+            if (data.data.code === '1') {
+              wx.showModal({
+                title: '',
+                content: '删除成功'
+              })
+              this.getOrderList()
+            } else {
+              wx.showModal({
+                title: '',
+                content: data.data.msg
+              })
+            }
+          }
+        })
+      },
       delAddress(e) {
         // 删除地址
         var id = e.currentTarget.dataset.id
@@ -355,7 +420,7 @@
       },
       goOrderInfo(e) {
         // 产看订单商品
-        this.$navigate(`/pages/commodityDetails?id=${e.currentTarget.dataset.id}`)
+        // this.$navigate(`/pages/commodityDetails?id=${e.currentTarget.dataset.id}`)
       },
       goIntegralInfo() {
         // 查看积分消费纪录
@@ -400,6 +465,8 @@
       })
     }
     getOrderList() {
+      this.orderList = []
+      this.$apply()
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/users_order`,
         method: 'POST',

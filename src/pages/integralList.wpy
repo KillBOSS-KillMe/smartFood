@@ -65,19 +65,19 @@
   <block wx:for="{{listData}}" key="index" index="index" item="item" wx:if="{{listData.length > 0}}">
     <view class="item">
       <view class="nameAndTime">
-        <view class="name">{{item.name}}</view>
+        <view class="name">{{item.title}}</view>
         <view class="time">
-          <span wx:if="{{item.type === '1'}}">-</span>
-          <span wx:if="{{item.type === '2'}}">+</span>
-          {{item.price}}积分
+          <span wx:if="{{item.type === '2'}}">-</span>
+          <span wx:if="{{item.type === '1'}}">+</span>
+          {{item.integral}}积分
         </view>
       </view>
       <view class="addess">
         <view>
-          <span wx:if="{{item.type === '1'}}">商品数量</span>
-          <span wx:if="{{item.type === '2'}}">人数</span>
+          <span wx:if="{{item.type === '2'}}">商品数量</span>
+          <span wx:if="{{item.type === '1'}}">人数</span>
           {{item.num}}</view>
-        <view>{{item.time}}</view>
+        <view>{{item.createTime}}</view>
       </view>
   </view>
   </block>
@@ -98,11 +98,7 @@
 
     data = {
       userInfo: null,
-      listData: [
-        {'name': '商品商品商品', 'price': '20', 'time': '2019.10.11', 'num': '3','type': '1'},
-        {'name': '餐厅餐厅餐厅', 'price': '20', 'time': '2019.10.11', 'num': '3','type': '2'},
-        {'name': '餐厅餐厅餐厅', 'price': '20', 'time': '2019.10.11', 'num': '3','type': '2'}
-      ]
+      listData: []
     }
 
     computed = {
@@ -133,15 +129,6 @@
           console.log(data)
           if (data.data.code == 1) {
             this.listData = data.data.data
-            let i = 0
-            for (i in this.listData) {
-              // 替换反斜杠正则
-              // replace(reg,"/")
-              var reg=/\\|\//g;
-              this.listData[i]['img'] = this.listData[i]['img'].replace(reg,"/")
-              this.listData[i]['detail'] = this.listData[i]['detail'].replace(reg,"/")
-            }
-            console.log(this.listData)
             this.$apply()
           } else {
             wx.showModal({
