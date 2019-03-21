@@ -271,10 +271,10 @@ export default class SetAddress extends wepy.page {
           this.listData = data.data.data
           this.$apply()
         } else {
-          wx.showModal({
-            title: '',
-            content: data.data.msg
-          })
+          // wx.showModal({
+          //   title: '',
+          //   content: data.data.msg
+          // })
         }
       }
     })

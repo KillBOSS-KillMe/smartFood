@@ -42,7 +42,7 @@ export default class Login extends wepy.page {
 
   data = {
     userName: '18700458359',
-    userPaw: '123456789',
+    userPaw: '123123',
     passwordInputType: 'password',
     passwordIcon: 'in_zhengyan'
   };

@@ -151,39 +151,42 @@
 </style>
 <template>
 <view>
-  <view class="address" wx:if="{{!addressListShow}}">
-    <view class="name">
-      <view>{{addressShow.name}}</view>
-      <view>默认</view>
-    </view>
-    <view class="info">
-      <view class="phone">{{addressShow.mobile}}</view>
-      <view class="add">
-        <icon class="iconfont icon-arrow-right-copy-copy-copy" />
-        {{addressShow.address}}
-      </view>
-    </view>
-    <view class="goAddressList" @tap="addressListShow">
-      <icon class="iconfont icon-arrow-right-copy-copy-copy" />
-    </view>
-  </view>
-  <block wx:for="{{addressList}}" key="index" index="index" item="item" wx:if="{{addressListShow}}">
-    <view class="address" data-index="{{index}}" data-id="{{item.id}}" @tap="addressSel">
+  <view wx:if="{{addressShow != null}}">
+    <view class="address" wx:if="{{!addressListShow}}">
       <view class="name">
-        <view>{{item.name}}</view>
+        <view>{{addressShow.name}}</view>
+        <view>默认</view>
       </view>
       <view class="info">
-        <view class="phone">{{item.mobile}}</view>
+        <view class="phone">{{addressShow.mobile}}</view>
         <view class="add">
           <icon class="iconfont icon-arrow-right-copy-copy-copy" />
-          {{item.address}}
+          {{addressShow.address}}
         </view>
       </view>
-      <view class="goAddressList">
+      <view class="goAddressList" @tap="addressListShow">
         <icon class="iconfont icon-arrow-right-copy-copy-copy" />
       </view>
     </view>
-  </block>
+    <block wx:for="{{addressList}}" key="index" index="index" item="item" wx:if="{{addressListShow}}">
+      <view class="address" data-index="{{index}}" data-id="{{item.id}}" @tap="addressSel">
+        <view class="name">
+          <view>{{item.name}}</view>
+        </view>
+        <view class="info">
+          <view class="phone">{{item.mobile}}</view>
+          <view class="add">
+            <icon class="iconfont icon-arrow-right-copy-copy-copy" />
+            {{item.address}}
+          </view>
+        </view>
+        <view class="goAddressList">
+          <icon class="iconfont icon-arrow-right-copy-copy-copy" />
+        </view>
+      </view>
+    </block>
+  </view>
+
   <view class="list">
     <view>
       <view>商品金额</view>
@@ -258,6 +261,19 @@
         this.$apply()
       },
       order(e) {
+        if (!this.addressShow) {
+          wx.showModal({
+            title: '',
+            content: '暂无收货地址，是否添加？',
+            success: res => {
+              if (res.confirm) {
+                // 新增地址
+                this.$navigate(`/pages/setAddress?info=`)
+              }
+            }
+          })
+          return ''
+        }
         let i = 0
         for (i in this.listData) {
           this.runOrder(i)
@@ -278,6 +294,8 @@
       for (i in this.listData) {
         this.allPrice += this.listData[i].integral * this.listData[i].num
       }
+    }
+    onShow() {
       this.getAddressList()
     }
     getAddressList() {
@@ -293,18 +311,13 @@
             this.addressList = data.data.data
             if (this.addressList.length > 0) {
               this.addressShow = this.addressList[0]
-            } else {
-              wx.showModal({
-                title: '',
-                content: '暂无收货地址，请添加地址'
-              })
             }
             this.$apply()
           } else {
-            wx.showModal({
-              title: '',
-              content: data.data.msg
-            })
+            // wx.showModal({
+            //   title: '',
+            //   content: data.data.msg
+            // })
           }
         }
       })

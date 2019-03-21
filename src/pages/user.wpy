@@ -265,7 +265,7 @@
     <block wx:for="{{orderList}}" key="index" index="index" item="item" wx:if="{{orderList.length > 0}}">
       <view class="item" data-id="{{item.id}}" data-address_id="{{item.address_id}}" @tap="goOrderInfo">
         <view class="img">
-          <image src="{{requestImgUrl + item.img}}" class="slide-image" />
+          <image src="{{item.img}}" class="slide-image" />
         </view>
         <view class="con">
           <view class="orderInfo">
@@ -337,12 +337,12 @@
           },
           success: data => {
             if (data.data.code === '1') {
-              // 刷新地址列表
-              this.getAddressList()
               wx.showModal({
                 title: '',
                 content: '删除成功'
               })
+              // 刷新地址列表
+              this.getAddressList()
             } else {
               wx.showModal({
                 title: '',
@@ -376,6 +376,8 @@
       this.getAddressList()
     }
     getAddressList() {
+      this.addressList = []
+      this.$apply()
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/users_address`,
         method: 'POST',
@@ -388,11 +390,10 @@
             this.addressList = data.data.data
             this.$apply()
           } else {
-            this.orderList = []
-            wx.showModal({
-              title: '',
-              content: data.data.msg
-            })
+            // wx.showModal({
+            //   title: '',
+            //   content: data.data.msg
+            // })
           }
         }
       })
@@ -415,13 +416,12 @@
               // replace(reg,"/")
               this.orderList[i]['img'] = this.orderList[i]['img'].replace(reg, '/')
             }
-            console.log(this.orderList)
             this.$apply()
           } else {
-            wx.showModal({
-              title: '',
-              content: data.data.msg
-            })
+            // wx.showModal({
+            //   title: '',
+            //   content: data.data.msg
+            // })
           }
         }
       })
