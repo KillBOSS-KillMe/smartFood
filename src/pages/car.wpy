@@ -149,10 +149,10 @@
     
   </view>
   <view class="settlement">
-    <view class="sel">
+    <!-- <view class="sel">
       <checkbox data-index="{{index}}" id="2" value="{{index}}" checked="{{item.checks}}"/>
       全选
-    </view>
+    </view> -->
     <view class="price">
       合计<span>{{allPrice}}积分</span>
     </view>

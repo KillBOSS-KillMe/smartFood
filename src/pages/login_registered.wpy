@@ -34,9 +34,9 @@
     </view>
     <view class="verification">
       <view class="iconfont icon-yanzhengma"></view>
-      <input type="text" placeholder="请输入验证码" value="{{verificationCode}}" bindinput="setVerificationCode" />
+      <input type="number" placeholder="请输入验证码" value="{{verificationCode}}" bindinput="setVerificationCode" />
       <view class="getCode" bindtap="getVerificationCode">
-        <view>获取验证码</view>
+        <view @tap="smsCode">获取验证码</view>
       </view>
     </view>
     <view class="set sub">
@@ -61,6 +61,7 @@ export default class Registered extends wepy.page {
   mixins = [check];
 
   data = {
+    openid: '',
     userInfo: null,
     userName: '',
     userPaw: '',
@@ -120,7 +121,34 @@ export default class Registered extends wepy.page {
         this.passwordIcon2 =  'in_zhengyan'
       }
     },
+    smsCode() {
+      if (this.check.isPhone(this.userName)) {
+        wx.showModal({
+          title: '',
+          content: '请输入正确的手机号'
+        })
+        return ''
+      }
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/api/sms_code`,
+        method: 'POST',
+        data: {
+          mobile: this.userName
+        },
+        success: data => {
+          if (data.code !== '0') {
+            
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    },
     submit() {
+      console.log(this.openid)
       // console.log('提交')
       if (this.check.isNull(this.code)) {
         wx.showModal({
@@ -164,9 +192,8 @@ export default class Registered extends wepy.page {
         })
         return ''
       }
-      return ''
       wx.request({
-        url: `${this.$parent.globalData.requestUrl}/api/register`,
+        url: `${this.$parent.globalData.requestUrl}/register`,
         method: 'POST',
         data: {
           mobile: this.userName,
@@ -174,10 +201,14 @@ export default class Registered extends wepy.page {
           code: this.verificationCode,
           username: this.userInfo.nickName,
           img: this.userInfo.avatarUrl,
-          openid: this.userInfo.openid
+          openid: this.openid
         },
         success: data => {
-          if (data.code !== '0') {
+          if (data.data.code === '1') {
+            wx.showModal({
+              title: '',
+              content: '注册成功'
+            })
             // 返回登录页
             wx.navigateBack()
           } else {
@@ -210,16 +241,16 @@ export default class Registered extends wepy.page {
           success: ress => {
             that.code = ress.code
             console.log(that.code)
-            return ''
             wx.request({
-              url: `${that.$parent.globalData.requestUrl}/api/openid`,
+              url: `${that.$parent.globalData.requestUrl}/openid`,
               method: 'POST',
               data: {
                 code: that.code
               },
               success: data => {
-                if (data.code !== '0') {
-                  that.userInfo['openid'] = data.openid
+                console.log(data)
+                if (data.data.code === '1') {
+                  that.openid = data.data.data
                 } else {
                   wx.showModal({
                     title: '',

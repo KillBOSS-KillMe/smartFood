@@ -92,7 +92,7 @@ export default class Login extends wepy.page {
         this.userName = ''
     },
     submit() {
-      console.log(this.userName, this.userPaw)
+      
       if (this.check.isPhone(this.userName)) {
         wx.showModal({
           title: '',
@@ -115,6 +115,7 @@ export default class Login extends wepy.page {
         return ''
       }
       // this.$redirect(`/pages/index`)
+      console.log(this.userName, this.userPaw)
       // return
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/login`,
