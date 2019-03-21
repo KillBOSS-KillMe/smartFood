@@ -130,14 +130,18 @@ export default class Registered extends wepy.page {
         return ''
       }
       wx.request({
-        url: `${this.$parent.globalData.requestUrl}/api/sms_code`,
+        url: `${this.$parent.globalData.requestUrl}/sms_code`,
         method: 'POST',
         data: {
           mobile: this.userName
         },
         success: data => {
-          if (data.code !== '0') {
-            
+          console.log(data)
+          if (data.data.code === '0') {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
           } else {
             wx.showModal({
               title: '',
