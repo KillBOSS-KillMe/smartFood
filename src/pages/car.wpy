@@ -61,7 +61,7 @@
 }
 .price {
   font-size: 30rpx;
-  color: #de9732;
+  color: #EE6667;
   height: 60rpx;
   line-height: 80rpx;
 }
