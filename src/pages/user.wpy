@@ -440,6 +440,24 @@
     }
     onShow() {
       this.getAddressList()
+      this.getUserInfo()
+    }
+    getUserInfo() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/users`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id
+        },
+        success: data => {
+          console.log(data)
+          if (data.data.code == 1) {
+            this.userInfo = data.data.data
+            this.$parent.globalData.userInfo = this.userInfo
+            this.$apply()
+          }
+        }
+      })
     }
     getAddressList() {
       this.addressList = []

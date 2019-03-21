@@ -274,9 +274,13 @@
           })
           return ''
         }
-        let i = 0
-        for (i in this.listData) {
-          this.runOrder(i)
+        if (this.updateType === 'details') {
+          this.detailsRunOrder()
+        } else {
+          let i = 0
+          for (i in this.listData) {
+            this.runOrder(i)
+          }
         }
       }
     }
@@ -285,10 +289,12 @@
 
     }
 
-    onLoad() {
+    onLoad(options) {
+      this.updateType = options.type
       this.userInfo = this.$parent.globalData.userInfo
       console.log(this.userInfo)
       this.listData = this.$parent.globalData.carData
+      console.log(this.listData)
       this.allPrice = 0
       let i = 0
       for (i in this.listData) {
@@ -324,17 +330,12 @@
     }
     runOrder(i) {
       wx.request({
-        url: `${this.$parent.globalData.requestUrl}/order`,
+        url: `${this.$parent.globalData.requestUrl}/update_order`,
         method: 'POST',
         data: {
-          uid: this.userInfo.id,
-          title: this.listData[i].title,
-          shop_id: this.listData[i].shop_id,
-          img: this.listData[i].img,
           num: this.listData[i].num,
-          integral: this.listData[i].integral,
+          integral: this.listData[i].integral * this.listData[i].num,
           address_id: this.addressShow.id,
-          type: 2,
           order_id: this.listData[i].id
         },
         success: data => {
@@ -343,7 +344,38 @@
               title: '',
               content: `${this.listData[i].title}下单成功`
             })
-            wx.navigateBack()
+            this.$redirect('/pages/user')
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
+    detailsRunOrder() {
+      // console.log(this.listData)
+      // return ''
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/order`,
+        method: 'POST',
+        data: {
+          uid: this.userInfo.id,
+          title: this.listData[0].title,
+          shop_id: this.listData[0].id,
+          img: this.listData[0].img,
+          num: this.listData[0].num,
+          integral: this.listData[0].integral * this.listData[0].num,
+          address_id: this.addressShow.id
+        },
+        success: data => {
+          if (data.data.code == 1) {
+            wx.showModal({
+              title: '',
+              content: `${this.listData[0].title}下单成功`
+            })
+            this.$redirect('/pages/user')
           } else {
             wx.showModal({
               title: '',

@@ -184,37 +184,37 @@ const months = []
 const days = []
 const hours = []
 const minutes = []
-//获取年
+// 获取年
 for (let i = 2018; i <= date.getFullYear() + 5; i++) {
-  years.push("" + i)
+  years.push('' + i)
 }
-//获取月份
+// 获取月份
 for (let i = 1; i <= 12; i++) {
   if (i < 10) {
-    i = "0" + i
+    i = '0' + i
   }
-  months.push("" + i)
+  months.push('' + i)
 }
-//获取日期
+// 获取日期
 for (let i = 1; i <= 31; i++) {
   if (i < 10) {
-    i = "0" + i
+    i = '0' + i
   }
-  days.push("" + i)
+  days.push('' + i)
 }
-//获取小时
+// 获取小时
 for (let i = 0; i < 24; i++) {
   if (i < 10) {
-    i = "0" + i
+    i = '0' + i
   }
-  hours.push("" + i)
+  hours.push('' + i)
 }
-//获取分钟
+// 获取分钟
 for (let i = 0; i < 60; i++) {
   if (i < 10) {
-    i = "0" + i
+    i = '0' + i
   }
-  minutes.push("" + i)
+  minutes.push('' + i)
 }
   import wepy from 'wepy'
   import check from '../mixins/check'
@@ -236,7 +236,7 @@ for (let i = 0; i < 60; i++) {
       time: '',
       multiArray: [years, months, days, hours, minutes],
       multiIndex: [0, 9, 16, 10, 17],
-      choose_year: '',
+      chooseYear: '',
       num: 0,
       team: '',
       origin: '',
@@ -362,18 +362,18 @@ for (let i = 0; i < 60; i++) {
           })
           return ''
         }
-        console.log(`uid---${this.userInfo.id}`)
-        console.log(`mess_id---${this.mess_id}`)
-        console.log(`num---${this.num}`)
-        console.log(`reserveTime---${this.reserveTime}`)
-        console.log(`package---${this.standard}`)
-        console.log(`team---${this.team}`)
-        console.log(`origin---${this.origin}`)
-        console.log(`table---${this.table}`)
-        console.log(`name---${this.name}`)
-        console.log(`mobile---${this.mobile}`)
-        console.log(`remark---${this.remark}`)
-        console.log(`title---${this.title}`)
+        // console.log(`uid---${this.userInfo.id}`)
+        // console.log(`mess_id---${this.mess_id}`)
+        // console.log(`num---${this.num}`)
+        // console.log(`reserveTime---${this.reserveTime}`)
+        // console.log(`package---${this.standard}`)
+        // console.log(`team---${this.team}`)
+        // console.log(`origin---${this.origin}`)
+        // console.log(`table---${this.table}`)
+        // console.log(`name---${this.name}`)
+        // console.log(`mobile---${this.mobile}`)
+        // console.log(`remark---${this.remark}`)
+        // console.log(`title---${this.title}`)
         wx.request({
           url: `${this.$parent.globalData.requestUrl}/reservation`,
           method: 'POST',
@@ -392,13 +392,13 @@ for (let i = 0; i < 60; i++) {
             title: this.title
           },
           success: data => {
-            console.log(data)
-            if (data.data.code == 1) {
+            if (data.data.code === '1') {
               wx.showModal({
                 title: '',
                 content: '预约成功'
               })
-              wx.navigateBack()
+              // wx.navigateBack()
+              this.$redirect('/pages/index')
               this.$apply()
             } else {
               wx.showModal({
@@ -411,21 +411,17 @@ for (let i = 0; i < 60; i++) {
       }
     }
 
-    events = {
-      
-    }
+    events = {}
 
     onLoad(options) {
       this.mess_id = options.id
       this.title = options.name
       this.userInfo = this.$parent.globalData.userInfo
-      console.log(this.userInfo)
-      this.choose_year = this.multiArray[0][0]
+      this.chooseYear = this.multiArray[0][0]
     }
 
     // 获取时间日期
     bindMultiPickerChange(e) {
-      // console.log('picker发送选择改变，携带值为', e.detail.value)
       this.multiIndex = e.detail.value
       const index = this.multiIndex
       const year = this.multiArray[0][index[0]]
@@ -433,65 +429,62 @@ for (let i = 0; i < 60; i++) {
       const day = this.multiArray[2][index[2]]
       const hour = this.multiArray[3][index[3]]
       const minute = this.multiArray[4][index[4]]
-      // console.log(`${year}-${month}-${day}-${hour}-${minute}`)
       this.time = year + '-' + month + '-' + day + ' ' + hour + ':' + minute
-      console.log(this.time)
     }
     // 监听picker的滚动事件
     bindMultiPickerColumnChange(e) {
       // 获取年份
-      if (e.detail.column == 0) {
-        let choose_year = this.multiArray[e.detail.column][e.detail.value]
+      if (e.detail.column === 0) {
+        let chooseYear = this.multiArray[e.detail.column][e.detail.value]
       }
-      if (e.detail.column == 1) {
+      if (e.detail.column === 1) {
         let num = parseInt(this.multiArray[e.detail.column][e.detail.value])
         let temp = []
-        if (num == 1 || num == 3 || num == 5 || num == 7 || num == 8 || num == 10 || num == 12) {
-          //判断31天的月份
+        if (num === 1 || num === 3 || num === 5 || num === 7 || num === 8 || num === 10 || num === 12) {
+          // 判断31天的月份
           for (let i = 1; i <= 31; i++) {
             if (i < 10) {
-              i = "0" + i
+              i = '0' + i
             }
-            temp.push("" + i)
+            temp.push('' + i)
           }
           this.multiArray[2] = temp
-        } else if (num == 4 || num == 6 || num == 9 || num == 11) {
+        } else if (num === 4 || num === 6 || num === 9 || num === 11) {
           // 判断30天的月份
           for (let i = 1; i <= 30; i++) {
             if (i < 10) {
-              i = "0" + i
+              i = '0' + i
             }
-            temp.push("" + i)
+            temp.push('' + i)
           }
           this.multiArray[2] = temp
-        } else if (num == 2) {
+        } else if (num === 2) {
           // 判断2月份天数
-          let year = parseInt(this.choose_year)
-          if (((year % 400 == 0) || (year % 100 != 0)) && (year % 4 == 0)) {
+          let year = parseInt(this.chooseYear)
+          if (((year % 400 === 0) || (year % 100 !== 0)) && (year % 4 === 0)) {
             for (let i = 1; i <= 29; i++) {
               if (i < 10) {
-                i = "0" + i
+                i = '0' + i
               }
-              temp.push("" + i)
+              temp.push('' + i)
             }
             this.multiArray[2] = temp
           } else {
             for (let i = 1; i <= 28; i++) {
               if (i < 10) {
-                i = "0" + i
+                i = '0' + i
               }
-              temp.push("" + i)
+              temp.push('' + i)
             }
             this.multiArray[2] = temp
           }
         }
-        console.log(this.multiArray[2])
       }
       var data = {
         multiArray: this.multiArray,
         multiIndex: this.multiIndex
       }
-      data.multiIndex[e.detail.column] = e.detail.value;
+      data.multiIndex[e.detail.column] = e.detail.value
       this.setData(data)
     }
   }

@@ -212,7 +212,7 @@ export default class SetAddress extends wepy.page {
       }
       this.$parent.globalData.carData = cartIndex
       // 进入结算页
-      this.$navigate(`/pages/settlement`)
+      this.$navigate(`/pages/settlement?type=car`)
     },
     selCommodity(e) {
       console.log(e.detail.value)
@@ -259,6 +259,8 @@ export default class SetAddress extends wepy.page {
     this.getCarList()
   }
   getCarList() {
+    this.listData = []
+    this.$apply()
     wx.request({
       url: `${this.$parent.globalData.requestUrl}/shop_cart`,
       method: 'POST',
