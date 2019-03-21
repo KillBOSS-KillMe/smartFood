@@ -105,15 +105,15 @@
 <view>
   <view class="list">
     <view class="item">
-      <label>人数人数：</label>
+      <label>预约人数：</label>
       <view class="con peopleNum">
         <icon class="iconfont icon-prune" @tap="getNumDown"></icon>
-        <input type="text" value="{{num}}" bindinput="getNum" />
+        <input type="number" value="{{num}}" bindinput="getNum" />
         <icon class="iconfont icon-tianjia" @tap="getNumUp"></icon>
       </view>
     </view>
     <view class="item">
-      <label>时间：</label>
+      <label>预约时间：</label>
       <view class="con time">
         <view>
             <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
@@ -148,7 +148,7 @@
     <view class="item">
       <label>桌数：</label>
       <view class="con table">
-        <input type="text"  placeholder="请输入导游名称" value="" bindinput="getTable" />
+        <input type="number"  placeholder="请输入桌数" value="{{table}}" bindinput="getTable" />
         <view>卓</view>
       </view>
     </view>
@@ -161,18 +161,18 @@
     <view class="item">
       <label>导游电话：</label>
       <view class="con setInp">
-        <input type="text"  placeholder="请输入导游电话" value="" bindinput="getMobile" />
+        <input type="number"  placeholder="请输入导游电话" value="" bindinput="getMobile" />
       </view>
     </view>
     <view class="item">
       <label>特殊要求：</label>
       <view class="con setInp">
-        <input type="text"  placeholder="录入计划" value="" bindinput="getRemark" />
+        <input type="text"  placeholder="特殊要求" value="" bindinput="getRemark" />
       </view>
     </view>
   </view>
   <view class="nav">
-    <view>提交</view>
+    <view @tap="upData">提交</view>
   </view>
 </view>
 </template>
@@ -217,6 +217,7 @@ for (let i = 0; i < 60; i++) {
   minutes.push("" + i)
 }
   import wepy from 'wepy'
+  import check from '../mixins/check'
   export default class SetPreordain extends wepy.page {
     config = {
       navigationBarTitleText: '预定表单'
@@ -225,18 +226,26 @@ for (let i = 0; i < 60; i++) {
 
     }
 
-    mixins = []
+    mixins = [check]
 
     data = {
-      id: '',
-      standard: '标准1',
-      regionss: ['标准1', '标准1', '标准1', '标准1'],
-
+      userInfo: null,
+      mess_id: '',
+      standard: '请选择用餐标准',
+      regionss: ['标准1', '标准2', '标准3', '标准4'],
       time: '',
       multiArray: [years, months, days, hours, minutes],
       multiIndex: [0, 9, 16, 10, 17],
       choose_year: '',
-      num: 0
+      num: 0,
+      team: '',
+      origin: '',
+      table: '',
+      name: '',
+      mobile: '',
+      remark: '',
+      title: '',
+      reserveTime: ''
     }
 
     computed = {
@@ -249,7 +258,7 @@ for (let i = 0; i < 60; i++) {
         let area = ''
         for (let i in this.standard) {
           if (this.standard[i] !== '全部' && this.standard[i] !== '请选择详细地址') {
-            area += this.standard[i]
+            area += this.regionss[i]
           }
         }
         this.standard = area
@@ -267,8 +276,7 @@ for (let i = 0; i < 60; i++) {
       },
       getNum(e) {
         // 获取人数
-        this.num = e.detail.value
-        console.log(this.num)
+        this.num = parseInt(e.detail.value)
       },
       getTeam(e) {
         // 获取旅行社
@@ -280,7 +288,7 @@ for (let i = 0; i < 60; i++) {
       },
       getTable(e) {
         // 获取桌数
-        this.table = e.detail.value
+        this.table = parseInt(e.detail.value)
       },
       getName(e) {
         // 获取导游姓名
@@ -294,16 +302,124 @@ for (let i = 0; i < 60; i++) {
         // 获取备注
         this.remark = e.detail.value
       },
-
+      upData() {
+        if (this.num <= 0) {
+          wx.showModal({
+            title: '',
+            content: '请输入预约人数'
+          })
+          return ''
+        }
+        if (this.time === '') {
+          wx.showModal({
+            title: '',
+            content: '请选择时间'
+          })
+          return ''
+        } else {
+          // 时间转时间戳
+          this.reserveTime = new Date(this.time.replace(/-/g,"/")).getTime()
+        }
+        if (this.standard === '请选择用餐标准') {
+          wx.showModal({
+            title: '',
+            content: '请选择用餐标准'
+          })
+          return ''
+        }
+        if (this.check.isNull(this.team)) {
+          wx.showModal({
+            title: '',
+            content: '请输入旅行社'
+          })
+          return ''
+        }
+        if (this.check.isNull(this.origin)) {
+          wx.showModal({
+            title: '',
+            content: '请输入客源地'
+          })
+          return ''
+        }
+        if (this.table <= 0) {
+          wx.showModal({
+            title: '',
+            content: '请输入桌数'
+          })
+          return ''
+        }
+        if (this.check.isNull(this.name)) {
+          wx.showModal({
+            title: '',
+            content: '请输入导游姓名'
+          })
+          return ''
+        }
+        if (this.check.isPhone(this.mobile)) {
+          wx.showModal({
+            title: '',
+            content: '请输入手机号'
+          })
+          return ''
+        }
+        console.log(`uid---${this.userInfo.id}`)
+        console.log(`mess_id---${this.mess_id}`)
+        console.log(`num---${this.num}`)
+        console.log(`reserveTime---${this.reserveTime}`)
+        console.log(`package---${this.standard}`)
+        console.log(`team---${this.team}`)
+        console.log(`origin---${this.origin}`)
+        console.log(`table---${this.table}`)
+        console.log(`name---${this.name}`)
+        console.log(`mobile---${this.mobile}`)
+        console.log(`remark---${this.remark}`)
+        console.log(`title---${this.title}`)
+        wx.request({
+          url: `${this.$parent.globalData.requestUrl}/reservation`,
+          method: 'POST',
+          data: {
+            uid: this.userInfo.id,
+            mess_id: this.mess_id,
+            num: this.num,
+            reserve_time: this.reserveTime,
+            package: this.standard,
+            team: this.team,
+            origin: this.origin,
+            table: this.table,
+            name: this.name,
+            mobile: this.mobile,
+            remark: this.remark,
+            title: this.title
+          },
+          success: data => {
+            console.log(data)
+            if (data.data.code == 1) {
+              wx.showModal({
+                title: '',
+                content: '预约成功'
+              })
+              wx.navigateBack()
+              this.$apply()
+            } else {
+              wx.showModal({
+                title: '',
+                content: data.data.msg
+              })
+            }
+          }
+        })
+      }
     }
 
     events = {
-
+      
     }
 
     onLoad(options) {
-      this.id = options.id
-      console.log(this.id)
+      this.mess_id = options.id
+      this.title = options.name
+      this.userInfo = this.$parent.globalData.userInfo
+      console.log(this.userInfo)
       this.choose_year = this.multiArray[0][0]
     }
 

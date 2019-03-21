@@ -50,6 +50,7 @@
     mixins = []
 
     data = {
+      name: '',
       id: '',
       detailImg: '',
       requestImgUrl: '',
@@ -64,7 +65,7 @@
     methods = {
       goPreordain() {
         // 进入预约表单
-        this.$navigate(`/pages/setPreordain?id=${this.id}`)
+        this.$navigate(`/pages/setPreordain?id=${this.id}&name=${this.name}`)
       },
       // 控制背景图大小
       autoImage(e) {
@@ -97,6 +98,7 @@
 
     onLoad(options) {
       this.id = options.id
+      this.name = options.name
       this.detailImg = options.detail
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
     }

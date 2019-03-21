@@ -84,7 +84,7 @@
 <view>
   <view class="list">
     <block wx:for="{{diningRoom}}" key="index" index="index" item="item">
-      <view class="item" data-id="{{item.id}}" data-detail="{{item.detail}}" @tap="goDiningRoomInfo">
+      <view class="item" data-id="{{item.id}}" data-name="{{item.name}}" data-detail="{{item.detail}}" @tap="goDiningRoomInfo">
         <view class="img">
           <image src="{{requestImgUrl + item.img}}" />
         </view>
@@ -146,7 +146,7 @@
     methods = {
       goDiningRoomInfo(e) {
         // 进入餐厅详情
-        this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}`)
+        this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}&name=${e.currentTarget.dataset.name}`)
       },
       goReservationList(e) {
         // 进入预约列表

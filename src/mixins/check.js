@@ -35,6 +35,12 @@ export default class testMixin extends wepy.mixin {
   // 数据格式校验
   check = {
     // 是否为空
+    // isInt(str) {
+    //   var a = /(^[1-9]\d*$)/, s = trim(str)
+    //   if (a.test(s))return false
+    //   else return true
+    // },
+    // 是否为空
     isNull(str) {
       if (trim(str).length == 0)return true
       else return false
