@@ -101,21 +101,8 @@
       listData: []
     }
 
-    computed = {
-
-    }
-
-    methods = {
-
-    }
-
-    events = {
-
-    }
-
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
-      console.log(this.userInfo)
       this.getIntegralList()
     }
     getIntegralList() {
@@ -126,7 +113,6 @@
           uid: this.userInfo.id
         },
         success: data => {
-          console.log(data)
           if (data.data.code == 1) {
             this.listData = data.data.data
             this.$apply()

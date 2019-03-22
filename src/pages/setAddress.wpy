@@ -147,13 +147,11 @@
 
     onLoad(options) {
       this.userInfo = this.$parent.globalData.userInfo
-      console.log(this.userInfo)
       if (!options.info) {
         
         this.type = 'new'
       } else {
         this.addressInfo = JSON.parse(options.info)
-        console.log(this.addressInfo)
       }
     }
     updataAddress() {
@@ -194,7 +192,6 @@
         method: 'POST',
         data: data,
         success: data => {
-          console.log(data)
           if (data.data.code == 1) {
             wx.navigateBack()
           } else {

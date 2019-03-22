@@ -98,7 +98,7 @@
   <view class="footer">
     <view class="ft_item {{navAction[0]}}">
       <view @tap="goIndex">
-        <view class="iconfont icon-shangpinliebiao"></view>
+        <view class="iconfont icon-yuyue"></view>
         <text class="text">预约</text>
       </view>
     </view>

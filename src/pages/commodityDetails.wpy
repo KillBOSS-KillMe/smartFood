@@ -134,60 +134,17 @@
             autoH = autoW / imgScale
             this.autoW = autoW
             this.autoH = autoH
-            console.log(this.autoW)
-            console.log(this.autoH)
             this.$apply()
           }
         })
       },
       goSettlement() {
-        // if (!this.address_id) {
-        //   wx.showModal({
-        //     title: '',
-        //     content: '暂无收货地址，是否添加？',
-        //     success: res => {
-        //       if (res.confirm) {
-        //         // 新增地址
-        //         this.$navigate(`/pages/setAddress?info=`)
-        //       }
-        //     }
-        //   })
-        //   return ''
-        // }
         let cartIndex = [
           {"uid": this.userInfo.id, "title": this.name, "id": this.id, "img": this.img, "num": 1, "integral": this.money}
         ]
         this.$parent.globalData.carData = cartIndex
         // 进入结算页
         this.$navigate(`/pages/settlement?type=details`)
-        // wx.request({
-        //   url: `${this.$parent.globalData.requestUrl}/order`,
-        //   method: 'POST',
-        //   data: {
-        //     uid: this.userInfo.id,
-        //     title: this.name,
-        //     shop_id: this.id,
-        //     img: this.img,
-        //     num: 1,
-        //     integral: this.money,
-        //     address_id: this.address_id,
-        //     type: 2
-        //   },
-        //   success: data => {
-        //     if (data.data.code == 1) {
-        //       wx.showModal({
-        //         title: '',
-        //         content: `${this.name}下单成功`
-        //       })
-        //       wx.navigateBack()
-        //     } else {
-        //       wx.showModal({
-        //         title: '',
-        //         content: data.data.msg
-        //       })
-        //     }
-        //   }
-        // })
       },
       setCar() {
         // 加入购物车
@@ -240,49 +197,6 @@
     }
     onShow() {
       this.userInfo = this.$parent.globalData.userInfo
-      // // 获取收货地址ID
-      // this.getAddressList()
     }
-    // // 获取地址列表
-    // getAddressList() {
-    //   wx.request({
-    //     url: `${this.$parent.globalData.requestUrl}/users_address`,
-    //     method: 'POST',
-    //     data: {
-    //       uid: this.userInfo.id
-    //     },
-    //     success: data => {
-    //       console.log(data)
-    //       if (data.data.code == 1) {
-    //         let addressList = data.data.data
-    //         if (addressList.length <= 0) {
-    //           wx.showModal({
-    //             title: '',
-    //             content: '暂无收货地址，请前往添加',
-    //             success: res => {
-    //               console.log(res)
-    //               if (res.confirm) {
-    //                 console.log('++')
-    //                 // 新增地址
-    //                 this.$navigate(`/pages/setAddress?info=`)
-    //               } else {
-    //                 console.log('--')
-    //               }
-    //             }
-    //           })
-    //           return ''
-    //         }
-    //         this.address_id = addressList[0].id
-    //         this.$apply()
-    //       } else {
-
-    //         // wx.showModal({
-    //         //   title: '',
-    //         //   content: data.data.msg
-    //         // })
-    //       }
-    //     }
-    //   })
-    // }
   }
 </script>

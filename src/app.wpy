@@ -1,12 +1,12 @@
 <style lang="less">
 @font-face {
   font-family: 'iconfont';  /* project id 1078713 */
-  src: url('//at.alicdn.com/t/font_1078713_zoz8vw1pk6.eot');
-  src: url('//at.alicdn.com/t/font_1078713_zoz8vw1pk6.eot?#iefix') format('embedded-opentype'),
-  url('//at.alicdn.com/t/font_1078713_zoz8vw1pk6.woff2') format('woff2'),
-  url('//at.alicdn.com/t/font_1078713_zoz8vw1pk6.woff') format('woff'),
-  url('//at.alicdn.com/t/font_1078713_zoz8vw1pk6.ttf') format('truetype'),
-  url('//at.alicdn.com/t/font_1078713_zoz8vw1pk6.svg#iconfont') format('svg');
+  src: url('//at.alicdn.com/t/font_1078713_p2148p67bro.eot');
+  src: url('//at.alicdn.com/t/font_1078713_p2148p67bro.eot?#iefix') format('embedded-opentype'),
+  url('//at.alicdn.com/t/font_1078713_p2148p67bro.woff2') format('woff2'),
+  url('//at.alicdn.com/t/font_1078713_p2148p67bro.woff') format('woff'),
+  url('//at.alicdn.com/t/font_1078713_p2148p67bro.ttf') format('truetype'),
+  url('//at.alicdn.com/t/font_1078713_p2148p67bro.svg#iconfont') format('svg');
 }
 
 .iconfont {
@@ -38,6 +38,7 @@
 .icon-yonghu-tianchong:before { content: "\e670"; } // 用户
 .icon-mimaffffffpx:before { content: "\e603"; } // 密码
 .icon-yanzhengma:before { content: "\e605"; } // 验证
+.icon-yuyue:before { content: "\e61a"; } // 验证
 
 
 
@@ -194,14 +195,6 @@ import configStore from './store'
 
 const store = configStore()
 setStore(store)
-
-// url: `/pages/login_alterPassword?`
-//       })
-//     },
-//     // 注册
-//     registerd() {
-//       wx.navigateTo({
-//         url: `/pages/login_registered?`
 export default class extends wepy.app {
   config = {
     pages: [
@@ -231,35 +224,12 @@ export default class extends wepy.app {
   globalData = {
     code: null,
     userInfo: null,
-    // 线下
+    // 接口路径
     requestUrl: 'https://smartfood.beaconway.cn/api',
-    // 线上
-    // requestUrl: 'https://bkwhb.beaconway.cn/api',
+    // 图片路径
     requestImgUrl: 'https://smartfood.beaconway.cn',
     navAction: ['action', 'noAction', 'noAction']
   }
-
-  // constructor () {
-  //   super()
-  //   this.use('requestfix')
-  // }
-
-  // onLaunch() {
-  //   this.testAsync()
-  // }
-
-  // sleep (s) {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       resolve('promise resolved')
-  //     }, s * 1000)
-  //   })
-  // }
-
-  // async testAsync () {
-  //   const data = await this.sleep(3)
-  //   console.log(data)
-  // }
 
   getUserInfo(cb) {
     const that = this

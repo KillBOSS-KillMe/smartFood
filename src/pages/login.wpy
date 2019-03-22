@@ -41,8 +41,8 @@ export default class Login extends wepy.page {
   mixins = [check];
 
   data = {
-    userName: '18700458359',
-    userPaw: '123456',
+    userName: '',
+    userPaw: '',
     passwordInputType: 'password',
     passwordIcon: 'in_zhengyan'
   };
@@ -114,9 +114,6 @@ export default class Login extends wepy.page {
         })
         return ''
       }
-      // this.$redirect(`/pages/index`)
-      console.log(this.userName, this.userPaw)
-      // return
       wx.request({
         url: `${this.$parent.globalData.requestUrl}/login`,
         method: 'POST',
@@ -125,7 +122,6 @@ export default class Login extends wepy.page {
           password: this.userPaw
         },
         success: data => {
-          console.log(data)
           if (data.data.code == 1) {
             this.$parent.globalData.userInfo = data.data.data
             let reg = /\\|\//g
@@ -151,7 +147,6 @@ export default class Login extends wepy.page {
     wx.getStorage({
       key: 'userLoginInfo',
       success: res => {
-        console.log(res)
         if (res.data) {
           let loginInfo = res.data
           loginInfo = loginInfo.split(',------,')

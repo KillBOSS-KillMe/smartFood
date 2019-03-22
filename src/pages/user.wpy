@@ -435,7 +435,6 @@
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
-      console.log(this.userInfo)
       this.getOrderList()
     }
     onShow() {
@@ -450,7 +449,6 @@
           uid: this.userInfo.id
         },
         success: data => {
-          console.log(data)
           if (data.data.code == 1) {
             this.userInfo = data.data.data
             this.$parent.globalData.userInfo = this.userInfo
@@ -469,15 +467,9 @@
           uid: this.userInfo.id
         },
         success: data => {
-          console.log(data)
           if (data.data.code == 1) {
             this.addressList = data.data.data
             this.$apply()
-          } else {
-            // wx.showModal({
-            //   title: '',
-            //   content: data.data.msg
-            // })
           }
         }
       })
@@ -492,7 +484,6 @@
           uid: this.userInfo.id
         },
         success: data => {
-          console.log(data)
           if (data.data.code == 1) {
             this.orderList = data.data.data
             let i = 0
@@ -503,11 +494,6 @@
               this.orderList[i]['img'] = this.orderList[i]['img'].replace(reg, '/')
             }
             this.$apply()
-          } else {
-            // wx.showModal({
-            //   title: '',
-            //   content: data.data.msg
-            // })
           }
         }
       })

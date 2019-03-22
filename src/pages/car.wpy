@@ -215,7 +215,6 @@ export default class SetAddress extends wepy.page {
       this.$navigate(`/pages/settlement?type=car`)
     },
     selCommodity(e) {
-      console.log(e.detail.value)
       this.cartIndex = e.detail.value
       this.allPrice = this.getAllPrice()
     },
@@ -253,7 +252,6 @@ export default class SetAddress extends wepy.page {
 
   onLoad() {
     this.userInfo = this.$parent.globalData.userInfo
-    console.log(this.userInfo)
   }
   onShow() {
     this.getCarList()
@@ -268,15 +266,9 @@ export default class SetAddress extends wepy.page {
         uid: this.userInfo.id
       },
       success: data => {
-        console.log(data)
         if (data.data.code === 1) {
           this.listData = data.data.data
           this.$apply()
-        } else {
-          // wx.showModal({
-          //   title: '',
-          //   content: data.data.msg
-          // })
         }
       }
     })

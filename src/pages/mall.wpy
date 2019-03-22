@@ -109,7 +109,6 @@
       commodityList: []
     }
 
-
     computed = {
 
     }
@@ -152,13 +151,11 @@
         url: `${this.$parent.globalData.requestUrl}/banner`,
         method: 'GET',
         success: data => {
-          console.log(data)
           if (data.data.code == 1) {
             this.bannerImg = data.data.data
             let reg = /\\|\//g
             this.bannerImg['img'] = this.bannerImg['img'].replace(reg, '/')
             this.$apply()
-            console.log(this.bannerImg)
           } else {
             wx.showModal({
               title: '',
@@ -173,7 +170,6 @@
         url: `${this.$parent.globalData.requestUrl}/shop`,
         method: 'GET',
         success: data => {
-          console.log(data)
           if (data.data.code == 1) {
             this.commodityList = data.data.data
             let i = 0

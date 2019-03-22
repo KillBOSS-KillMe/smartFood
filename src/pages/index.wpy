@@ -160,7 +160,6 @@
     onLoad() {
       this.userInfo = this.$parent.globalData.userInfo
       this.requestImgUrl = this.$parent.globalData.requestImgUrl
-      console.log(this.userInfo)
       this.getFoodList()
     }
     getFoodList() {
@@ -172,7 +171,6 @@
           password: this.userPaw
         },
         success: data => {
-          console.log(data)
           if (data.data.code == 1) {
             this.diningRoom = data.data.data
             let i = 0
@@ -183,7 +181,6 @@
               this.diningRoom[i]['img'] = this.diningRoom[i]['img'].replace(reg, '/')
               this.diningRoom[i]['detail'] = this.diningRoom[i]['detail'].replace(reg, '/')
             }
-            console.log(this.diningRoom)
             this.$apply()
           } else {
             wx.showModal({

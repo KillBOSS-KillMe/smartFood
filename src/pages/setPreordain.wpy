@@ -185,7 +185,7 @@ const days = []
 const hours = []
 const minutes = []
 // 获取年
-for (let i = 2018; i <= date.getFullYear() + 5; i++) {
+for (let i = date.getFullYear(); i <= date.getFullYear() + 1; i++) {
   years.push('' + i)
 }
 // 获取月份
@@ -318,7 +318,8 @@ for (let i = 0; i < 60; i++) {
           return ''
         } else {
           // 时间转时间戳
-          this.reserveTime = new Date(this.time.replace(/-/g,"/")).getTime()
+          this.reserveTime = new Date(this.time).getTime()
+          this.reserveTime = this.reserveTime / 1000
         }
         if (this.standard === '请选择用餐标准') {
           wx.showModal({
@@ -362,18 +363,6 @@ for (let i = 0; i < 60; i++) {
           })
           return ''
         }
-        // console.log(`uid---${this.userInfo.id}`)
-        // console.log(`mess_id---${this.mess_id}`)
-        // console.log(`num---${this.num}`)
-        // console.log(`reserveTime---${this.reserveTime}`)
-        // console.log(`package---${this.standard}`)
-        // console.log(`team---${this.team}`)
-        // console.log(`origin---${this.origin}`)
-        // console.log(`table---${this.table}`)
-        // console.log(`name---${this.name}`)
-        // console.log(`mobile---${this.mobile}`)
-        // console.log(`remark---${this.remark}`)
-        // console.log(`title---${this.title}`)
         wx.request({
           url: `${this.$parent.globalData.requestUrl}/reservation`,
           method: 'POST',
@@ -397,7 +386,6 @@ for (let i = 0; i < 60; i++) {
                 title: '',
                 content: '预约成功'
               })
-              // wx.navigateBack()
               this.$redirect('/pages/index')
               this.$apply()
             } else {
@@ -429,7 +417,7 @@ for (let i = 0; i < 60; i++) {
       const day = this.multiArray[2][index[2]]
       const hour = this.multiArray[3][index[3]]
       const minute = this.multiArray[4][index[4]]
-      this.time = year + '-' + month + '-' + day + ' ' + hour + ':' + minute
+      this.time = year + '/' + month + '/' + day + ' ' + hour + ':' + minute
     }
     // 监听picker的滚动事件
     bindMultiPickerColumnChange(e) {

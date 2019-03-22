@@ -81,7 +81,6 @@
         wx.getSystemInfo({
           success: res => {
             autoW = res.windowWidth - 20
-            // console.log(autoW)
             autoH = autoW / imgScale
             this.autoW = autoW
             this.autoH = autoH
