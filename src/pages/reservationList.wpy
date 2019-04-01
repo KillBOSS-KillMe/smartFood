@@ -109,6 +109,19 @@
     font-size: 140rpx;
     text-align: center;
   }
+  .cancelReservation{
+    width:470rpx;
+    height:80rpx;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:1rpx solid #363636;
+    border-radius:40rpx;
+    color:#fff;
+    background-color:#363636;
+    margin:auto;
+    font-size: 28rpx;
+  }
 </style>
 <template>
 <view class="list">
@@ -125,12 +138,14 @@
       <view class="addess">
         <view>
           <icon class="iconfont icon-map"></icon>
-          {{item.mess_address}}{{item.mess_address}}{{item.mess_address}}{{item.mess_address}}{{item.mess_address}}{{item.mess_address}}
+          {{item.mess_address}}
         </view>
         <view>
           <span wx:if="{{item.type == '1'}}">预约中</span>
           <span wx:if="{{item.type == '2'}}">预约成功</span>
           <span wx:if="{{item.type == '3'}}">预约失败</span>
+          <span wx:if="{{item.type == '4'}}">完成</span>
+          <span wx:if="{{item.type == '5'}}">取消预约</span>
         </view>
         <view data-index="{{index}}" @tap="showInfoList">
           <!-- top  bottom  样式替换控制箭头方向 -->
@@ -172,6 +187,7 @@
           <label>特殊要求:</label>
           <view>{{item.remark}}</view>
         </view>
+        <view class="cancelReservation" wx:if="{{item.type == '1' || item.type == '2'}}" data-id="{{item.id}}" @tap="cancelReservation">取消预约</view>
       </view>
     </view>
   </block>
@@ -208,6 +224,26 @@
           this.listData[index]['closed'] = '0'
         }
         this.$apply()
+      },
+      cancelReservation(e) {
+        let id = e.currentTarget.dataset.id
+        wx.request({
+          url: `${this.$parent.globalData.requestUrl}/reserve_cancel`,
+          method: 'POST',
+          data: {
+            id: id
+          },
+          success: data => {
+            if (data.data.code == 1) {
+              wx.showModal({
+                title: '',
+                content: '取消成功'
+              })
+              this.getReserveList()
+              this.$apply()
+            }
+          }
+        })
       }
     }
 
