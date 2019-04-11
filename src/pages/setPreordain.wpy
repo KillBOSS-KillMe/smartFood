@@ -117,7 +117,7 @@
       <view class="con time">
         <view>
             <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
-              <input value='{{time}}' placeholder='选择时间'/>
+              <input disabled value='{{time}}' placeholder='选择时间'/>
             </picker>
             <icon class="iconfont icon-rili"></icon>
         </view>
