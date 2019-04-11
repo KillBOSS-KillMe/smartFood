@@ -100,6 +100,12 @@
   .lv input, .table input{
     width: 500rpx;
   }
+  .bindMultiPickerChange{
+    width: 250rpx !important;
+    border: 0rpx !important;
+    font-size: 25rpx;
+    text-align: center;
+  }
 </style>
 <template>
 <view>
@@ -117,7 +123,8 @@
       <view class="con time">
         <view>
             <picker mode="multiSelector" bindchange="bindMultiPickerChange" bindcolumnchange="bindMultiPickerColumnChange" value="{{multiIndex}}" range="{{multiArray}}">
-              <input disabled value='{{time}}' placeholder='选择时间'/>
+              <!-- <input disabled value='{{time}}' placeholder='选择时间'/> -->
+              <view class="bindMultiPickerChange">{{time}}</view>
             </picker>
             <icon class="iconfont icon-rili"></icon>
         </view>

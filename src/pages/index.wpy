@@ -139,8 +139,9 @@
 
     methods = {
       goDiningRoomInfo(e) {
-        // 进入餐厅详情
-        this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}&name=${e.currentTarget.dataset.name}`)
+        // // 进入餐厅详情
+        // this.$navigate(`/pages/restaurantInfo?id=${e.currentTarget.dataset.id}&detail=${e.currentTarget.dataset.detail}&name=${e.currentTarget.dataset.name}`)
+        this.$navigate(`/pages/setPreordain?id=${e.currentTarget.dataset.id}`)
       },
       goReservationList(e) {
         // 进入预约列表
