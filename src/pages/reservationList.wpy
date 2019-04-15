@@ -164,6 +164,10 @@
           <view>{{item.type}}元/桌</view>
         </view>
         <view class="itemInfo">
+          <label>餐标名:</label>
+          <view>{{item.package}}</view>
+        </view>
+        <view class="itemInfo">
           <label>旅行社:</label>
           <view>{{item.team}}</view>
         </view>

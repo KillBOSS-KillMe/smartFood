@@ -106,6 +106,13 @@
     font-size: 25rpx;
     text-align: center;
   }
+  .standard,
+  .standard view{
+    width: 540rpx;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    white-space:nowrap;
+  }
 </style>
 <template>
 <view>
@@ -133,7 +140,7 @@
     <view class="item">
       <label>餐标：</label>
       <view class="con lv">
-        <picker data-model="component" range="{{regionss}}" @change="selStandard" value="{{standard}}" custom-item="{{customItem}}">
+        <picker class="standard" data-model="component" range="{{regionss}}" @change="selStandard" value="{{standard}}" custom-item="{{customItem}}">
           <view class="picker">
             {{standard}}
           </view>
@@ -156,7 +163,7 @@
       <label>桌数：</label>
       <view class="con table">
         <input type="number"  placeholder="请输入桌数" value="{{table}}" bindinput="getTable" />
-        <view>卓</view>
+        <view>桌</view>
       </view>
     </view>
     <view class="item">
@@ -239,7 +246,7 @@ for (let i = 0; i < 60; i++) {
       userInfo: null,
       mess_id: '',
       standard: '请选择用餐标准',
-      regionss: ['标准1', '标准2', '标准3', '标准4'],
+      regionss: [],
       time: '',
       multiArray: [years, months, days, hours, minutes],
       multiIndex: [0, 9, 16, 10, 17],
@@ -261,14 +268,15 @@ for (let i = 0; i < 60; i++) {
 
     methods = {
       selStandard(e) {
-        this.standard = e.detail.value
-        let area = ''
-        for (let i in this.standard) {
-          if (this.standard[i] !== '全部' && this.standard[i] !== '请选择详细地址') {
-            area += this.regionss[i]
-          }
-        }
-        this.standard = area
+        var standard = e.detail.value
+        // let area = ''
+        // for (let i in standard) {
+        //   if (this.standard[i] !== '全部' && this.standard[i] !== '请选择详细地址') {
+        //     area += this.regionss[i]
+        //   }
+        // }
+        this.standard = this.regionss[standard]
+        // this.standard = area
       },
       getNumDown() {
         if (this.num <= 1) {
@@ -413,8 +421,33 @@ for (let i = 0; i < 60; i++) {
       this.title = options.name
       this.userInfo = this.$parent.globalData.userInfo
       this.chooseYear = this.multiArray[0][0]
+      this.getPackage()
     }
-
+    // 获取餐标
+    getPackage() {
+      wx.request({
+        url: `${this.$parent.globalData.requestUrl}/package`,
+        method: 'GET',
+        data: {},
+        success: data => {
+          if (data.data.code === 1) {
+            let regionss = []
+            data = data.data.data
+            let i = 0
+            for(i in data) {
+              regionss.push(data[i].name)
+            }
+            this.regionss = regionss
+            this.$apply()
+          } else {
+            wx.showModal({
+              title: '',
+              content: data.data.msg
+            })
+          }
+        }
+      })
+    }
     // 获取时间日期
     bindMultiPickerChange(e) {
       this.multiIndex = e.detail.value
